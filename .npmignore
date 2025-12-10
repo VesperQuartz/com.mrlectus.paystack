@@ -1,0 +1,22 @@
+# Ignore source code as only compiled output is needed
+src/
+
+# Ignore test files
+tests/
+
+# Ignore development dependencies and build artifacts
+node_modules/
+firebase-debug.log
+tsconfig.json
+tsdown.config.ts
+
+# Ignore lock files
+pnpm-lock.yaml
+
+# Ignore other editor/git related files
+.gitignore
+.editorconfig
+.prettierrc
+.vscode/
+*.log
+*.env
