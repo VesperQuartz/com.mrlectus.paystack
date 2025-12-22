@@ -1,23 +1,3 @@
-# tsdown-starter
+# Paystack SDK
 
-A starter for creating a TypeScript package.
-
-## Development
-
-- Install dependencies:
-
-```bash
-npm install
-```
-
-- Run the unit tests:
-
-```bash
-npm run test
-```
-
-- Build the library:
-
-```bash
-npm run build
-```
+This is a typescript sdk for interacting with the [Paystack API](https://paystack.com/docs/api/v1).
