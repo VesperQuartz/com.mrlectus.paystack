@@ -40,5 +40,8 @@
 	"dependencies": {
 		"ky": "^1.14.1",
 		"zod": "^4.1.13"
+	},
+	"publishConfig": {
+		"npmPublish": false
 	}
 }
