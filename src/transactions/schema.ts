@@ -1,5 +1,12 @@
 import z from "zod";
-import type { InitializePayload } from "./types";
+import type {
+	ChargeAuthorizationPayload,
+	ExportTransactionPayload,
+	InitializePayload,
+	ListPayload,
+	PartialDebitPayload,
+	TransactionTotalPayload,
+} from "./types";
 
 const paymentChannelSchema = z.enum([
 	"card",
@@ -29,3 +36,65 @@ export const InitializePayloadSchema = z.object({
 	bearer: z.enum(["account", "subaccount"]).optional(),
 }) satisfies z.ZodType<InitializePayload>;
 
+export const ListPayloadSchema = z.object({
+	parPage: z.number().int().optional(),
+	page: z.number().int().optional(),
+	customer: z.number().int().optional(),
+	terminalid: z.string().optional(),
+	status: z.enum(["failed", "success", "abandoned"]).optional(),
+	from: z.coerce
+		.date()
+		.optional()
+		.transform((date) => date?.toISOString()),
+	to: z.coerce
+		.date()
+		.optional()
+		.transform((date) => date?.toISOString()),
+	amount: z.number().int().optional(),
+}) satisfies z.ZodType<ListPayload>;
+
+export const ChargeAuthorizationPayloadSchema = z.object({
+	amount: z.string(),
+	email: z.email(),
+	authorization_code: z.templateLiteral(["AUTH_", z.string()]),
+	reference: z.string().optional(),
+	currency: z.string().optional(),
+	metadata: z.string().optional(),
+	channel: z.array(paymentChannelSchema),
+	subaccount: z.string().optional(),
+	transaction_charge: z.number().int().optional(),
+	bearer: z.enum(["account", "subaccount"]).optional(),
+	queue: z.boolean().optional(),
+}) satisfies z.ZodType<ChargeAuthorizationPayload>;
+
+export const TransactionTotalPayloadSchema = z.object({
+	parPage: z.number().int().optional(),
+	page: z.number().int().optional(),
+	from: z.coerce
+		.date()
+		.optional()
+		.transform((date) => date?.toISOString()),
+	to: z.coerce
+		.date()
+		.optional()
+		.transform((date) => date?.toISOString()),
+	amount: z.number().int().optional(),
+}) satisfies z.ZodType<TransactionTotalPayload>;
+
+export const ExportTransactionPayloadSchema = ListPayloadSchema.omit({
+	terminalid: true,
+}).extend({
+	customer: z.number().int().optional(),
+	settled: z.boolean().optional(),
+	settlement: z.number().int().optional(),
+	payment_page: z.number().int().optional(),
+}) satisfies z.ZodType<ExportTransactionPayload>;
+
+export const PartialDebitPayloadSchema = z.object({
+	authorization_code: z.templateLiteral(["AUTH_", z.string()]),
+	amount: z.string(),
+	currency: z.string(),
+	email: z.email(),
+	at_least: z.string().optional(),
+	reference: z.string().optional(),
+}) satisfies z.ZodType<PartialDebitPayload>;
