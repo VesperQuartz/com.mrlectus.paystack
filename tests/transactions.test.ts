@@ -5,6 +5,7 @@ import type { KyInstance } from "ky";
 // Mock Ky instance
 const mockKy = {
 	post: vi.fn().mockReturnThis(),
+	get: vi.fn().mockReturnThis(),
 	json: vi.fn(),
 } as unknown as KyInstance;
 
@@ -13,25 +14,189 @@ describe("Transactions", () => {
 		vi.clearAllMocks();
 	});
 
-	it("should call initialize with correct payload", async () => {
-		const transactions = createTransactions(mockKy);
-		const payload = {
-			amount: "5000",
-			email: "test@example.com",
-			channels: ["card", "bank"],
-		};
+	const transactions = createTransactions(mockKy);
 
-		// Mock the json response
-		const mockResponse = { status: true, message: "Authorization URL created" };
-		(mockKy.post as any).mockReturnValue({
-			json: vi.fn().mockResolvedValue(mockResponse),
+	describe("initialize", () => {
+		it("should call initialize with correct payload", async () => {
+			const payload = {
+				amount: "5000",
+				email: "test@example.com",
+				channels: ["card", "bank"],
+			};
+
+			const mockResponse = { status: true, message: "Authorization URL created" };
+			(mockKy.post as any).mockReturnValue({
+				json: vi.fn().mockResolvedValue(mockResponse),
+			});
+
+			const result = await transactions.initialize(payload as any);
+
+			expect(mockKy.post).toHaveBeenCalledWith("transaction/initialize", {
+				json: payload,
+			});
+			expect(result).toEqual(mockResponse);
 		});
+	});
 
-		const result = await transactions.initialize(payload as any);
+	describe("verify", () => {
+		it("should call verify with correct reference", async () => {
+			const reference = "ref_123456";
+			const mockResponse = { status: true, message: "Verification successful" };
+			(mockKy.get as any).mockReturnValue({
+				json: vi.fn().mockResolvedValue(mockResponse),
+			});
 
-		expect(mockKy.post).toHaveBeenCalledWith("transaction/initialize", {
-			json: payload,
+			const result = await transactions.verify({ reference });
+
+			expect(mockKy.get).toHaveBeenCalledWith(`transaction/verify/${reference}`);
+			expect(result).toEqual(mockResponse);
 		});
-		expect(result).toEqual(mockResponse);
+	});
+
+	describe("list", () => {
+		it("should call list with correct search params", async () => {
+			const payload = {
+				page: 1,
+				parPage: 20,
+				status: "success",
+			};
+			const mockResponse = { status: true, message: "Transactions retrieved" };
+			(mockKy.get as any).mockReturnValue({
+				json: vi.fn().mockResolvedValue(mockResponse),
+			});
+
+			const result = await transactions.list(payload as any);
+
+			expect(mockKy.get).toHaveBeenCalledWith("transaction/list", {
+				searchParams: payload,
+			});
+			expect(result).toEqual(mockResponse);
+		});
+	});
+
+	describe("fetch", () => {
+		it("should call fetch with correct id", async () => {
+			const id = 12345;
+			const mockResponse = { status: true, message: "Transaction retrieved" };
+			(mockKy.get as any).mockReturnValue({
+				json: vi.fn().mockResolvedValue(mockResponse),
+			});
+
+			const result = await transactions.fetch({ id });
+
+			expect(mockKy.get).toHaveBeenCalledWith(`transaction/${id}`);
+			expect(result).toEqual(mockResponse);
+		});
+	});
+
+	describe("chargeAuthorization", () => {
+		it("should call chargeAuthorization with correct payload", async () => {
+			const payload = {
+				amount: "1000",
+				email: "user@example.com",
+				authorization_code: "AUTH_code123",
+			};
+			const mockResponse = { status: true, message: "Charge successful" };
+			(mockKy.post as any).mockReturnValue({
+				json: vi.fn().mockResolvedValue(mockResponse),
+			});
+
+			const result = await transactions.chargeAuthorization(payload as any);
+
+			expect(mockKy.post).toHaveBeenCalledWith("transaction/charge_authorization", {
+				json: payload,
+			});
+			expect(result).toEqual(mockResponse);
+		});
+	});
+
+	describe("viewTimeline", () => {
+		it("should call viewTimeline with correct id or reference", async () => {
+			const id_or_reference = "ref_timeline";
+			const mockResponse = { status: true, message: "Timeline retrieved" };
+			(mockKy.get as any).mockReturnValue({
+				json: vi.fn().mockResolvedValue(mockResponse),
+			});
+
+			const result = await transactions.viewTimeline({ id_or_reference });
+
+			expect(mockKy.get).toHaveBeenCalledWith(`transaction/timeline/${id_or_reference}`);
+			expect(result).toEqual(mockResponse);
+		});
+	});
+
+	describe("transactionTotals", () => {
+		it("should call transactionTotals with correct search params", async () => {
+			const payload = {
+				page: 1,
+				parPage: 10,
+			};
+			const mockResponse = { status: true, message: "Totals retrieved" };
+			(mockKy.get as any).mockReturnValue({
+				json: vi.fn().mockResolvedValue(mockResponse),
+			});
+
+			const result = await transactions.transactionTotals(payload);
+
+			expect(mockKy.get).toHaveBeenCalledWith("transaction/totals", {
+				searchParams: payload,
+			});
+			expect(result).toEqual(mockResponse);
+		});
+	});
+
+	describe("exportTransaction", () => {
+		it("should call exportTransaction with correct search params", async () => {
+			const payload = {
+				from: "2023-01-01",
+				to: "2023-12-31",
+				settled: true,
+			};
+			const mockResponse = { status: true, message: "Export successful" };
+			(mockKy.get as any).mockReturnValue({
+				json: vi.fn().mockResolvedValue(mockResponse),
+			});
+
+			// We need to match how the schema transforms dates or expects strings
+			// The schema expects dates or strings and transforms them.
+			// The test payload passes strings which are valid ISO dates, so schema validation should pass.
+			const result = await transactions.exportTransaction(payload as any);
+
+			// The actual call might transform the payload slightly (e.g. date objects to strings), 
+			// but here we passed strings that match the schema's expectation or transformation.
+			// Let's check what the function calls ky with.
+			// The schema transforms date inputs to ISO strings.
+			
+			expect(mockKy.get).toHaveBeenCalledWith("transaction/export", {
+				searchParams: expect.objectContaining({
+					from: expect.any(String),
+					to: expect.any(String),
+					settled: true,
+				}),
+			});
+			expect(result).toEqual(mockResponse);
+		});
+	});
+
+	describe("partialDebit", () => {
+		it("should call partialDebit with correct payload", async () => {
+			const payload = {
+				authorization_code: "AUTH_partial",
+				amount: "2000",
+				currency: "NGN",
+				email: "partial@example.com",
+			};
+			const mockResponse = { status: true, message: "Partial debit successful" };
+			(mockKy.post as any).mockReturnValue({
+				json: vi.fn().mockResolvedValue(mockResponse),
+			});
+
+			const result = await transactions.partialDebit(payload as any);
+
+			expect(mockKy.post).toHaveBeenCalledWith("transaction/partial_debit", {
+				json: payload,
+			});
+			expect(result).toEqual(mockResponse);
+		});
 	});
 });

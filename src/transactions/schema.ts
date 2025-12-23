@@ -59,10 +59,9 @@ export const ChargeAuthorizationPayloadSchema = z.object({
 	authorization_code: z.templateLiteral(["AUTH_", z.string()]),
 	reference: z.string().optional(),
 	currency: z.string().optional(),
-	metadata: z.string().optional(),
-	channel: z.array(paymentChannelSchema),
-	subaccount: z.string().optional(),
-	transaction_charge: z.number().int().optional(),
+	       metadata: z.string().optional(),
+	       channel: z.array(paymentChannelSchema).optional(),
+	       subaccount: z.string().optional(),	transaction_charge: z.number().int().optional(),
 	bearer: z.enum(["account", "subaccount"]).optional(),
 	queue: z.boolean().optional(),
 }) satisfies z.ZodType<ChargeAuthorizationPayload>;
