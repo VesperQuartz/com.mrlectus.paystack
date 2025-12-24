@@ -67,10 +67,23 @@ describe("Transactions", () => {
 
 			const result = await transactions.list(payload as any);
 
-			expect(mockKy.get).toHaveBeenCalledWith("transaction/list", {
+			expect(mockKy.get).toHaveBeenCalledWith("transaction", {
 				searchParams: payload,
 			});
 			expect(result).toEqual(mockResponse);
+		});
+
+		it("should call list with empty params if none provided", async () => {
+			const mockResponse = { status: true, message: "Transactions retrieved" };
+			(mockKy.get as any).mockReturnValue({
+				json: vi.fn().mockResolvedValue(mockResponse),
+			});
+
+			await transactions.list();
+
+			expect(mockKy.get).toHaveBeenCalledWith("transaction", {
+				searchParams: {},
+			});
 		});
 	});
 
@@ -143,6 +156,19 @@ describe("Transactions", () => {
 			});
 			expect(result).toEqual(mockResponse);
 		});
+
+		it("should call transactionTotals with empty params if none provided", async () => {
+			const mockResponse = { status: true, message: "Totals retrieved" };
+			(mockKy.get as any).mockReturnValue({
+				json: vi.fn().mockResolvedValue(mockResponse),
+			});
+
+			await transactions.transactionTotals();
+
+			expect(mockKy.get).toHaveBeenCalledWith("transaction/totals", {
+				searchParams: {},
+			});
+		});
 	});
 
 	describe("exportTransaction", () => {
@@ -175,6 +201,19 @@ describe("Transactions", () => {
 				}),
 			});
 			expect(result).toEqual(mockResponse);
+		});
+
+		it("should call exportTransaction with empty params if none provided", async () => {
+			const mockResponse = { status: true, message: "Export successful" };
+			(mockKy.get as any).mockReturnValue({
+				json: vi.fn().mockResolvedValue(mockResponse),
+			});
+
+			await transactions.exportTransaction();
+
+			expect(mockKy.get).toHaveBeenCalledWith("transaction/export", {
+				searchParams: {},
+			});
 		});
 	});
 

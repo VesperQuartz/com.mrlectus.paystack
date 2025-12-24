@@ -57,10 +57,10 @@ export const createTransactions = (instance: KyInstance) => {
 	 * If you plan to store or make use of the the transaction ID, you should represent it as a unsigned 64-bit integer. To learn more, check out our changelog.
 	 * @see https://paystack.com/docs/changelog/api/#june-2022
 	 */
-	const list = async (payload: ListPayload) => {
+	const list = async (payload: ListPayload = {}) => {
 		const params = ListPayloadSchema.parse(payload);
 		return await instance
-			.get("transaction/list", {
+			.get("transaction", {
 				searchParams: params,
 			})
 			.json<ListResponsePayload>();
@@ -111,7 +111,7 @@ export const createTransactions = (instance: KyInstance) => {
 	/**
 	 * Total amount received on your account
 	 */
-	const transactionTotals = async (payload: TransactionTotalPayload) => {
+	const transactionTotals = async (payload: TransactionTotalPayload = {}) => {
 		const data = TransactionTotalPayloadSchema.parse(payload);
 		return await instance
 			.get("transaction/totals", {
@@ -123,7 +123,7 @@ export const createTransactions = (instance: KyInstance) => {
 	/**
 	 * Export a list of transactions carried out on your integration
 	 */
-	const exportTransaction = async (payload: ExportTransactionPayload) => {
+	const exportTransaction = async (payload: ExportTransactionPayload = {}) => {
 		const data = ExportTransactionPayloadSchema.parse(payload);
 		return await instance
 			.get("transaction/export", {
