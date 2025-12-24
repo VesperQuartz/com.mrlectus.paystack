@@ -1,7 +1,7 @@
 {
 	"name": "@mrlectus/paystack",
 	"type": "module",
-	"version": "0.0.12",
+	"version": "0.0.13",
 	"description": "An sdk for interacting with the paystack api",
 	"author": "mrlectus <mrlectus@lectuslab.online>",
 	"license": "MIT",
