@@ -1,6 +1,6 @@
 import ky from "ky";
-import { createTransactions } from "../transactions/transactions";
 import { PaystackApiError } from "../errors";
+import { createTransactions } from "../transactions/transactions";
 
 export const PaystackClient = (secretKey?: string | undefined, config = {}) => {
 	if (!secretKey || process.env.PAYSTACK_SECRET) {
@@ -17,11 +17,11 @@ export const PaystackClient = (secretKey?: string | undefined, config = {}) => {
 				async (error) => {
 					const { response } = error;
 					if (response) {
-						const errorBody = (await response.json()) as {
+						const errorBody = await response.json<{
 							status: boolean;
 							message: string;
 							data?: unknown;
-						};
+						}>();
 						throw new PaystackApiError(errorBody, {
 							cause: error,
 						});
