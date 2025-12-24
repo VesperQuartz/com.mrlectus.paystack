@@ -10,4 +10,12 @@ export class PaystackApiError extends Error {
 		this.data = errorBody.data;
 		this.name = "PaystackApiError";
 	}
+
+	toJSON() {
+		return {
+			status: this.status,
+			message: this.message,
+			data: this.data,
+		};
+	}
 }
