@@ -20,3 +20,4 @@ pnpm-lock.yaml
 .vscode/
 *.log
 *.env
+*.tgz

@@ -1,5 +1,6 @@
 import ky from "ky";
 import { PaystackApiError } from "../errors";
+import { createTransactionSplits } from "../transaction-splits";
 import { createTransactions } from "../transactions/transactions";
 
 export const PaystackClient = (secretKey?: string | undefined, config = {}) => {
@@ -37,6 +38,13 @@ export const PaystackClient = (secretKey?: string | undefined, config = {}) => {
 		},
 	});
 	return {
+		/**
+		 * @description The Transactions API allows you create and manage payments on your integration.
+		 */
 		transactions: createTransactions(kyclient),
+		/**
+		 * @description The Transaction Splits API enables merchants split the settlement for a transaction across their payout account, and one or more subaccounts.
+		 */
+		splits: createTransactionSplits(kyclient),
 	};
 };
