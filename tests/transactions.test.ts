@@ -1,6 +1,6 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { createTransactions } from "../src/transactions/transactions";
 import type { KyInstance } from "ky";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import { createTransactions } from "../src/transactions/transactions";
 
 // Mock Ky instance
 const mockKy = {
@@ -24,7 +24,10 @@ describe("Transactions", () => {
 				channels: ["card", "bank"],
 			};
 
-			const mockResponse = { status: true, message: "Authorization URL created" };
+			const mockResponse = {
+				status: true,
+				message: "Authorization URL created",
+			};
 			(mockKy.post as any).mockReturnValue({
 				json: vi.fn().mockResolvedValue(mockResponse),
 			});
@@ -48,7 +51,9 @@ describe("Transactions", () => {
 
 			const result = await transactions.verify({ reference });
 
-			expect(mockKy.get).toHaveBeenCalledWith(`transaction/verify/${reference}`);
+			expect(mockKy.get).toHaveBeenCalledWith(
+				`transaction/verify/${reference}`,
+			);
 			expect(result).toEqual(mockResponse);
 		});
 	});
@@ -57,7 +62,7 @@ describe("Transactions", () => {
 		it("should call list with correct search params", async () => {
 			const payload = {
 				page: 1,
-				parPage: 20,
+				perPage: 20,
 				status: "success",
 			};
 			const mockResponse = { status: true, message: "Transactions retrieved" };
@@ -116,9 +121,12 @@ describe("Transactions", () => {
 
 			const result = await transactions.chargeAuthorization(payload as any);
 
-			expect(mockKy.post).toHaveBeenCalledWith("transaction/charge_authorization", {
-				json: payload,
-			});
+			expect(mockKy.post).toHaveBeenCalledWith(
+				"transaction/charge_authorization",
+				{
+					json: payload,
+				},
+			);
 			expect(result).toEqual(mockResponse);
 		});
 	});
@@ -133,7 +141,9 @@ describe("Transactions", () => {
 
 			const result = await transactions.viewTimeline({ id_or_reference });
 
-			expect(mockKy.get).toHaveBeenCalledWith(`transaction/timeline/${id_or_reference}`);
+			expect(mockKy.get).toHaveBeenCalledWith(
+				`transaction/timeline/${id_or_reference}`,
+			);
 			expect(result).toEqual(mockResponse);
 		});
 	});
@@ -142,7 +152,7 @@ describe("Transactions", () => {
 		it("should call transactionTotals with correct search params", async () => {
 			const payload = {
 				page: 1,
-				parPage: 10,
+				perPage: 10,
 			};
 			const mockResponse = { status: true, message: "Totals retrieved" };
 			(mockKy.get as any).mockReturnValue({
@@ -188,11 +198,11 @@ describe("Transactions", () => {
 			// The test payload passes strings which are valid ISO dates, so schema validation should pass.
 			const result = await transactions.exportTransaction(payload as any);
 
-			// The actual call might transform the payload slightly (e.g. date objects to strings), 
+			// The actual call might transform the payload slightly (e.g. date objects to strings),
 			// but here we passed strings that match the schema's expectation or transformation.
 			// Let's check what the function calls ky with.
 			// The schema transforms date inputs to ISO strings.
-			
+
 			expect(mockKy.get).toHaveBeenCalledWith("transaction/export", {
 				searchParams: expect.objectContaining({
 					from: expect.any(String),
@@ -225,7 +235,10 @@ describe("Transactions", () => {
 				currency: "NGN",
 				email: "partial@example.com",
 			};
-			const mockResponse = { status: true, message: "Partial debit successful" };
+			const mockResponse = {
+				status: true,
+				message: "Partial debit successful",
+			};
 			(mockKy.post as any).mockReturnValue({
 				json: vi.fn().mockResolvedValue(mockResponse),
 			});
@@ -239,3 +252,4 @@ describe("Transactions", () => {
 		});
 	});
 });
+

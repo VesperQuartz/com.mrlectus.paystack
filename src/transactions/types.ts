@@ -1,3 +1,5 @@
+import type { Nullable } from "../type";
+
 export type PaymentChannel =
 	| "card"
 	| "bank"
@@ -105,7 +107,7 @@ export type Log = {
 	}[];
 };
 
-export type Authorization = {
+export type Authorization = Nullable<{
 	authorization_code: `AUTH_${string}`;
 	bin: string;
 	last4: string;
@@ -119,7 +121,7 @@ export type Authorization = {
 	reusable: boolean;
 	signature: `SIG_${string}`;
 	account_name: string | null;
-};
+}>;
 
 export type Customer = {
 	id: string;
@@ -167,8 +169,8 @@ export type VerifyResponsePayload = {
 		fees_breakdown: string | null;
 		connect: string | null;
 		transaction_date: string;
-		plan_object: object;
-		subaccount: object;
+		plan_object?: object;
+		subaccount?: object;
 	};
 };
 
@@ -176,7 +178,7 @@ export type ListPayload = {
 	/**
 	 * Specify how many records you want to retrieve per page. If not specified, we use a default value of 50.
 	 */
-	parPage?: number;
+	perPage?: number;
 	/**
 	 * Specify exactly what page you want to retrieve. If not specified, we use a default value of 1.
 	 */
@@ -285,7 +287,7 @@ export type TransactionTotalPayload = {
 	/**
 	 * Specify how many records you want to retrieve per page. If not specified, we use a default value of 50.
 	 */
-	parPage?: number;
+	perPage?: number;
 	/**
 	 * Specify exactly what page you want to retrieve. If not specified, we use a default value of 1.
 	 */
@@ -322,7 +324,7 @@ export type ExportTransactionPayload = {
 	/**
 	 * Specify how many records you want to retrieve per page. If not specified, we use a default value of 50.
 	 */
-	parPage?: number;
+	perPage?: number;
 	/**
 	 * Specify exactly what page you want to retrieve. If not specified, we use a default value of 1.
 	 */

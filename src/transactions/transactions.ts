@@ -79,7 +79,9 @@ export const createTransactions = (instance: KyInstance) => {
 		 */
 		id: number;
 	}) => {
-		return instance.get(`transaction/${payload.id}`).json<VerifyPayload>();
+		return instance
+			.get(`transaction/${payload.id}`)
+			.json<VerifyResponsePayload>();
 	};
 
 	/**

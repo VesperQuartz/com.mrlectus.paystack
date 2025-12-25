@@ -37,7 +37,7 @@ export const InitializePayloadSchema = z.object({
 }) satisfies z.ZodType<InitializePayload>;
 
 export const ListPayloadSchema = z.object({
-	parPage: z.number().int().optional(),
+	perPage: z.number().int().optional(),
 	page: z.number().int().optional(),
 	customer: z.number().int().optional(),
 	terminalid: z.string().optional(),
@@ -59,15 +59,16 @@ export const ChargeAuthorizationPayloadSchema = z.object({
 	authorization_code: z.templateLiteral(["AUTH_", z.string()]),
 	reference: z.string().optional(),
 	currency: z.string().optional(),
-	       metadata: z.string().optional(),
-	       channel: z.array(paymentChannelSchema).optional(),
-	       subaccount: z.string().optional(),	transaction_charge: z.number().int().optional(),
+	metadata: z.string().optional(),
+	channel: z.array(paymentChannelSchema).optional(),
+	subaccount: z.string().optional(),
+	transaction_charge: z.number().int().optional(),
 	bearer: z.enum(["account", "subaccount"]).optional(),
 	queue: z.boolean().optional(),
 }) satisfies z.ZodType<ChargeAuthorizationPayload>;
 
 export const TransactionTotalPayloadSchema = z.object({
-	parPage: z.number().int().optional(),
+	perPage: z.number().int().optional(),
 	page: z.number().int().optional(),
 	from: z.coerce
 		.date()

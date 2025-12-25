@@ -13,6 +13,11 @@ export const PaystackClient = (secretKey?: string | undefined, config = {}) => {
 			Authorization: `Bearer ${process.env.PAYSTACK_SECRET ?? secretKey}`,
 		},
 		hooks: {
+			afterResponse: [
+				async (req) => {
+					console.log("FULL REQUEST URL:", req.url);
+				},
+			],
 			beforeError: [
 				async (error) => {
 					const { response } = error;
