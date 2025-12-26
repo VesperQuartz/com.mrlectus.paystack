@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@mrlectus/paystack':
-        specifier: file:/home/brown/Code/com.mrlectus.paystack/mrlectus-paystack-0.0.15.tgz
-        version: file:mrlectus-paystack-0.0.15.tgz
       ky:
         specifier: ^1.14.1
         version: 1.14.1
@@ -234,10 +231,6 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
-
-  '@mrlectus/paystack@file:mrlectus-paystack-0.0.15.tgz':
-    resolution: {integrity: sha512-37ZJGQUgM3TIjpen0+5A/csUUHuWM8rlNLC6ib7bx32D8/EfCHtkED8/tQ5mBb8fBrdwFTDcJtRqrjijMNQYhA==, tarball: file:mrlectus-paystack-0.0.15.tgz}
-    version: 0.0.15
 
   '@napi-rs/wasm-runtime@1.1.0':
     resolution: {integrity: sha512-Fq6DJW+Bb5jaWE69/qOE0D1TUN9+6uWhCeZpdnSBk14pjLcCWR7Q8n49PTSPHazM37JqrsdpEthXy2xn6jWWiA==}
@@ -1017,11 +1010,6 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
-
-  '@mrlectus/paystack@file:mrlectus-paystack-0.0.15.tgz':
-    dependencies:
-      ky: 1.14.1
-      zod: 4.2.1
 
   '@napi-rs/wasm-runtime@1.1.0':
     dependencies:
