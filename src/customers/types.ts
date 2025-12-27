@@ -8,11 +8,11 @@ export type CreateCustomerPayload = {
 	/**
 	 * @description Customer's first name
 	 */
-	first_name: string;
+	first_name?: string;
 	/**
 	 * @description Customer's last name
 	 */
-	last_name: string;
+	last_name?: string;
 	/**
 	 * @description Customer's phone number
 	 */
@@ -274,4 +274,113 @@ export type FetchMandateAuthorizationsResponsePayload = {
 	};
 };
 
-export type CreateCustomerClient = {};
+export type CreateCustomerClient = {
+	/**
+	 * @description Create a customer on your integration
+	 */
+	create: (
+		payload: CreateCustomerPayload,
+	) => Promise<CreateCustomerResponsePayload>;
+
+	/**
+	 * @description List customers available on your integration
+	 */
+	list: (payload?: ListCustomerPayload) => Promise<ListCustomerResponsePayload>;
+
+	/**
+	 * @description Get the details of a customer
+	 */
+	fetch: (payload: {
+		/**
+		 * @description Email or customer code of the customer
+		 */
+		email_or_code: string;
+	}) => Promise<FetchCustomerResponsePayload>;
+
+	/**
+	 * @description Update a customer's details on your integration
+	 */
+	update: (
+		payload: UpdateCustomerPayload,
+	) => Promise<UpdateCustomerResponsePayload>;
+
+	/**
+	 * @description Validate a customer's identification
+	 */
+	validate: (payload: ValidateCustomerPayload) => Promise<{
+		status: boolean;
+		message: string;
+	}>;
+
+	/**
+	 * @description Set a risk action for a customer
+	 */
+	setRiskAction: (
+		payload: SetRiskActionPayload,
+	) => Promise<SetRiskActionResponsePayload>;
+
+	/**
+	 * @description Initialize an authorization for a customer
+	 */
+	initializeAuthorization: (
+		payload: InitializeAuthorizationPayload,
+	) => Promise<InitializeAuthorizationResponsePayload>;
+
+	/**
+	 * @description Verify an authorization for a customer
+	 */
+	verifyAuthorization: (payload: {
+		/**
+		 * @description The reference of the authorization
+		 */
+		reference: string;
+	}) => Promise<VerifyAuthorizationResponsePayload>;
+
+	/**
+	 * @description Initialize a direct debit for a customer
+	 */
+	initializeDirectDebit: (
+		payload: InitializeDirectDebitPayload,
+	) => Promise<InitializeAuthorizationResponsePayload>;
+
+	/**
+	 * @description Charge a customer for direct debit activation
+	 */
+	directDebitActivationCharge: (payload: {
+		/**
+		 * @description The customer ID
+		 */
+		id: number;
+		/**
+		 * @description The authorization ID
+		 */
+		authorization_id: number;
+	}) => Promise<{
+		status: boolean;
+		message: string;
+	}>;
+
+	/**
+	 * @description Fetch mandate authorizations for a customer
+	 */
+	fetchMandateAuthorizations: (payload: {
+		/**
+		 * @description The customer ID
+		 */
+		id: number;
+	}) => Promise<FetchMandateAuthorizationsResponsePayload>;
+
+	/**
+	 * @description Deactivate an authorization for a customer
+	 */
+	deactivateAuthorization: (payload: {
+		/**
+		 * @description The authorization code
+		 */
+		authorization_code: string;
+	}) => Promise<{
+		status: boolean;
+		message: string;
+	}>;
+};
+

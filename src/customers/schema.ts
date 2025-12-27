@@ -11,10 +11,10 @@ import type {
 
 export const CreateCustomerSchemaPayload = z.object({
 	email: z.email(),
-	first_name: z.string(),
-	last_name: z.string(),
+	first_name: z.optional(z.string()),
+	last_name: z.optional(z.string()),
 	phone: z.optional(z.string()),
-	metadata: z.record(z.string(), z.unknown()),
+	metadata: z.optional(z.record(z.string(), z.unknown())),
 }) satisfies z.ZodMiniType<CreateCustomerPayload>;
 
 export const ListCustomerPayloadSchema = z.object({
@@ -26,11 +26,10 @@ export const ListCustomerPayloadSchema = z.object({
 
 export const UpdateCustomerPayloadSchema = z.object({
 	code: z.string(),
-	first_name: z.string(),
-	last_name: z.string(),
-	email: z.string(),
+	first_name: z.optional(z.string()),
+	last_name: z.optional(z.string()),
 	phone: z.optional(z.string()),
-	metadata: z.record(z.string(), z.unknown()),
+	metadata: z.optional(z.record(z.string(), z.unknown())),
 }) satisfies z.ZodMiniType<UpdateCustomerPayload>;
 
 export const ValidateCustomerPayloadSchema = z.object({
