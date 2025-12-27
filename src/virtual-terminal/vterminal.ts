@@ -13,13 +13,16 @@ import type {
 	AddSplitCodeResponsePayload,
 	AssignDestinationPayload,
 	AssignDestinationResponsePayload,
+	CreateVirtualTerminalClient,
 	CreateVirtualTerminalPayload,
 	CreateVirtualTerminalResponsePayload,
 	ListVirtualTerminalResponsePayload,
 	UnAssignDestinationPayload,
 } from "./types";
 
-export const createVirtualTerminal = (instance: KyInstance) => {
+export const createVirtualTerminal = (
+	instance: KyInstance,
+): CreateVirtualTerminalClient => {
 	const create = async (payload: CreateVirtualTerminalPayload) => {
 		const data = CreateVirtualTerminalSchemaPayload.parse(payload);
 		return await instance
@@ -39,7 +42,6 @@ export const createVirtualTerminal = (instance: KyInstance) => {
 	};
 
 	const fetch = async (payload: {
-		/** @description Code of the Virtual Terminal */
 		code: string;
 	}) => {
 		const data = z
@@ -53,9 +55,7 @@ export const createVirtualTerminal = (instance: KyInstance) => {
 	};
 
 	const update = async (payload: {
-		/** @description Code of the Virtual Terminal to update */
 		code: string;
-		/** @description Name of the Virtual Terminal */
 		name: string;
 	}) => {
 		const parse = z
@@ -76,7 +76,6 @@ export const createVirtualTerminal = (instance: KyInstance) => {
 	};
 
 	const deactivate = async (payload: {
-		/** @description Code of the Virtual Terminal to deactivate */
 		code: string;
 	}) => {
 		const parse = z

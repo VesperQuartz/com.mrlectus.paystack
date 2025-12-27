@@ -1,4 +1,5 @@
 import type { CreateSplit } from "../transaction-splits";
+import type { ListTerminalPayload } from "../terminal";
 import type { Currency } from "../types";
 
 export type CreateVirtualTerminalPayload = {
@@ -116,3 +117,94 @@ export type AddSplitCodeResponsePayload = {
 	message: string;
 	data: CreateSplit;
 };
+
+export type CreateVirtualTerminalClient = {
+	/**
+	 * @description Create a Virtual Terminal on your integration
+	 */
+	create: (
+		payload: CreateVirtualTerminalPayload,
+	) => Promise<CreateVirtualTerminalResponsePayload>;
+
+	/**
+	 * @description List the Virtual Terminals available on your integration
+	 */
+	list: (
+		payload: ListTerminalPayload,
+	) => Promise<ListVirtualTerminalResponsePayload>;
+
+	/**
+	 * @description Get the details of a Virtual Terminal
+	 */
+	fetch: (payload: {
+		/**
+		 * @description Code of the Virtual Terminal
+		 */
+		code: string;
+	}) => Promise<CreateVirtualTerminalResponsePayload>;
+
+	/**
+	 * @description Update the details of a Virtual Terminal
+	 */
+	update: (payload: {
+		/**
+		 * @description Code of the Virtual Terminal to update
+		 */
+		code: string;
+		/**
+		 * @description Name of the Virtual Terminal
+		 */
+		name: string;
+	}) => Promise<{
+		status: boolean;
+		message: string;
+	}>;
+
+	/**
+	 * @description Deactivate a Virtual Terminal on your integration
+	 */
+	deactivate: (payload: {
+		/**
+		 * @description Code of the Virtual Terminal to deactivate
+		 */
+		code: string;
+	}) => Promise<{
+		status: boolean;
+		message: string;
+	}>;
+
+	/**
+	 * @description Assign a destination to a Virtual Terminal
+	 */
+	assignDestination: (
+		payload: AssignDestinationPayload,
+	) => Promise<AssignDestinationResponsePayload>;
+
+	/**
+	 * @description Unassign a destination from a Virtual Terminal
+	 */
+	unassignDestination: (
+		payload: UnAssignDestinationPayload,
+	) => Promise<{
+		status: boolean;
+		message: string;
+	}>;
+
+	/**
+	 * @description Add a split code to a Virtual Terminal
+	 */
+	addSplitCode: (
+		payload: AddSplitCodePayload,
+	) => Promise<AddSplitCodeResponsePayload>;
+
+	/**
+	 * @description Remove a split code from a Virtual Terminal
+	 */
+	removeSplitCode: (
+		payload: AddSplitCodePayload,
+	) => Promise<{
+		status: boolean;
+		message: string;
+	}>;
+};
+
