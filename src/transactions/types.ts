@@ -131,7 +131,7 @@ export type Customer = {
 	customer_code: `CUS_${string}`;
 	phone: string | null;
 	metadata: unknown;
-	risk_action: "default" | (string & {});
+	risk_action: "default" | "allow" | "deny" | (string & {});
 	international_format_phone?: string | null;
 };
 

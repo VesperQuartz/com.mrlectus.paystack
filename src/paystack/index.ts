@@ -3,6 +3,7 @@ import { PaystackApiError } from "../errors";
 import { createTerminal } from "../terminal";
 import { createTransactionSplits } from "../transaction-splits";
 import { createTransactions } from "../transactions/transactions";
+import { createVirtualTerminal } from "../virtual-terminal";
 
 export const PaystackClient = (secretKey?: string | undefined, config = {}) => {
 	if (!secretKey && !process.env.PAYSTACK_SECRET) {
@@ -53,5 +54,7 @@ export const PaystackClient = (secretKey?: string | undefined, config = {}) => {
 		splits: createTransactionSplits(kyclient),
 		/** @description The Terminal API allows you to build delightful in-person payment experiences. */
 		terminal: createTerminal(kyclient),
+		/** @description The Virtual Terminal API allows you to accept in-person payments without a POS device. */
+		virtaulTerminal: createVirtualTerminal(kyclient),
 	};
 };
