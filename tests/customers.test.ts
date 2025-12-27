@@ -95,6 +95,7 @@ describe("Customers", () => {
 			const payload = {
 				code: "CUS_123",
 				first_name: "Jane",
+				last_name: "Doe",
 			};
 			const mockResponse = { status: true, message: "Customer updated" };
 			(mockKy.put as any).mockReturnValue({
