@@ -99,7 +99,7 @@ export type Log = {
 	errors: number;
 	success: boolean;
 	mobile: boolean;
-	input: unknown[];
+	input: Partial<unknown[]>;
 	history: {
 		type: string;
 		message: string;
@@ -213,7 +213,7 @@ export type ListPayload = {
 export type ListResponsePayload = {
 	status: boolean;
 	message: string;
-	data: VerifyResponsePayload["data"][];
+	data: Partial<VerifyResponsePayload["data"][]>;
 	meta: TransactionMeta;
 };
 
@@ -308,15 +308,19 @@ export type TransactionTotalResponsePayload = {
 	data: {
 		total_transactions: number;
 		total_volume: number;
-		total_volume_by_currency: {
-			currency: Currency;
-			amount: number;
-		}[];
+		total_volume_by_currency: Partial<
+			{
+				currency: Currency;
+				amount: number;
+			}[]
+		>;
 		pending_transfers: number;
-		pending_transfers_by_currency: {
-			currency: Currency;
-			amount: number;
-		}[];
+		pending_transfers_by_currency: Partial<
+			{
+				currency: Currency;
+				amount: number;
+			}[]
+		>;
 	};
 };
 
@@ -510,4 +514,3 @@ export type TransactionsClient = {
 		payload: PartialDebitPayload,
 	) => Promise<PartialDebitResponsePayload>;
 };
-

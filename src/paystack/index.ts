@@ -1,5 +1,6 @@
 import ky from "ky";
 import { PaystackApiError } from "../errors";
+import { createTerminal } from "../terminal";
 import { createTransactionSplits } from "../transaction-splits";
 import { createTransactions } from "../transactions/transactions";
 
@@ -25,12 +26,16 @@ export const PaystackClient = (secretKey?: string | undefined, config = {}) => {
 					if (response) {
 						const errorBody = await response.json<{
 							status: boolean;
+							statusCode: number;
 							message: string;
 							data?: unknown;
 						}>();
-						throw new PaystackApiError(errorBody, {
-							cause: error,
-						});
+						throw new PaystackApiError(
+							{ ...errorBody, statusCode: response.status },
+							{
+								cause: error,
+							},
+						);
 					}
 					return error;
 				},
@@ -46,5 +51,7 @@ export const PaystackClient = (secretKey?: string | undefined, config = {}) => {
 		 * @description The Transaction Splits API enables merchants split the settlement for a transaction across their payout account, and one or more subaccounts.
 		 */
 		splits: createTransactionSplits(kyclient),
+		/** @description The Terminal API allows you to build delightful in-person payment experiences. */
+		terminal: createTerminal(kyclient),
 	};
 };

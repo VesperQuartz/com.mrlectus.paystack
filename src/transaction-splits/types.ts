@@ -59,10 +59,12 @@ export type CreateSplit = {
 	updatedAt: string;
 	is_dynamic: boolean;
 	total_subaccounts: number;
-	subaccounts: {
-		subaccount: Subaccount;
-		share: number;
-	}[];
+	subaccounts: Partial<
+		{
+			subaccount: Subaccount;
+			share: number;
+		}[]
+	>;
 };
 
 export type SplitResponsePayload = {
@@ -113,7 +115,7 @@ export type SplitMeta = {
 export type ListSplitResponsePayload = {
 	status: boolean;
 	message: string;
-	data: CreateSplit[];
+	data: Partial<CreateSplit[]>;
 	meta: SplitMeta;
 };
 
