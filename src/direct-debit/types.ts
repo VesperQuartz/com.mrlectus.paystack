@@ -36,4 +36,18 @@ export type ListMandateAuthorizationsResponsePayload = {
 	meta: CustomerMeta;
 };
 
-export type CreateDirectDebitClient = {};
+export type CreateDirectDebitClient = {
+	/** @description Trigger an activation charge on an inactive mandate on behalf of your customer. */
+	triggerActivationCharge: (payload: {
+		/** @description An array of customer IDs to trigger the activation charge for. */
+		customer_ids: number[];
+	}) => Promise<{
+		status: boolean;
+		message: string;
+	}>;
+
+	/** @description List all direct debit mandates available on your integration. */
+	listMandateAuthorizations: (
+		payload: ListMandateAuthorizationsPayload,
+	) => Promise<ListMandateAuthorizationsResponsePayload>;
+};

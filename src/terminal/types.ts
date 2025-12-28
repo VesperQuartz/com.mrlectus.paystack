@@ -61,7 +61,7 @@ export type FetchStatusResponsePayload = {
 
 export type ListTerminalPayload = {
 	/** @description Filter by status ('active' or 'inactive') */
-	status: "active" | "inactive";
+	status?: "active" | "inactive";
 	/** @description Search query string */
 	search?: string;
 	/** @description Specify how many records you want to retrieve per page. If not specified, we use a default value of 50. */

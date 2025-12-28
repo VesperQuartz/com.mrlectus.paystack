@@ -2,11 +2,14 @@ import type { KyInstance } from "ky";
 import { z } from "zod/v4-mini";
 import { ListMandateAuthorizationsSchema } from "./schema";
 import type {
+	CreateDirectDebitClient,
 	ListMandateAuthorizationsPayload,
 	ListMandateAuthorizationsResponsePayload,
 } from "./types";
 
-export const createDirectDebit = (instance: KyInstance) => {
+export const createDirectDebit = (
+	instance: KyInstance,
+): CreateDirectDebitClient => {
 	const triggerActivationCharge = async (payload: {
 		customer_ids: number[];
 	}) => {

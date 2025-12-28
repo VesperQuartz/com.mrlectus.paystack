@@ -32,6 +32,8 @@ export const FetchEventStatusPayloadSchema = z.object({
 }) satisfies z.ZodMiniType<FetchEventStatusPayload>;
 
 export const ListTerminalPayloadSchema = z.object({
+	status: z.optional(z.enum(["active", "inactive"])),
+	search: z.optional(z.string()),
 	next: z.optional(z.string()),
 	perPage: z.optional(z.number()),
 	previous: z.optional(z.string()),
