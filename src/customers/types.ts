@@ -8,11 +8,11 @@ export type CreateCustomerPayload = {
 	/**
 	 * @description Customer's first name
 	 */
-	first_name?: string;
+	first_name: string;
 	/**
 	 * @description Customer's last name
 	 */
-	last_name?: string;
+	last_name: string;
 	/**
 	 * @description Customer's phone number
 	 */
@@ -33,6 +33,9 @@ export type Customer = {
 	identifications: string | null;
 	risk_action?: "default" | "allow" | "deny" | (string & {});
 	metadata?: Record<string, unknown>;
+	transactions?: Partial<unknown[]>;
+	subscriptions?: Partial<unknown[]>;
+	authorizations?: Partial<Authorization[]>;
 	phone?: string | null;
 	createdAt: string;
 	updatedAt: string;
@@ -64,9 +67,10 @@ export type ListCustomerPayload = {
 };
 
 export type CustomerMeta = {
+	per_page: number;
 	next: string | null;
-	previous: string | null;
-	perPage: number;
+	count: number;
+	total: number;
 };
 
 export type ListCustomerResponsePayload = {
@@ -175,7 +179,7 @@ export type InitializeAuthorizationPayload = {
 	/** @description Customer's email address */
 	email: string;
 	/** @description `direct-debit` is the only supported option for now */
-	channel: "direct-debit";
+	channel: "direct_debit";
 	/** @description Fully qualified url (e.g. https://example.com/) to redirect your customer to. */
 	callback_url?: string;
 	/** @description Holds the customer's account details. */
@@ -211,7 +215,7 @@ export type VerifyAuthorizationResponsePayload = {
 	message: string;
 	data: {
 		authorization_code: `AUTH_${string}`;
-		channel: "direct-debit" | (string & {});
+		channel: "direct_debit" | (string & {});
 		bank: string;
 		active: boolean;
 		customer: {
@@ -266,17 +270,18 @@ export type FetchMandateAuthorizationsResponsePayload = {
 			};
 		}[]
 	>;
-	meta: {
-		per_page: number;
-		next: string | null;
-		count: number;
-		total: number;
-	};
+	meta: CustomerMeta;
 };
 
 export type CreateCustomerClient = {
 	/**
 	 * @description Create a customer on your integration
+	 *
+	 * > **Customer Validation**
+	 * > The first_name, last_name and phone are optional parameters.
+	 * > However, when creating a customer that would be assigned a Dedicated Virtual Account and your
+	 * > business category falls under Betting, Financial services, and General Service, then these
+	 * > parameters become compulsory.
 	 */
 	create: (
 		payload: CreateCustomerPayload,
@@ -288,11 +293,11 @@ export type CreateCustomerClient = {
 	list: (payload?: ListCustomerPayload) => Promise<ListCustomerResponsePayload>;
 
 	/**
-	 * @description Get the details of a customer
+	 * @description Get details of a customer on your integration.
 	 */
 	fetch: (payload: {
 		/**
-		 * @description Email or customer code of the customer
+		 * @description An `email` or `customer` code for the customer you want to fetch
 		 */
 		email_or_code: string;
 	}) => Promise<FetchCustomerResponsePayload>;
@@ -305,7 +310,7 @@ export type CreateCustomerClient = {
 	) => Promise<UpdateCustomerResponsePayload>;
 
 	/**
-	 * @description Validate a customer's identification
+	 * @description Validate a customer's identity
 	 */
 	validate: (payload: ValidateCustomerPayload) => Promise<{
 		status: boolean;
@@ -313,46 +318,46 @@ export type CreateCustomerClient = {
 	}>;
 
 	/**
-	 * @description Set a risk action for a customer
+	 * @description Whitelist or blacklist a customer on your integration
 	 */
 	setRiskAction: (
 		payload: SetRiskActionPayload,
 	) => Promise<SetRiskActionResponsePayload>;
 
 	/**
-	 * @description Initialize an authorization for a customer
+	 * @description Initiate a request to create a reusable authorization code for recurring transactions.
 	 */
 	initializeAuthorization: (
 		payload: InitializeAuthorizationPayload,
 	) => Promise<InitializeAuthorizationResponsePayload>;
 
 	/**
-	 * @description Verify an authorization for a customer
+	 * @description Check the status of an authorization request.
 	 */
 	verifyAuthorization: (payload: {
 		/**
-		 * @description The reference of the authorization
+		 * @description The reference returned in the initialization response
 		 */
 		reference: string;
 	}) => Promise<VerifyAuthorizationResponsePayload>;
 
 	/**
-	 * @description Initialize a direct debit for a customer
+	 * @description Initialize the process of linking an account to a customer for Direct Debit transactions.
 	 */
 	initializeDirectDebit: (
 		payload: InitializeDirectDebitPayload,
 	) => Promise<InitializeAuthorizationResponsePayload>;
 
 	/**
-	 * @description Charge a customer for direct debit activation
+	 * @description Trigger an activation charge on an inactive mandate on behalf of your customer.
 	 */
 	directDebitActivationCharge: (payload: {
 		/**
-		 * @description The customer ID
+		 * @description The customer ID attached to the authorization
 		 */
 		id: number;
 		/**
-		 * @description The authorization ID
+		 * @description The authorization ID gotten from the initiation response
 		 */
 		authorization_id: number;
 	}) => Promise<{
@@ -361,21 +366,21 @@ export type CreateCustomerClient = {
 	}>;
 
 	/**
-	 * @description Fetch mandate authorizations for a customer
+	 * @description Get the list of direct debit mandates associated with a customer.
 	 */
 	fetchMandateAuthorizations: (payload: {
 		/**
-		 * @description The customer ID
+		 * @description The customer ID for the authorizations to fetch
 		 */
 		id: number;
 	}) => Promise<FetchMandateAuthorizationsResponsePayload>;
 
 	/**
-	 * @description Deactivate an authorization for a customer
+	 * @description Deactivate an authorization for any payment channel.
 	 */
 	deactivateAuthorization: (payload: {
 		/**
-		 * @description The authorization code
+		 * @description The authorization code to be deactivated
 		 */
 		authorization_code: string;
 	}) => Promise<{
@@ -383,4 +388,3 @@ export type CreateCustomerClient = {
 		message: string;
 	}>;
 };
-

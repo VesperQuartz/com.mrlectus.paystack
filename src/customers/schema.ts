@@ -11,8 +11,8 @@ import type {
 
 export const CreateCustomerSchemaPayload = z.object({
 	email: z.email(),
-	first_name: z.optional(z.string()),
-	last_name: z.optional(z.string()),
+	first_name: z.string(),
+	last_name: z.string(),
 	phone: z.optional(z.string()),
 	metadata: z.optional(z.record(z.string(), z.unknown())),
 }) satisfies z.ZodMiniType<CreateCustomerPayload>;
@@ -26,8 +26,8 @@ export const ListCustomerPayloadSchema = z.object({
 
 export const UpdateCustomerPayloadSchema = z.object({
 	code: z.string(),
-	first_name: z.optional(z.string()),
-	last_name: z.optional(z.string()),
+	first_name: z.string(),
+	last_name: z.string(),
 	phone: z.optional(z.string()),
 	metadata: z.optional(z.record(z.string(), z.unknown())),
 }) satisfies z.ZodMiniType<UpdateCustomerPayload>;
@@ -54,7 +54,7 @@ export const SetRiskActionPayloadSchema = z.object({
 
 export const InitializeAuthorizationPayloadSchema = z.object({
 	email: z.email(),
-	channel: z.literal("direct-debit"),
+	channel: z.literal("direct_debit"),
 	callback_url: z.optional(z.url()),
 	account: z.optional(
 		z.object({

@@ -28,7 +28,7 @@ export const CreateVirtualTerminalSchemaPayload = z.object({
 
 export const ListVirtualTerminalPayloadSchema = z.object({
 	status: z.enum(["active", "inactive"]),
-	perPage: z.number(),
+	perPage: z.optional(z.number()),
 	search: z.optional(z.string()),
 	next: z.optional(z.string()),
 	previous: z.optional(z.string()),

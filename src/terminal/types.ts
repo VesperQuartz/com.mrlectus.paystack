@@ -60,6 +60,10 @@ export type FetchStatusResponsePayload = {
 };
 
 export type ListTerminalPayload = {
+	/** @description Filter by status ('active' or 'inactive') */
+	status: "active" | "inactive";
+	/** @description Search query string */
+	search?: string;
 	/** @description Specify how many records you want to retrieve per page. If not specified, we use a default value of 50. */
 	perPage?: number;
 	/** @description A cursor that indicates your place in the list. It can be used to fetch the next page of the list */

@@ -83,9 +83,12 @@ describe("Customers", () => {
 
 			const result = await customer.fetch(payload);
 
-			expect(mockKy.get).toHaveBeenCalledWith(`customer/${payload.email_or_code}`, {
-				searchParams: payload,
-			});
+			expect(mockKy.get).toHaveBeenCalledWith(
+				`customer/${payload.email_or_code}`,
+				{
+					searchParams: payload,
+				},
+			);
 			expect(result).toEqual(mockResponse);
 		});
 	});
@@ -133,9 +136,12 @@ describe("Customers", () => {
 			const { code, ...rest } = payload;
 			const result = await customer.validate(payload as any);
 
-			expect(mockKy.post).toHaveBeenCalledWith(`customer/${code}/identification`, {
-				json: rest,
-			});
+			expect(mockKy.post).toHaveBeenCalledWith(
+				`customer/${code}/identification`,
+				{
+					json: rest,
+				},
+			);
 			expect(result).toEqual(mockResponse);
 		});
 	});
@@ -164,18 +170,24 @@ describe("Customers", () => {
 		it("should call initializeAuthorization with correct payload", async () => {
 			const payload = {
 				email: "customer@example.com",
-				channel: "direct-debit",
+				channel: "direct_debit",
 			};
-			const mockResponse = { status: true, message: "Authorization initialized" };
+			const mockResponse = {
+				status: true,
+				message: "Authorization initialized",
+			};
 			(mockKy.post as any).mockReturnValue({
 				json: vi.fn().mockResolvedValue(mockResponse),
 			});
 
 			const result = await customer.initializeAuthorization(payload as any);
 
-			expect(mockKy.post).toHaveBeenCalledWith("customer/authorization/initialize", {
-				json: payload,
-			});
+			expect(mockKy.post).toHaveBeenCalledWith(
+				"customer/authorization/initialize",
+				{
+					json: payload,
+				},
+			);
 			expect(result).toEqual(mockResponse);
 		});
 	});
@@ -190,7 +202,9 @@ describe("Customers", () => {
 
 			const result = await customer.verifyAuthorization({ reference });
 
-			expect(mockKy.get).toHaveBeenCalledWith(`customer/authorization/verify/${reference}`);
+			expect(mockKy.get).toHaveBeenCalledWith(
+				`customer/authorization/verify/${reference}`,
+			);
 			expect(result).toEqual(mockResponse);
 		});
 	});
@@ -202,7 +216,10 @@ describe("Customers", () => {
 				account: { number: "1234567890", bank_code: "011" },
 				address: { street: "Street", city: "City", state: "State" },
 			};
-			const mockResponse = { status: true, message: "Direct debit initialized" };
+			const mockResponse = {
+				status: true,
+				message: "Direct debit initialized",
+			};
 			(mockKy.post as any).mockReturnValue({
 				json: vi.fn().mockResolvedValue(mockResponse),
 			});
@@ -210,9 +227,12 @@ describe("Customers", () => {
 			const { id, ...rest } = payload;
 			const result = await customer.initializeDirectDebit(payload as any);
 
-			expect(mockKy.post).toHaveBeenCalledWith(`customer/${id}/initialize-direct-debit`, {
-				json: rest,
-			});
+			expect(mockKy.post).toHaveBeenCalledWith(
+				`customer/${id}/initialize-direct-debit`,
+				{
+					json: rest,
+				},
+			);
 			expect(result).toEqual(mockResponse);
 		});
 	});
@@ -223,7 +243,10 @@ describe("Customers", () => {
 				id: 123,
 				authorization_id: 456,
 			};
-			const mockResponse = { status: true, message: "Activation charge successful" };
+			const mockResponse = {
+				status: true,
+				message: "Activation charge successful",
+			};
 			(mockKy.put as any).mockReturnValue({
 				json: vi.fn().mockResolvedValue(mockResponse),
 			});
@@ -231,9 +254,12 @@ describe("Customers", () => {
 			const { id, ...rest } = payload;
 			const result = await customer.directDebitActivationCharge(payload);
 
-			expect(mockKy.put).toHaveBeenCalledWith(`customer/authorization/${id}/direct-debit-activation-charge`, {
-				json: rest,
-			});
+			expect(mockKy.put).toHaveBeenCalledWith(
+				`customer/authorization/${id}/direct-debit-activation-charge`,
+				{
+					json: rest,
+				},
+			);
 			expect(result).toEqual(mockResponse);
 		});
 	});
@@ -241,14 +267,19 @@ describe("Customers", () => {
 	describe("fetchMandateAuthorizations", () => {
 		it("should call fetchMandateAuthorizations with correct id", async () => {
 			const id = 123;
-			const mockResponse = { status: true, message: "Mandate authorizations retrieved" };
+			const mockResponse = {
+				status: true,
+				message: "Mandate authorizations retrieved",
+			};
 			(mockKy.get as any).mockReturnValue({
 				json: vi.fn().mockResolvedValue(mockResponse),
 			});
 
 			const result = await customer.fetchMandateAuthorizations({ id });
 
-			expect(mockKy.get).toHaveBeenCalledWith(`customer/${id}/directdebit-mandate-authorizations`);
+			expect(mockKy.get).toHaveBeenCalledWith(
+				`customer/${id}/directdebit-mandate-authorizations`,
+			);
 			expect(result).toEqual(mockResponse);
 		});
 	});
@@ -256,16 +287,22 @@ describe("Customers", () => {
 	describe("deactivateAuthorization", () => {
 		it("should call deactivateAuthorization with correct authorization_code", async () => {
 			const payload = { authorization_code: "AUTH_123" };
-			const mockResponse = { status: true, message: "Authorization deactivated" };
+			const mockResponse = {
+				status: true,
+				message: "Authorization deactivated",
+			};
 			(mockKy.post as any).mockReturnValue({
 				json: vi.fn().mockResolvedValue(mockResponse),
 			});
 
 			const result = await customer.deactivateAuthorization(payload);
 
-			expect(mockKy.post).toHaveBeenCalledWith(`customer/authorization/deactivate`, {
-				json: payload,
-			});
+			expect(mockKy.post).toHaveBeenCalledWith(
+				`customer/authorization/deactivate`,
+				{
+					json: payload,
+				},
+			);
 			expect(result).toEqual(mockResponse);
 		});
 	});

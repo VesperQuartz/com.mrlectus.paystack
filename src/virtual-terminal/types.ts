@@ -53,7 +53,7 @@ export type ListVirtualTerminalPayload = {
 	/** @description Filter by status ('active' or 'inactive') */
 	status: "active" | "inactive";
 	/** @description Number of records per page */
-	perPage: number;
+	perPage?: number;
 	/** @description Search query string */
 	search?: string;
 	/** @description Cursor for next page */

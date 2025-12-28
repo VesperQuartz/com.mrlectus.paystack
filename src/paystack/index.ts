@@ -1,4 +1,6 @@
 import ky from "ky";
+import { createCustomer } from "../customers";
+import { createDirectDebit } from "../direct-debit";
 import { PaystackApiError } from "../errors";
 import { createTerminal } from "../terminal";
 import { createTransactionSplits } from "../transaction-splits";
@@ -56,5 +58,9 @@ export const PaystackClient = (secretKey?: string | undefined, config = {}) => {
 		terminal: createTerminal(kyclient),
 		/** @description The Virtual Terminal API allows you to accept in-person payments without a POS device. */
 		virtaulTerminal: createVirtualTerminal(kyclient),
+		/** @description The Customers API allows you create and manage customers on your integration. */
+		customers: createCustomer(kyclient),
+		/** @description The Direct Debit API allows you manage the authorization on your customer's bank accounts. */
+		directDebit: createDirectDebit(kyclient),
 	};
 };
