@@ -213,4 +213,56 @@ export type FetchBankProvidersResponsePayload = {
 	>;
 };
 
-export type CreateDedicatedAccountClient = {};
+export type CreateDedicatedAccountClient = {
+	/** @description Create a dedicated virtual account for an existing customer. */
+	create: (
+		payload: CreateDedicatedVirtualAccountPayload,
+	) => Promise<CreateDedicatedVirtualAccountResponsePayload>;
+
+	/** @description Assign a dedicated virtual account to a customer. */
+	assign: (payload: AssignDedicatedVirtualAccountPayload) => Promise<{
+		status: boolean;
+		message: string;
+	}>;
+
+	/** @description List dedicated virtual accounts available on your integration. */
+	list: (
+		payload: ListDedicatedVirtualAccountsPayload,
+	) => Promise<ListDedicatedVirtualAccountsResponsePayload>;
+
+	/** @description Get details of a dedicated virtual account on your integration. */
+	fetch: (payload: {
+		/** @description The ID of the dedicated virtual account */
+		dedicated_account_id: number;
+	}) => Promise<FetchDedicatedVirtualAccountResponsePayload>;
+
+	/** @description Requery a dedicated virtual account for new transactions. */
+	requery: (payload: RequeryDedicatedAccountPayload) => Promise<{
+		status: boolean;
+		message: string;
+	}>;
+
+	/** @description Deactivate a dedicated virtual account on your integration. */
+	deactivate: (payload: {
+		/** @description The ID of the dedicated virtual account */
+		dedicated_account_id: number;
+	}) => Promise<DeactivateDedicatedAccountResponsePayload>;
+
+	/** @description Split transactions from a dedicated virtual account. */
+	splitTransaction: (
+		payload: SplitDedicatedAccountTransactionPayload,
+	) => Promise<SplitDedicatedAccountTransactionResponsePayload>;
+
+	/** @description Remove a split configuration from a dedicated virtual account. */
+	removeSplit: (payload: {
+		/** @description Dedicated virtual account number */
+		account_number: string;
+	}) => Promise<{
+		status: boolean;
+		message: string;
+	}>;
+
+	/** @description Get the list of available bank providers for dedicated virtual accounts. */
+	listBankProviders: () => Promise<FetchBankProvidersResponsePayload>;
+};
+
