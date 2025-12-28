@@ -1,5 +1,6 @@
 import ky from "ky";
 import { createCustomer } from "../customers";
+import { createDedicatedVirtualAccounts } from "../dedicated-virtual-accounts";
 import { createDirectDebit } from "../direct-debit";
 import { PaystackApiError } from "../errors";
 import { createTerminal } from "../terminal";
@@ -62,5 +63,6 @@ export const PaystackClient = (secretKey?: string | undefined, config = {}) => {
 		customers: createCustomer(kyclient),
 		/** @description The Direct Debit API allows you manage the authorization on your customer's bank accounts. */
 		directDebit: createDirectDebit(kyclient),
+		dedicatedVirtualAccount: createDedicatedVirtualAccounts(kyclient),
 	};
 };
