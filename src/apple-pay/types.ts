@@ -21,4 +21,38 @@ export type ListDomainsResponsePayload = {
 	};
 };
 
-export type CreateApplePayClient = {};
+export type CreateApplePayClient = {
+	/**
+	 * @description Register a top-level domain or subdomain for your Apple Pay integration.
+	 */
+	registerDomain: (payload: {
+		/**
+		 * @description Domain name to be registered
+		 */
+		domainName: string;
+	}) => Promise<{
+		status: boolean;
+		message: string;
+	}>;
+
+	/**
+	 * @description List all registered domains on your integration.
+	 */
+	listDomains: (
+		payload: ListDomainsPayload,
+	) => Promise<ListDomainsResponsePayload>;
+
+	/**
+	 * @description Unregister a top-level domain or subdomain previously used for your Apple Pay integration.
+	 */
+	unregisterDomain: (payload: {
+		/**
+		 * @description Domain name to be unregistered
+		 */
+		domainName: string;
+	}) => Promise<{
+		status: boolean;
+		message: string;
+	}>;
+};
+
