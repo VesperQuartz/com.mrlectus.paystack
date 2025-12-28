@@ -63,6 +63,7 @@ export const PaystackClient = (secretKey?: string | undefined, config = {}) => {
 		customers: createCustomer(kyclient),
 		/** @description The Direct Debit API allows you manage the authorization on your customer's bank accounts. */
 		directDebit: createDirectDebit(kyclient),
+		/** @description The Dedicated Virtual Account API enables Nigerian and Ghanaian merchants to manage unique payment accounts of their customers. */
 		dedicatedVirtualAccount: createDedicatedVirtualAccounts(kyclient),
 	};
 };

@@ -219,7 +219,7 @@ export type CreateDedicatedAccountClient = {
 		payload: CreateDedicatedVirtualAccountPayload,
 	) => Promise<CreateDedicatedVirtualAccountResponsePayload>;
 
-	/** @description Assign a dedicated virtual account to a customer. */
+	/** @description You can create a customer, validate the customer, and assign a DVA to the customer. */
 	assign: (payload: AssignDedicatedVirtualAccountPayload) => Promise<{
 		status: boolean;
 		message: string;
@@ -248,12 +248,12 @@ export type CreateDedicatedAccountClient = {
 		dedicated_account_id: number;
 	}) => Promise<DeactivateDedicatedAccountResponsePayload>;
 
-	/** @description Split transactions from a dedicated virtual account. */
+	/** @description Split a dedicated virtual account transaction with one or more accounts. */
 	splitTransaction: (
 		payload: SplitDedicatedAccountTransactionPayload,
 	) => Promise<SplitDedicatedAccountTransactionResponsePayload>;
 
-	/** @description Remove a split configuration from a dedicated virtual account. */
+	/** @description If you've previously set up split payment for transactions on a dedicated virtual account, you can remove it with this endpoint */
 	removeSplit: (payload: {
 		/** @description Dedicated virtual account number */
 		account_number: string;
@@ -265,4 +265,3 @@ export type CreateDedicatedAccountClient = {
 	/** @description Get the list of available bank providers for dedicated virtual accounts. */
 	listBankProviders: () => Promise<FetchBankProvidersResponsePayload>;
 };
-
