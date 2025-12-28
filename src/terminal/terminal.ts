@@ -52,7 +52,7 @@ export const createTerminal = (instance: KyInstance): CreateTerminalClient => {
 			.json<FetchStatusResponsePayload>();
 	};
 
-	const list = async (payload: ListTerminalPayload = {}) => {
+	const list = async (payload: ListTerminalPayload) => {
 		const parse = ListTerminalPayloadSchema.parse(payload);
 		return await instance
 			.get("terminal", {

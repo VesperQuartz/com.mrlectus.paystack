@@ -61,7 +61,7 @@ export type FetchStatusResponsePayload = {
 
 export type ListTerminalPayload = {
 	/** @description Filter by status ('active' or 'inactive') */
-	status?: "active" | "inactive";
+	status: "active" | "inactive";
 	/** @description Search query string */
 	search?: string;
 	/** @description Specify how many records you want to retrieve per page. If not specified, we use a default value of 50. */
@@ -124,7 +124,7 @@ export type CreateTerminalClient = {
 		terminal_id: string;
 	}) => Promise<FetchStatusResponsePayload>;
 	/** @description List the Terminals available on your integration */
-	list: (payload?: ListTerminalPayload) => Promise<ListTerminalResponsePayload>;
+	list: (payload: ListTerminalPayload) => Promise<ListTerminalResponsePayload>;
 	/** @description Get the details of a Terminal */
 	fetch: (payload: {
 		terminal_id: string;

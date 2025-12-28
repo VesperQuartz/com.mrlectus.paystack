@@ -122,6 +122,7 @@ describe("Terminal", () => {
 	describe("list", () => {
 		it("should call list with correct search params", async () => {
 			const payload = {
+				status: "active" as const,
 				perPage: 10,
 				next: "cursor_123",
 			};
@@ -138,16 +139,17 @@ describe("Terminal", () => {
 			expect(result).toEqual(mockResponse);
 		});
 
-		it("should call list with empty params if none provided", async () => {
+		it("should call list with required status", async () => {
+			const payload = { status: "active" as const };
 			const mockResponse = { status: true, message: "Terminals retrieved" };
 			(mockKy.get as any).mockReturnValue({
 				json: vi.fn().mockResolvedValue(mockResponse),
 			});
 
-			await terminal.list();
+			await terminal.list(payload);
 
 			expect(mockKy.get).toHaveBeenCalledWith("terminal", {
-				searchParams: {},
+				searchParams: payload,
 			});
 		});
 	});
