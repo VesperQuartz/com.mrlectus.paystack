@@ -107,4 +107,92 @@ export type FetchSubscriptionResponsePayload = {
 	};
 };
 
-export type CreateSubscriptionClient = {};
+export type CreateSubscriptionClient = {
+	/**
+	 * @description Create a subscription on your integration
+	 */
+	create: (
+		payload: CreateSubscriptionPayload,
+	) => Promise<CreateSubscriptionResponsePayload>;
+
+	/**
+	 * @description List subscriptions available on your integration
+	 */
+	list: (
+		payload?: ListSubscriptionPayload,
+	) => Promise<ListSubscriptionResponsePayload>;
+
+	/**
+	 * @description Get details of a subscription on your integration
+	 */
+	fetch: (payload: {
+		/**
+		 * @description The subscription ID or code you want to fetch
+		 */
+		id_or_code: string;
+	}) => Promise<FetchSubscriptionResponsePayload>;
+
+	/**
+	 * @description Enable a subscription on your integration
+	 */
+	enable: (payload: {
+		/**
+		 * @description Subscription code
+		 */
+		code: string;
+		/**
+		 * @description Email token
+		 */
+		token: string;
+	}) => Promise<{
+		status: boolean;
+		message: string;
+	}>;
+
+	/**
+	 * @description Disable a subscription on your integration
+	 */
+	disable: (payload: {
+		/**
+		 * @description Subscription code
+		 */
+		code: string;
+		/**
+		 * @description Email token
+		 */
+		token: string;
+	}) => Promise<{
+		status: boolean;
+		message: string;
+	}>;
+
+	/**
+	 * @description Generate a link for relevant steps an subscription update
+	 */
+	generateUpdatelink: (payload: {
+		/**
+		 * @description Subscription code
+		 */
+		code: string;
+	}) => Promise<{
+		status: boolean;
+		message: string;
+		data: {
+			link: string;
+		};
+	}>;
+
+	/**
+	 * @description Send an email for relevant steps an subscription update
+	 */
+	sendUpdatelink: (payload: {
+		/**
+		 * @description Subscription code
+		 */
+		code: string;
+	}) => Promise<{
+		status: boolean;
+		message: string;
+	}>;
+};
+
