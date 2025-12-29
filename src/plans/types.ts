@@ -158,4 +158,33 @@ export type UpdatePlanPayload = {
 	update_existing_subscriptions?: boolean;
 } & CreatePlanPayload;
 
-export type CreatePlanClient = {};
+export type CreatePlanClient = {
+	/**
+	 * @description Create a plan on your integration
+	 */
+	create: (payload: CreatePlanPayload) => Promise<CreatePlanResponsePayload>;
+
+	/**
+	 * @description List plans available on your integration
+	 */
+	list: (payload: ListPlansPayload) => Promise<ListPlansResponsePayload>;
+
+	/**
+	 * @description Get details of a plan on your integration
+	 */
+	fetch: (payload: {
+		/**
+		 * @description Plan ID or code
+		 */
+		id_or_code: string;
+	}) => Promise<FetchPlansResponsePayload>;
+
+	/**
+	 * @description Update a plan's details on your integration
+	 */
+	update: (payload: UpdatePlanPayload) => Promise<{
+		status: boolean;
+		message: string;
+	}>;
+};
+
