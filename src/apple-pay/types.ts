@@ -24,6 +24,9 @@ export type ListDomainsResponsePayload = {
 export type CreateApplePayClient = {
 	/**
 	 * @description Register a top-level domain or subdomain for your Apple Pay integration.
+	 *
+	 * > **Domain Registration**
+	 * > This endpoint can only be called with one domain or subdomain at a time.
 	 */
 	registerDomain: (payload: {
 		/**
@@ -36,7 +39,7 @@ export type CreateApplePayClient = {
 	}>;
 
 	/**
-	 * @description List all registered domains on your integration.
+	 * @description Lists all registered domains on your integration. Returns an empty array if no domains have been added.
 	 */
 	listDomains: (
 		payload: ListDomainsPayload,
@@ -55,4 +58,3 @@ export type CreateApplePayClient = {
 		message: string;
 	}>;
 };
-

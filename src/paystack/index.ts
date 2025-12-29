@@ -1,8 +1,10 @@
 import ky from "ky";
+import { createApplePay } from "../apple-pay";
 import { createCustomer } from "../customers";
 import { createDedicatedVirtualAccounts } from "../dedicated-virtual-accounts";
 import { createDirectDebit } from "../direct-debit";
 import { PaystackApiError } from "../errors";
+import { createSubaccounts } from "../subaccounts";
 import { createTerminal } from "../terminal";
 import { createTransactionSplits } from "../transaction-splits";
 import { createTransactions } from "../transactions/transactions";
@@ -65,5 +67,9 @@ export const PaystackClient = (secretKey?: string | undefined, config = {}) => {
 		directDebit: createDirectDebit(kyclient),
 		/** @description The Dedicated Virtual Account API enables Nigerian and Ghanaian merchants to manage unique payment accounts of their customers. */
 		dedicatedVirtualAccount: createDedicatedVirtualAccounts(kyclient),
+		/** @description The Apple Pay API allows you register your application's top-level domain or subdomain. */
+		applePay: createApplePay(kyclient),
+		/** @description The Subaccounts API allows you create and manage subaccounts on your integration. Subaccounts can be used to split payment between two accounts (your main account and a sub account). */
+		subaccounts: createSubaccounts(kyclient),
 	};
 };
