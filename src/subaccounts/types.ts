@@ -161,7 +161,7 @@ export type CreateSubaccountClient = {
 	 */
 	fetch: (payload: {
 		/**
-		 * @description The id or code of the subaccount
+		 * @description The subaccount ID or code you want to fetch
 		 */
 		id_or_code: string;
 	}) => Promise<FetchSubAccountResponsePayload>;
@@ -173,4 +173,3 @@ export type CreateSubaccountClient = {
 		payload: UpdateSubAccountPayload,
 	) => Promise<FetchSubAccountResponsePayload>;
 };
-
