@@ -141,4 +141,36 @@ export type UpdateSubAccountPayload = {
 	metadata?: string;
 };
 
-export type CreateSubaccountClient = {};
+export type CreateSubaccountClient = {
+	/**
+	 * @description Create a subaccount on your integration
+	 */
+	create: (
+		payload: CreateSubaccountPayload,
+	) => Promise<CreateSubaccountResponsePayload>;
+
+	/**
+	 * @description List subaccounts available on your integration
+	 */
+	list: (
+		payload: ListSubAccountsPayload,
+	) => Promise<ListSubAccountsResponsePayload>;
+
+	/**
+	 * @description Get details of a subaccount on your integration
+	 */
+	fetch: (payload: {
+		/**
+		 * @description The id or code of the subaccount
+		 */
+		id_or_code: string;
+	}) => Promise<FetchSubAccountResponsePayload>;
+
+	/**
+	 * @description Update a subaccount's details on your integration
+	 */
+	update: (
+		payload: UpdateSubAccountPayload,
+	) => Promise<FetchSubAccountResponsePayload>;
+};
+
