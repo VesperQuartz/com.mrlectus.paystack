@@ -31,4 +31,13 @@ describe("PaystackClient", () => {
 		process.env.PAYSTACK_SECRET = "sk_test_env_123";
 		expect(() => PaystackClient("sk_test_arg_123")).not.toThrow();
 	});
+
+	it("should initialize with config object as first argument", () => {
+		process.env.PAYSTACK_SECRET = "sk_test_env_123";
+		expect(() => PaystackClient({ timeout: 5000 })).not.toThrow();
+	});
+
+	it("should initialize with secret key and config object", () => {
+		expect(() => PaystackClient("sk_test_123", { debug: true })).not.toThrow();
+	});
 });

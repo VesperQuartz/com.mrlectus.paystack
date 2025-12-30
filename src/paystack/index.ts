@@ -13,20 +13,44 @@ import { createTransactionSplits } from "#/transaction-splits";
 import { createTransactions } from "#/transactions/transactions";
 import { createVirtualTerminal } from "#/virtual-terminal";
 
-export const PaystackClient = (secretKey?: string | undefined, config = {}) => {
-	if (!secretKey && !process.env.PAYSTACK_SECRET) {
+type ApiConfig = {
+	timeout?: number;
+	debug?: boolean;
+	signal?: AbortSignal | null | undefined;
+};
+
+export const PaystackClient = (
+	secretKeyOrConfig?: string | ApiConfig,
+	config: ApiConfig = {
+		debug: false,
+	},
+) => {
+	const providedSecretKey =
+		typeof secretKeyOrConfig === "string" ? secretKeyOrConfig : undefined;
+
+	const configWithDefaults =
+		typeof secretKeyOrConfig === "object"
+			? secretKeyOrConfig
+			: (config ?? { debug: false });
+
+	const secretKey = providedSecretKey ?? process.env.PAYSTACK_SECRET;
+
+	if (!secretKey) {
 		throw new Error("Secret key is required");
 	}
+
 	const kyclient = ky.create({
 		prefixUrl: "https://api.paystack.co",
+		timeout: configWithDefaults.timeout ?? 10000,
+		signal: configWithDefaults.signal ?? undefined,
 		headers: {
 			"Content-Type": "application/json",
-			Authorization: `Bearer ${process.env.PAYSTACK_SECRET ?? secretKey}`,
+			Authorization: `Bearer ${secretKey}`,
 		},
 		hooks: {
 			afterResponse: [
 				async (req) => {
-					console.log("FULL REQUEST URL:", req.url);
+					configWithDefaults.debug && console.log("FULL REQUEST URL:", req.url);
 				},
 			],
 			beforeError: [

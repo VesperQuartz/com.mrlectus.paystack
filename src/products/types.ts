@@ -129,11 +129,18 @@ export type UpdateProductResponsePayload = {
 };
 
 export type CreateProductClient = {
+	/** @description Create a product on your integration */
 	create: (
 		payload: CreateProductPayload,
 	) => Promise<CreateProductResponsePayload>;
+	/** @description List products available on your integration */
 	list: (payload?: ListProductPayload) => Promise<ListProductResponsePayload>;
-	fetch: (payload: { id: string }) => Promise<FetchProductResponsePayload>;
+	/** @description Get details of a product on your integration */
+	fetch: (payload: {
+		/** @description The product ID you want to fetch */
+		id: string;
+	}) => Promise<FetchProductResponsePayload>;
+	/** @description Update a product's details on your integration */
 	update: (
 		payload: UpdateProductPayload,
 	) => Promise<UpdateProductResponsePayload>;
