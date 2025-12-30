@@ -1,16 +1,17 @@
 import ky from "ky";
-import { createApplePay } from "../apple-pay";
-import { createCustomer } from "../customers";
-import { createDedicatedVirtualAccounts } from "../dedicated-virtual-accounts";
-import { createDirectDebit } from "../direct-debit";
-import { PaystackApiError } from "../errors";
-import { createPlans } from "../plans";
-import { createSubaccounts } from "../subaccounts";
-import { createSubscriptions } from "../subscriptions";
-import { createTerminal } from "../terminal";
-import { createTransactionSplits } from "../transaction-splits";
-import { createTransactions } from "../transactions/transactions";
-import { createVirtualTerminal } from "../virtual-terminal";
+import { createApplePay } from "#/apple-pay";
+import { createCustomer } from "#/customers";
+import { createDedicatedVirtualAccounts } from "#/dedicated-virtual-accounts";
+import { createDirectDebit } from "#/direct-debit";
+import { PaystackApiError } from "#/errors";
+import { createPlans } from "#/plans";
+import { createProducts } from "#/products";
+import { createSubaccounts } from "#/subaccounts";
+import { createSubscriptions } from "#/subscriptions";
+import { createTerminal } from "#/terminal";
+import { createTransactionSplits } from "#/transaction-splits";
+import { createTransactions } from "#/transactions/transactions";
+import { createVirtualTerminal } from "#/virtual-terminal";
 
 export const PaystackClient = (secretKey?: string | undefined, config = {}) => {
 	if (!secretKey && !process.env.PAYSTACK_SECRET) {
@@ -77,5 +78,7 @@ export const PaystackClient = (secretKey?: string | undefined, config = {}) => {
 		plans: createPlans(kyclient),
 		/** @description The Subscriptions API allows you create and manage recurring payment on your integration. */
 		subscriptions: createSubscriptions(kyclient),
+		/** @description The Products API allows you create and manage inventories on your integration. */
+		products: createProducts(kyclient),
 	};
 };
