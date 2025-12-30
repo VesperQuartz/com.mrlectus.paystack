@@ -128,4 +128,13 @@ export type UpdateProductResponsePayload = {
 	};
 };
 
-export type CreateProductClient = {};
+export type CreateProductClient = {
+	create: (
+		payload: CreateProductPayload,
+	) => Promise<CreateProductResponsePayload>;
+	list: (payload?: ListProductPayload) => Promise<ListProductResponsePayload>;
+	fetch: (payload: { id: string }) => Promise<FetchProductResponsePayload>;
+	update: (
+		payload: UpdateProductPayload,
+	) => Promise<UpdateProductResponsePayload>;
+};
