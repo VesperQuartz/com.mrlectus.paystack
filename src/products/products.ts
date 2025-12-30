@@ -1,5 +1,5 @@
 import type { KyInstance } from "ky";
-import z from "zod/v4-mini";
+import { z } from "zod/v4-mini";
 import {
 	CreateProductPayloadSchema,
 	ListProductPayloadSchema,
