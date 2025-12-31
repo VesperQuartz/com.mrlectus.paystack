@@ -2,16 +2,12 @@
 	"compilerOptions": {
 		"target": "esnext",
 		"allowJs": true,
-		"lib": [
-			"es2023"
-		],
+		"lib": ["es2023"],
 		"moduleDetection": "force",
 		"module": "preserve",
 		"moduleResolution": "bundler",
 		"resolveJsonModule": true,
-		"types": [
-			"node"
-		],
+		"types": ["node"],
 		"strict": true,
 		"noUnusedLocals": true,
 		"declaration": true,
@@ -22,12 +18,8 @@
 		"skipLibCheck": true,
 		"baseUrl": "./src",
 		"paths": {
-			"#/*": [
-				"./*"
-			]
+			"#/*": ["./*"]
 		}
 	},
-	"include": [
-		"src"
-	]
+	"include": ["src"]
 }

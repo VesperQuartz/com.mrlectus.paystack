@@ -50,7 +50,7 @@ export const createProducts = (instance: KyInstance): CreateProductClient => {
 		const data = UpdateProductPayloadSchema.parse(payload);
 		const { id, ...rest } = data;
 		return await instance
-			.put(`product/${data.id}`, {
+			.put(`product/${id}`, {
 				json: rest,
 			})
 			.json<UpdateProductResponsePayload>();

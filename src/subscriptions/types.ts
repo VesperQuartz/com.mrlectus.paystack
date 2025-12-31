@@ -195,4 +195,3 @@ export type CreateSubscriptionClient = {
 		message: string;
 	}>;
 };
-

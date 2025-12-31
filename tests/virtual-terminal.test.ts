@@ -71,7 +71,9 @@ describe("Virtual Terminal", () => {
 
 			const result = await vTerminal.fetch(payload);
 
-			expect(mockKy.get).toHaveBeenCalledWith(`virtual_terminal/${payload.code}`);
+			expect(mockKy.get).toHaveBeenCalledWith(
+				`virtual_terminal/${payload.code}`,
+			);
 			expect(result).toEqual(mockResponse);
 		});
 	});
@@ -107,7 +109,9 @@ describe("Virtual Terminal", () => {
 
 			const result = await vTerminal.deactivate(payload);
 
-			expect(mockKy.put).toHaveBeenCalledWith(`virtual_terminal/${payload.code}/deactivate`);
+			expect(mockKy.put).toHaveBeenCalledWith(
+				`virtual_terminal/${payload.code}/deactivate`,
+			);
 			expect(result).toEqual(mockResponse);
 		});
 	});
@@ -126,9 +130,12 @@ describe("Virtual Terminal", () => {
 			const { code, ...rest } = payload;
 			const result = await vTerminal.assignDestination(payload);
 
-			expect(mockKy.post).toHaveBeenCalledWith(`virtual_terminal/${code}/destination/assign`, {
-				json: rest,
-			});
+			expect(mockKy.post).toHaveBeenCalledWith(
+				`virtual_terminal/${code}/destination/assign`,
+				{
+					json: rest,
+				},
+			);
 			expect(result).toEqual(mockResponse);
 		});
 	});
@@ -147,9 +154,12 @@ describe("Virtual Terminal", () => {
 			const { code, ...rest } = payload;
 			const result = await vTerminal.unassignDestination(payload);
 
-			expect(mockKy.post).toHaveBeenCalledWith(`virtual_terminal/${code}/destination/unassign`, {
-				json: rest,
-			});
+			expect(mockKy.post).toHaveBeenCalledWith(
+				`virtual_terminal/${code}/destination/unassign`,
+				{
+					json: rest,
+				},
+			);
 			expect(result).toEqual(mockResponse);
 		});
 	});
@@ -168,9 +178,12 @@ describe("Virtual Terminal", () => {
 			const { code, ...rest } = payload;
 			const result = await vTerminal.addSplitCode(payload);
 
-			expect(mockKy.put).toHaveBeenCalledWith(`virtual_terminal/${code}/split_code`, {
-				json: rest,
-			});
+			expect(mockKy.put).toHaveBeenCalledWith(
+				`virtual_terminal/${code}/split_code`,
+				{
+					json: rest,
+				},
+			);
 			expect(result).toEqual(mockResponse);
 		});
 	});
@@ -189,9 +202,12 @@ describe("Virtual Terminal", () => {
 			const { code, ...rest } = payload;
 			const result = await vTerminal.removeSplitCode(payload);
 
-			expect(mockKy.delete).toHaveBeenCalledWith(`virtual_terminal/${code}/split_code`, {
-				json: rest,
-			});
+			expect(mockKy.delete).toHaveBeenCalledWith(
+				`virtual_terminal/${code}/split_code`,
+				{
+					json: rest,
+				},
+			);
 			expect(result).toEqual(mockResponse);
 		});
 	});

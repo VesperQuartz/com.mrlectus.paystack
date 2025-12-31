@@ -57,9 +57,12 @@ describe("Direct Debit", () => {
 
 			const result = await directDebit.listMandateAuthorizations(payload);
 
-			expect(mockKy.get).toHaveBeenCalledWith("directdebit/mandate-authorizations", {
-				searchParams: payload,
-			});
+			expect(mockKy.get).toHaveBeenCalledWith(
+				"directdebit/mandate-authorizations",
+				{
+					searchParams: payload,
+				},
+			);
 			expect(result).toEqual(mockResponse);
 		});
 	});

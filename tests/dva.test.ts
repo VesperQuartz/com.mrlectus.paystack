@@ -92,7 +92,9 @@ describe("Dedicated Virtual Accounts", () => {
 
 			const result = await dva.fetch(payload);
 
-			expect(mockKy.get).toHaveBeenCalledWith(`dedicated_account/${payload.dedicated_account_id}`);
+			expect(mockKy.get).toHaveBeenCalledWith(
+				`dedicated_account/${payload.dedicated_account_id}`,
+			);
 			expect(result).toEqual(mockResponse);
 		});
 	});
@@ -127,7 +129,9 @@ describe("Dedicated Virtual Accounts", () => {
 
 			const result = await dva.deactivate(payload);
 
-			expect(mockKy.delete).toHaveBeenCalledWith(`dedicated_account/${payload.dedicated_account_id}`);
+			expect(mockKy.delete).toHaveBeenCalledWith(
+				`dedicated_account/${payload.dedicated_account_id}`,
+			);
 			expect(result).toEqual(mockResponse);
 		});
 	});
@@ -161,7 +165,9 @@ describe("Dedicated Virtual Accounts", () => {
 
 			const result = await dva.listBankProviders();
 
-			expect(mockKy.get).toHaveBeenCalledWith("dedicated_account/available_providers");
+			expect(mockKy.get).toHaveBeenCalledWith(
+				"dedicated_account/available_providers",
+			);
 			expect(result).toEqual(mockResponse);
 		});
 	});

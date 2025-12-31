@@ -79,7 +79,9 @@ describe("Subscriptions", () => {
 
 			const result = await subscriptions.fetch(payload);
 
-			expect(mockKy.get).toHaveBeenCalledWith(`subscription/${payload.id_or_code}`);
+			expect(mockKy.get).toHaveBeenCalledWith(
+				`subscription/${payload.id_or_code}`,
+			);
 			expect(result).toEqual(mockResponse);
 		});
 	});
@@ -121,14 +123,20 @@ describe("Subscriptions", () => {
 	describe("generateUpdatelink", () => {
 		it("should call manage/link with correct code", async () => {
 			const payload = { code: "SUB_123" };
-			const mockResponse = { status: true, message: "Link generated", data: { link: "http://link" } };
+			const mockResponse = {
+				status: true,
+				message: "Link generated",
+				data: { link: "http://link" },
+			};
 			(mockKy.get as any).mockReturnValue({
 				json: vi.fn().mockResolvedValue(mockResponse),
 			});
 
 			const result = await subscriptions.generateUpdatelink(payload);
 
-			expect(mockKy.get).toHaveBeenCalledWith(`subscription/${payload.code}/manage/link`);
+			expect(mockKy.get).toHaveBeenCalledWith(
+				`subscription/${payload.code}/manage/link`,
+			);
 			expect(result).toEqual(mockResponse);
 		});
 	});
@@ -143,7 +151,9 @@ describe("Subscriptions", () => {
 
 			const result = await subscriptions.sendUpdatelink(payload);
 
-			expect(mockKy.post).toHaveBeenCalledWith(`subscription/${payload.code}/manage/email`);
+			expect(mockKy.post).toHaveBeenCalledWith(
+				`subscription/${payload.code}/manage/email`,
+			);
 			expect(result).toEqual(mockResponse);
 		});
 	});

@@ -40,9 +40,12 @@ describe("Terminal", () => {
 			const { terminal_id, ...rest } = payload;
 			const result = await terminal.sendEvent(payload as any);
 
-			expect(mockKy.post).toHaveBeenCalledWith(`terminal/${terminal_id}/event`, {
-				json: rest,
-			});
+			expect(mockKy.post).toHaveBeenCalledWith(
+				`terminal/${terminal_id}/event`,
+				{
+					json: rest,
+				},
+			);
 			expect(result).toEqual(mockResponse);
 		});
 
@@ -67,9 +70,12 @@ describe("Terminal", () => {
 			const { terminal_id, ...rest } = payload;
 			const result = await terminal.sendEvent(payload as any);
 
-			expect(mockKy.post).toHaveBeenCalledWith(`terminal/${terminal_id}/event`, {
-				json: rest,
-			});
+			expect(mockKy.post).toHaveBeenCalledWith(
+				`terminal/${terminal_id}/event`,
+				{
+					json: rest,
+				},
+			);
 			expect(result).toEqual(mockResponse);
 		});
 	});
@@ -164,7 +170,9 @@ describe("Terminal", () => {
 
 			const result = await terminal.fetch(payload);
 
-			expect(mockKy.get).toHaveBeenCalledWith(`terminal/${payload.terminal_id}`);
+			expect(mockKy.get).toHaveBeenCalledWith(
+				`terminal/${payload.terminal_id}`,
+			);
 			expect(result).toEqual(mockResponse);
 		});
 	});

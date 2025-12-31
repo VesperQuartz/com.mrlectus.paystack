@@ -133,22 +133,25 @@ describe("Transaction Splits", () => {
 			const payload = {
 				id: "123",
 				subaccount: "ACCT_789",
-				share: 0, // share is required by type but omitted in schema logic usually for removal? 
-                // Let's check the implementation. logic says: z.omit(..., { share: true })
+				share: 0, // share is required by type but omitted in schema logic usually for removal?
+				// Let's check the implementation. logic says: z.omit(..., { share: true })
 			};
 			const mockResponse = { status: true, message: "Subaccount removed" };
 			(mockKy.post as any).mockReturnValue({
 				json: vi.fn().mockResolvedValue(mockResponse),
 			});
 
-            // The implementation omits 'share' from the payload sent to API
+			// The implementation omits 'share' from the payload sent to API
 			const { id, share, ...expectedData } = payload;
 
 			const result = await splits.removeSubaccount(payload);
 
-			expect(mockKy.post).toHaveBeenCalledWith(`split/${id}/subaccount/remove`, {
-				json: expectedData,
-			});
+			expect(mockKy.post).toHaveBeenCalledWith(
+				`split/${id}/subaccount/remove`,
+				{
+					json: expectedData,
+				},
+			);
 			expect(result).toEqual(mockResponse);
 		});
 	});

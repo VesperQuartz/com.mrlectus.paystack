@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import { PaystackApiError } from "../src/errors";
 
 describe("PaystackApiError", () => {
@@ -6,8 +6,10 @@ describe("PaystackApiError", () => {
 		const errorBody = {
 			status: false,
 			message: "Something went wrong",
+			statusCode: 400,
 			data: { code: "INVALID_PARAMS" },
 		};
+
 		const error = new PaystackApiError(errorBody);
 
 		expect(error.toJSON()).toEqual(errorBody);

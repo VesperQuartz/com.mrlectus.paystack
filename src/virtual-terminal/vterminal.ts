@@ -41,9 +41,7 @@ export const createVirtualTerminal = (
 			.json<ListVirtualTerminalResponsePayload>();
 	};
 
-	const fetch = async (payload: {
-		code: string;
-	}) => {
+	const fetch = async (payload: { code: string }) => {
 		const data = z
 			.object({
 				code: z.string(),
@@ -54,10 +52,7 @@ export const createVirtualTerminal = (
 			.json<CreateVirtualTerminalResponsePayload>();
 	};
 
-	const update = async (payload: {
-		code: string;
-		name: string;
-	}) => {
+	const update = async (payload: { code: string; name: string }) => {
 		const parse = z
 			.object({
 				code: z.string(),
@@ -75,9 +70,7 @@ export const createVirtualTerminal = (
 			}>();
 	};
 
-	const deactivate = async (payload: {
-		code: string;
-	}) => {
+	const deactivate = async (payload: { code: string }) => {
 		const parse = z
 			.object({
 				code: z.string(),

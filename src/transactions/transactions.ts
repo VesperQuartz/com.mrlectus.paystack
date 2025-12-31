@@ -17,15 +17,17 @@ import type {
 	ListResponsePayload,
 	PartialDebitPayload,
 	PartialDebitResponsePayload,
+	TransactionsClient,
 	TransactionTotalPayload,
 	TransactionTotalResponsePayload,
 	VerifyPayload,
 	VerifyResponsePayload,
 	ViewTimelineResponsePayload,
-	TransactionsClient,
 } from "./types";
 
-export const createTransactions = (instance: KyInstance): TransactionsClient => {
+export const createTransactions = (
+	instance: KyInstance,
+): TransactionsClient => {
 	const initialize = async (payload: InitializePayload) => {
 		const data = InitializePayloadSchema.parse(payload);
 		return await instance
@@ -50,9 +52,7 @@ export const createTransactions = (instance: KyInstance): TransactionsClient => 
 			.json<ListResponsePayload>();
 	};
 
-	const fetch = async (payload: {
-		id: number;
-	}) => {
+	const fetch = async (payload: { id: number }) => {
 		return instance
 			.get(`transaction/${payload.id}`)
 			.json<VerifyResponsePayload>();
@@ -67,9 +67,7 @@ export const createTransactions = (instance: KyInstance): TransactionsClient => 
 			.json<VerifyResponsePayload>();
 	};
 
-	const viewTimeline = async (payload: {
-		id_or_reference: string;
-	}) => {
+	const viewTimeline = async (payload: { id_or_reference: string }) => {
 		return await instance
 			.get(`transaction/timeline/${payload.id_or_reference}`)
 			.json<ViewTimelineResponsePayload>();
@@ -114,4 +112,3 @@ export const createTransactions = (instance: KyInstance): TransactionsClient => 
 		partialDebit,
 	};
 };
-

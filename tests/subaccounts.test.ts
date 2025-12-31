@@ -69,7 +69,9 @@ describe("Subaccounts", () => {
 
 			const result = await subaccounts.fetch(payload);
 
-			expect(mockKy.get).toHaveBeenCalledWith(`subaccount/${payload.id_or_code}`);
+			expect(mockKy.get).toHaveBeenCalledWith(
+				`subaccount/${payload.id_or_code}`,
+			);
 			expect(result).toEqual(mockResponse);
 		});
 	});

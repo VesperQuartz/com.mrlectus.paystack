@@ -105,7 +105,9 @@ describe("Payment Page", () => {
 
 			const result = await paymentPage.checkSlugAvailability(payload);
 
-			expect(mockKy.get).toHaveBeenCalledWith(`page/check_slug_availability/${payload.slug}`);
+			expect(mockKy.get).toHaveBeenCalledWith(
+				`page/check_slug_availability/${payload.slug}`,
+			);
 			expect(result).toEqual(mockResponse);
 		});
 	});
