@@ -4,6 +4,7 @@ import { createCustomer } from "#/customers";
 import { createDedicatedVirtualAccounts } from "#/dedicated-virtual-accounts";
 import { createDirectDebit } from "#/direct-debit";
 import { PaystackApiError } from "#/errors";
+import { createPaymentPage } from "#/payment-page";
 import { createPlans } from "#/plans";
 import { createProducts } from "#/products";
 import { createSubaccounts } from "#/subaccounts";
@@ -104,5 +105,7 @@ export const PaystackClient = (
 		subscriptions: createSubscriptions(kyclient),
 		/** @description The Products API allows you create and manage inventories on your integration. */
 		products: createProducts(kyclient),
+		/** @description The Payment Pages API provides a quick and secure way to collect payment for products. */
+		paymentPage: createPaymentPage(kyclient),
 	};
 };
