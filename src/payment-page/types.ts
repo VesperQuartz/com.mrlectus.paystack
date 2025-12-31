@@ -112,4 +112,30 @@ export type UpdatePaymentPagePayload = {
 	active?: boolean;
 };
 
-export type CreatePaymentPageClient = {};
+export type CreatePaymentPageClient = {
+	/** @description Create a payment page on your integration */
+	create: (
+		payload: CreatePaymentPagePayload,
+	) => Promise<CreatePaymentPageResponsePayload>;
+	/** @description List payment pages available on your integration */
+	list: (
+		payload?: ListPaymentPagePayload,
+	) => Promise<ListPaymentPageResponsePayload>;
+	/** @description Get details of a payment page on your integration */
+	fetch: (payload: {
+		id_or_slug: string;
+	}) => Promise<FetchPaymentPageResponsePayload>;
+	/** @description Update a payment page's details on your integration */
+	update: (
+		payload: UpdatePaymentPagePayload,
+	) => Promise<CreatePaymentPageResponsePayload>;
+	/** @description Check if a slug is available for use on your integration */
+	checkSlugAvailability: (payload: {
+		slug: string;
+	}) => Promise<{ status: boolean; message: string }>;
+	/** @description Add products to a payment page */
+	addProduct: (payload: {
+		id: number;
+		product: number[];
+	}) => Promise<FetchPaymentPageResponsePayload>;
+};
