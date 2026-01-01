@@ -123,19 +123,23 @@ export type CreatePaymentPageClient = {
 	) => Promise<ListPaymentPageResponsePayload>;
 	/** @description Get details of a payment page on your integration */
 	fetch: (payload: {
+		/** The page `ID` or `slug` you want to fetch */
 		id_or_slug: string;
 	}) => Promise<FetchPaymentPageResponsePayload>;
 	/** @description Update a payment page's details on your integration */
 	update: (
 		payload: UpdatePaymentPagePayload,
 	) => Promise<CreatePaymentPageResponsePayload>;
-	/** @description Check if a slug is available for use on your integration */
+	/** @description Check the availability of a slug for a payment page */
 	checkSlugAvailability: (payload: {
+		/** URL slug to be confirmed */
 		slug: string;
 	}) => Promise<{ status: boolean; message: string }>;
 	/** @description Add products to a payment page */
 	addProduct: (payload: {
+		/** Id of the payment page */
 		id: number;
+		/** Ids of all the products */
 		product: number[];
 	}) => Promise<FetchPaymentPageResponsePayload>;
 };

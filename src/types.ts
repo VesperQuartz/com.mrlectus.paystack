@@ -6,3 +6,11 @@ export type Nullable<T> = {
 };
 
 export type Currency = z.infer<typeof CurrencySchema>;
+
+export type MetaV1 = {
+	total: number;
+	skipped: number;
+	perPage: number;
+	page: number;
+	pageCount: number;
+};

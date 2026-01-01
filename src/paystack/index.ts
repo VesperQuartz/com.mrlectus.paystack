@@ -5,6 +5,7 @@ import { createDedicatedVirtualAccounts } from "#/dedicated-virtual-accounts";
 import { createDirectDebit } from "#/direct-debit";
 import { PaystackApiError } from "#/errors";
 import { createPaymentPage } from "#/payment-page";
+import { createPaymentRequests } from "#/payment-requests";
 import { createPlans } from "#/plans";
 import { createProducts } from "#/products";
 import { createSubaccounts } from "#/subaccounts";
@@ -107,5 +108,7 @@ export const PaystackClient = (
 		products: createProducts(kyclient),
 		/** @description The Payment Pages API provides a quick and secure way to collect payment for products. */
 		paymentPage: createPaymentPage(kyclient),
+		/** @description The Payment Requests API allows you manage requests for payment of goods and services. */
+		paymentRequests: createPaymentRequests(kyclient),
 	};
 };
