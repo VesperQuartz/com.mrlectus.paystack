@@ -23,7 +23,7 @@ export const createPaymentPage = (
 			.json<CreatePaymentPageResponsePayload>();
 	};
 
-	const list = (payload?: ListPaymentPagePayload) => {
+	const list = (payload: ListPaymentPagePayload = {}) => {
 		const data = ListPaymentPagePayloadSchema.parse(payload);
 		return instance
 			.get("page", {

@@ -8,6 +8,7 @@ import { createPaymentPage } from "#/payment-page";
 import { createPaymentRequests } from "#/payment-requests";
 import { createPlans } from "#/plans";
 import { createProducts } from "#/products";
+import { createSettlements } from "#/settlements";
 import { createSubaccounts } from "#/subaccounts";
 import { createSubscriptions } from "#/subscriptions";
 import { createTerminal } from "#/terminal";
@@ -110,5 +111,7 @@ export const PaystackClient = (
 		paymentPage: createPaymentPage(kyclient),
 		/** @description The Payment Requests API allows you manage requests for payment of goods and services. */
 		paymentRequests: createPaymentRequests(kyclient),
+		/** @description The Settlements API allows you gain insights into payouts made by Paystack to your bank account. */
+		settlements: createSettlements(kyclient),
 	};
 };

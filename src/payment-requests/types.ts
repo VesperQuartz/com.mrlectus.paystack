@@ -147,30 +147,45 @@ export type UpdatePaymentRequestPayload = CreatePaymentRequestPayload & {
 };
 
 export type CreatePaymentRequestClient = {
+	/** @description Create a payment request for a transaction on your integration */
 	create: (
 		payload: CreatePaymentRequestPayload,
 	) => Promise<CreatePaymentRequestResponsePayload>;
+	/** @description List payment requests available on your integration */
 	list: (
 		payload: ListPaymentRequestPayload,
 	) => Promise<ListPaymentRequestResponsePayload>;
+	/** @description Get details of a payment request on your integration */
 	fetch: (payload: {
+		/** @description The payment request `ID` or `code` you want to fetch */
 		id_or_code: string;
 	}) => Promise<FetchPaymentRequestResponsePayload>;
+	/** @description Verify details of a payment request on your integration */
 	verify: (payload: {
+		/** @description Payment Request code */
 		code: string;
 	}) => Promise<VerifyPaymentRequestResponsePayload>;
+	/** @description Send notification of a payment request to your customers */
 	sendNotification: (payload: {
+		/** @description Payment Request code */
 		code: string;
 	}) => Promise<{ status: boolean; message: string }>;
+	/** @description Get payment requests metric */
 	totals: () => Promise<PaymentReuestTotalResponsePayload>;
+	/** @description Finalize a draft payment request */
 	finalize: (payload: {
+		/** @description Payment Request code */
 		code: string;
+		/** @description Indicates whether Paystack sends an email notification to customer. Defaults to `true` */
 		send_notification?: boolean;
 	}) => Promise<CreatePaymentRequestResponsePayload>;
+	/** @description Update a payment request's details on your integration */
 	update: (
 		payload: UpdatePaymentRequestPayload,
 	) => Promise<CreatePaymentRequestResponsePayload>;
+	/** @description Used to archive a payment request. A payment request will no longer be fetched on list or returned on verify */
 	archive: (payload: {
+		/** @description Payment Request code */
 		code: string;
 	}) => Promise<{ status: boolean; message: string }>;
 };
