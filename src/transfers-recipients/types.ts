@@ -1,19 +1,19 @@
 import type { Currency, MetaV1 } from "#/types";
 
 export type CreateTransferRecipientPayload = {
-  /** @description Recipient Type. It could be one of: `nuban`, `ghipss`, `mobile_money` or `basa` */
+  /** Recipient Type. It could be one of: `nuban`, `ghipss`, `mobile_money` or `basa` */
   type: "nuban" | "ghipss" | "mobile_money" | "basa";
-  /** @description The recipient's name according to their account registration.*/
+  /** The recipient's name according to their account registration.*/
   name: string;
-  /** @description Required for all recipient types except authorization */
+  /** Required for all recipient types except authorization */
   account_number: string;
-  /** @description Required for all recipient types except authorization. You can get the list of Bank Codes by calling the List Banks endpoint. */
+  /** Required for all recipient types except authorization. You can get the list of Bank Codes by calling the List Banks endpoint. */
   bank_code: string;
-  /** @description A description for this recipient */
+  /** A description for this recipient */
   description?: string;
-  /** @description Currency for the account receiving the transfer */
+  /** Currency for the account receiving the transfer */
   currency?: Currency;
-  /** @description An authorization code from a previous transaction */
+  /** An authorization code from a previous transaction */
   authorization_code?: string;
   /** Store additional information about your recipient in a structured format, JSON */
   metadata?: Record<string, unknown>;
@@ -49,7 +49,7 @@ export type CreateTransferRecipientResponsePayload = {
 };
 
 export type BulkCreateTransferRecipientPayload = {
-  /** @description A list of transfer recipient object. Each object should contain `type`, `name`, and `bank_code`. Any Create Transfer Recipient param can also be passed. */
+  /** A list of transfer recipient object. Each object should contain `type`, `name`, and `bank_code`. Any Create Transfer Recipient param can also be passed. */
   batch: CreateTransferRecipientPayload[];
 };
 
@@ -64,19 +64,19 @@ export type BulkCreateTransferRecipientResponsePayload = {
 
 export type ListTransferRecipientsPayload = {
   /**
-   * @description Specify how many records you want to retrieve per page. If not specified, we use a default value of 50.
+   * Specify how many records you want to retrieve per page. If not specified, we use a default value of 50.
    */
   perPage?: number;
   /**
-   * @description Specify exactly what page you want to retrieve. If not specified, we use a default value of 1.
+   * Specify exactly what page you want to retrieve. If not specified, we use a default value of 1.
    */
   page?: number;
   /**
-   * @description A timestamp from which to start listing transaction e.g. `2016-09-24T00:00:05.000Z`, `2016-09-21`
+   * A timestamp from which to start listing transaction e.g. `2016-09-24T00:00:05.000Z`, `2016-09-21`
    */
   from?: string | Date;
   /**
-   * @description A timestamp at which to stop listing transaction e.g. `2016-09-24T00:00:05.000Z`, `2016-09-21`
+   * A timestamp at which to stop listing transaction e.g. `2016-09-24T00:00:05.000Z`, `2016-09-21`
    */
   to?: string | Date;
 };
@@ -89,11 +89,11 @@ export type ListTransferRecipientsResponsePayload = {
 };
 
 export type UpdateTransferRecipientPayload = {
-  /** @description Transfer Recipient's ID or code */
+  /** Transfer Recipient's ID or code */
   id_or_code: string;
-  /** @description A name for the recipient */
+  /** A name for the recipient */
   name: string;
-  /** @description Email address of the recipient */
+  /** Email address of the recipient */
   email?: string;
 };
 

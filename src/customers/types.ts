@@ -2,23 +2,23 @@ import type { Authorization } from "../transactions";
 
 export type CreateCustomerPayload = {
   /**
-   * @description Customer's email address
+   * Customer's email address
    */
   email: string;
   /**
-   * @description Customer's first name
+   * Customer's first name
    */
   first_name: string;
   /**
-   * @description Customer's last name
+   * Customer's last name
    */
   last_name: string;
   /**
-   * @description Customer's phone number
+   * Customer's phone number
    */
   phone?: string;
   /**
-   * @description A set of key/value pairs that you can attach to the customer. It can be used to store additional information in a structured format.
+   * A set of key/value pairs that you can attach to the customer. It can be used to store additional information in a structured format.
    */
   metadata?: Record<string, unknown>;
 };
@@ -49,19 +49,19 @@ export type CreateCustomerResponsePayload = {
 
 export type ListCustomerPayload = {
   /**
-   * @description Specify how many records you want to retrieve per page. If not specified, we use a default value of 50.
+   * Specify how many records you want to retrieve per page. If not specified, we use a default value of 50.
    */
   perPage?: number;
   /**
-   * @description Specify exactly what page you want to retrieve. If not specified, we use a default value of 1.
+   * Specify exactly what page you want to retrieve. If not specified, we use a default value of 1.
    */
   page?: number;
   /**
-   * @description A timestamp from which to start listing transaction e.g. `2016-09-24T00:00:05.000Z`, `2016-09-21`
+   * A timestamp from which to start listing transaction e.g. `2016-09-24T00:00:05.000Z`, `2016-09-21`
    */
   from?: string | Date;
   /**
-   * @description A timestamp at which to stop listing transaction e.g. `2016-09-24T00:00:05.000Z`, `2016-09-21`
+   * A timestamp at which to stop listing transaction e.g. `2016-09-24T00:00:05.000Z`, `2016-09-21`
    */
   to?: string | Date;
 };
@@ -99,7 +99,7 @@ export type FetchCustomerResponsePayload = {
 
 export type UpdateCustomerPayload = {
   /**
-   * @description Customer's code
+   * Customer's code
    */
   code: string;
 } & Omit<CreateCustomerPayload, "email">;
@@ -126,28 +126,28 @@ export type UpdateCustomerResponsePayload = {
 };
 
 export type ValidateCustomerPayload = {
-  /** @description Email, or customer code of customer to be identified */
+  /** Email, or customer code of customer to be identified */
   code: string;
-  /** @description Customer's first name */
+  /** Customer's first name */
   first_name: string;
-  /** @description Customer's last name */
+  /** Customer's last name */
   last_name: string;
-  /** @description Predefined types of identification. Only `bank_account` is supported at the moment */
+  /** Predefined types of identification. Only `bank_account` is supported at the moment */
   type: "bank_account";
-  /** @description Customer's identification number */
+  /** Customer's identification number */
   value: string;
-  /** @description 2 letter country code of identification issuer  */
+  /** 2 letter country code of identification issuer  */
   country: string;
-  /** @description Customer's Bank Verification Number */
+  /** Customer's Bank Verification Number */
   bvn: string;
   /**
-   * @description You can get the list of Bank Codes by calling the List Banks endpoint. (required if type is bank_account)
+   * You can get the list of Bank Codes by calling the List Banks endpoint. (required if type is bank_account)
    * @see You can get the list of Bank Codes by calling the List Banks endpoint. (required if type is bank_account)
    */
   bank_code: string;
-  /** @description Customer's bank account number. (required if `type` is `bank_account`)  */
+  /** Customer's bank account number. (required if `type` is `bank_account`)  */
   account_number: string;
-  /** @description Customer's middle name */
+  /** Customer's middle name */
   middle_name?: string;
 };
 
@@ -176,26 +176,26 @@ export type SetRiskActionResponsePayload = {
 };
 
 export type InitializeAuthorizationPayload = {
-  /** @description Customer's email address */
+  /** Customer's email address */
   email: string;
-  /** @description `direct-debit` is the only supported option for now */
+  /** `direct-debit` is the only supported option for now */
   channel: "direct_debit";
-  /** @description Fully qualified url (e.g. https://example.com/) to redirect your customer to. */
+  /** Fully qualified url (e.g. https://example.com/) to redirect your customer to. */
   callback_url?: string;
-  /** @description Holds the customer's account details. */
+  /** Holds the customer's account details. */
   account?: {
-    /** @description The customer's account number */
+    /** The customer's account number */
     number: string;
-    /** @description The code representing the customer's bank. */
+    /** The code representing the customer's bank. */
     bank_code: string;
   };
-  /** @description Represents the customer's address. */
+  /** Represents the customer's address. */
   address?: {
-    /** @description The customer's street */
+    /** The customer's street */
     street: string;
-    /** @description The customer's city */
+    /** The customer's city */
     city: string;
-    /** @description The customer's state */
+    /** The customer's state */
     state: string;
   };
 };
@@ -226,22 +226,22 @@ export type VerifyAuthorizationResponsePayload = {
 };
 
 export type InitializeDirectDebitPayload = {
-  /** @description The customer ID  */
+  /** The customer ID  */
   id: string;
-  /** @description Holds the customer's account details. */
+  /** Holds the customer's account details. */
   account: {
-    /** @description The customer's account number */
+    /** The customer's account number */
     number: string;
-    /** @description The code representing the customer's bank. */
+    /** The code representing the customer's bank. */
     bank_code: string;
   };
-  /** @description Represents the customer's address. */
+  /** Represents the customer's address. */
   address: {
-    /** @description The customer's street */
+    /** The customer's street */
     street: string;
-    /** @description The customer's city */
+    /** The customer's city */
     city: string;
-    /** @description The customer's state */
+    /** The customer's state */
     state: string;
   };
 };
@@ -275,7 +275,7 @@ export type FetchMandateAuthorizationsResponsePayload = {
 
 export type CreateCustomerClient = {
   /**
-   * @description Create a customer on your integration
+   * Create a customer on your integration
    *
    * > **Customer Validation**
    * > The first_name, last_name and phone are optional parameters.
@@ -286,27 +286,27 @@ export type CreateCustomerClient = {
   create: (payload: CreateCustomerPayload) => Promise<CreateCustomerResponsePayload>;
 
   /**
-   * @description List customers available on your integration
+   * List customers available on your integration
    */
   list: (payload?: ListCustomerPayload) => Promise<ListCustomerResponsePayload>;
 
   /**
-   * @description Get details of a customer on your integration.
+   * Get details of a customer on your integration.
    */
   fetch: (payload: {
     /**
-     * @description An `email` or `customer` code for the customer you want to fetch
+     * An `email` or `customer` code for the customer you want to fetch
      */
     email_or_code: string;
   }) => Promise<FetchCustomerResponsePayload>;
 
   /**
-   * @description Update a customer's details on your integration
+   * Update a customer's details on your integration
    */
   update: (payload: UpdateCustomerPayload) => Promise<UpdateCustomerResponsePayload>;
 
   /**
-   * @description Validate a customer's identity
+   * Validate a customer's identity
    */
   validate: (payload: ValidateCustomerPayload) => Promise<{
     status: boolean;
@@ -314,44 +314,44 @@ export type CreateCustomerClient = {
   }>;
 
   /**
-   * @description Whitelist or blacklist a customer on your integration
+   * Whitelist or blacklist a customer on your integration
    */
   setRiskAction: (payload: SetRiskActionPayload) => Promise<SetRiskActionResponsePayload>;
 
   /**
-   * @description Initiate a request to create a reusable authorization code for recurring transactions.
+   * Initiate a request to create a reusable authorization code for recurring transactions.
    */
   initializeAuthorization: (
     payload: InitializeAuthorizationPayload,
   ) => Promise<InitializeAuthorizationResponsePayload>;
 
   /**
-   * @description Check the status of an authorization request.
+   * Check the status of an authorization request.
    */
   verifyAuthorization: (payload: {
     /**
-     * @description The reference returned in the initialization response
+     * The reference returned in the initialization response
      */
     reference: string;
   }) => Promise<VerifyAuthorizationResponsePayload>;
 
   /**
-   * @description Initialize the process of linking an account to a customer for Direct Debit transactions.
+   * Initialize the process of linking an account to a customer for Direct Debit transactions.
    */
   initializeDirectDebit: (
     payload: InitializeDirectDebitPayload,
   ) => Promise<InitializeAuthorizationResponsePayload>;
 
   /**
-   * @description Trigger an activation charge on an inactive mandate on behalf of your customer.
+   * Trigger an activation charge on an inactive mandate on behalf of your customer.
    */
   directDebitActivationCharge: (payload: {
     /**
-     * @description The customer ID attached to the authorization
+     * The customer ID attached to the authorization
      */
     id: number;
     /**
-     * @description The authorization ID gotten from the initiation response
+     * The authorization ID gotten from the initiation response
      */
     authorization_id: number;
   }) => Promise<{
@@ -360,21 +360,21 @@ export type CreateCustomerClient = {
   }>;
 
   /**
-   * @description Get the list of direct debit mandates associated with a customer.
+   * Get the list of direct debit mandates associated with a customer.
    */
   fetchMandateAuthorizations: (payload: {
     /**
-     * @description The customer ID for the authorizations to fetch
+     * The customer ID for the authorizations to fetch
      */
     id: number;
   }) => Promise<FetchMandateAuthorizationsResponsePayload>;
 
   /**
-   * @description Deactivate an authorization for any payment channel.
+   * Deactivate an authorization for any payment channel.
    */
   deactivateAuthorization: (payload: {
     /**
-     * @description The authorization code to be deactivated
+     * The authorization code to be deactivated
      */
     authorization_code: string;
   }) => Promise<{

@@ -1,22 +1,22 @@
 import type { Currency } from "../types";
 
 export type CreateDedicatedVirtualAccountPayload = {
-  /** @description Customer ID or code */
+  /** Customer ID or code */
   customer: string;
   /**
-   * @description The bank slug for preferred bank. To get a list of available banks, use the List Providers endpoint.
+   * The bank slug for preferred bank. To get a list of available banks, use the List Providers endpoint.
    * @see The bank slug for preferred bank. To get a list of available banks, use the List Providers endpoint.
    */
   preferred_bank?: "wema-bank" | "titan-paystack" | (string & {});
-  /** @description Subaccount code of the account you want to split the transaction with */
+  /** Subaccount code of the account you want to split the transaction with */
   subaccount?: string;
-  /** @description Split code consisting of the lists of accounts you want to split the transaction with */
+  /** Split code consisting of the lists of accounts you want to split the transaction with */
   split_code?: string;
-  /** @description Customer's first name */
+  /** Customer's first name */
   first_name?: string;
-  /** @description Customer's last name */
+  /** Customer's last name */
   last_name?: string;
-  /** @description Customer's phone number */
+  /** Customer's phone number */
   phone?: string;
 };
 
@@ -68,40 +68,40 @@ export type CreateDedicatedVirtualAccountResponsePayload = {
 };
 
 export type AssignDedicatedVirtualAccountPayload = {
-  /** @description The email address of the customer. */
+  /** The email address of the customer. */
   email: string;
-  /** @description The first name of the customer. */
+  /** The first name of the customer. */
   first_name: string;
-  /** @description The last name of the customer. */
+  /** The last name of the customer. */
   last_name: string;
-  /** @description The phone number of the customer. */
+  /** The phone number of the customer. */
   phone: string;
-  /** @description The bank slug for preferred bank. To get a list of available banks, use the List Providers endpoint. */
+  /** The bank slug for preferred bank. To get a list of available banks, use the List Providers endpoint. */
   preferred_bank: "wema-bank" | "titan-paystack" | (string & {});
-  /** @description Currently accepts `NG` and `GH` only */
+  /** Currently accepts `NG` and `GH` only */
   country: "NG" | "GH" | (string & {});
-  /** @description Customer's account number */
+  /** Customer's account number */
   account_number?: string;
-  /** @description Bank Verification Number */
+  /** Bank Verification Number */
   bvn?: string;
-  /** @description Customer's bank code */
+  /** Customer's bank code */
   bank_code?: string;
-  /** @description Subaccount code of the account you want to split the transaction with */
+  /** Subaccount code of the account you want to split the transaction with */
   subaccount?: string;
-  /** @description Split code consisting of the lists of accounts you want to split the transaction with */
+  /** Split code consisting of the lists of accounts you want to split the transaction with */
   split_code?: string;
 };
 
 export type ListDedicatedVirtualAccountsPayload = {
-  /** @description Status of the dedicated virtual account */
+  /** Status of the dedicated virtual account */
   active: boolean;
-  /** @description The currency of the dedicated virtual account. Only `NGN` and `GHS` are currently allowed */
+  /** The currency of the dedicated virtual account. Only `NGN` and `GHS` are currently allowed */
   currency: "NGN" | "GHS";
-  /** @description The bank's slug in lowercase, without spaces e.g. `wema-bank` */
+  /** The bank's slug in lowercase, without spaces e.g. `wema-bank` */
   provider_slug?: "wema-bank" | "titan-paystack" | (string & {});
-  /** @description The bank's id e.g `034`*/
+  /** The bank's id e.g `034`*/
   bank_id?: string;
-  /** @description The customer's ID */
+  /** The customer's ID */
   customer?: string;
 };
 
@@ -157,11 +157,11 @@ export type FetchDedicatedVirtualAccountResponsePayload = {
 };
 
 export type RequeryDedicatedAccountPayload = {
-  /** @description Virtual account number to requery */
+  /** Virtual account number to requery */
   account_number: string;
-  /** @description The bank's slug in lowercase, without spaces e.g. wema-bank */
+  /** The bank's slug in lowercase, without spaces e.g. wema-bank */
   provider_slug: "wema-bank" | "titan-paystack" | (string & {});
-  /** @description The day the transfer was made in `YYYY-MM-DD` format */
+  /** The day the transfer was made in `YYYY-MM-DD` format */
   date?: string;
 };
 
@@ -184,13 +184,13 @@ export type DeactivateDedicatedAccountResponsePayload = {
 };
 
 export type SplitDedicatedAccountTransactionPayload = {
-  /** @description The customer's ID */
+  /** The customer's ID */
   customer: string;
-  /** @description Subaccount code of the account you want to split the transaction with */
+  /** Subaccount code of the account you want to split the transaction with */
   subaccount?: string;
-  /** @description Split code consisting of the lists of accounts you want to split the transaction with */
+  /** Split code consisting of the lists of accounts you want to split the transaction with */
   split_code?: string;
-  /** @description The bank slug for preferred bank. To get a list of available banks, use the List Providers endpoint. */
+  /** The bank slug for preferred bank. To get a list of available banks, use the List Providers endpoint. */
   preferred_bank?: "wema-bank" | "titan-paystack" | (string & {});
 };
 
@@ -214,54 +214,54 @@ export type FetchBankProvidersResponsePayload = {
 };
 
 export type CreateDedicatedAccountClient = {
-  /** @description Create a dedicated virtual account for an existing customer. */
+  /** Create a dedicated virtual account for an existing customer. */
   create: (
     payload: CreateDedicatedVirtualAccountPayload,
   ) => Promise<CreateDedicatedVirtualAccountResponsePayload>;
 
-  /** @description You can create a customer, validate the customer, and assign a DVA to the customer. */
+  /** You can create a customer, validate the customer, and assign a DVA to the customer. */
   assign: (payload: AssignDedicatedVirtualAccountPayload) => Promise<{
     status: boolean;
     message: string;
   }>;
 
-  /** @description List dedicated virtual accounts available on your integration. */
+  /** List dedicated virtual accounts available on your integration. */
   list: (
     payload: ListDedicatedVirtualAccountsPayload,
   ) => Promise<ListDedicatedVirtualAccountsResponsePayload>;
 
-  /** @description Get details of a dedicated virtual account on your integration. */
+  /** Get details of a dedicated virtual account on your integration. */
   fetch: (payload: {
-    /** @description The ID of the dedicated virtual account */
+    /** The ID of the dedicated virtual account */
     dedicated_account_id: number;
   }) => Promise<FetchDedicatedVirtualAccountResponsePayload>;
 
-  /** @description Requery a dedicated virtual account for new transactions. */
+  /** Requery a dedicated virtual account for new transactions. */
   requery: (payload: RequeryDedicatedAccountPayload) => Promise<{
     status: boolean;
     message: string;
   }>;
 
-  /** @description Deactivate a dedicated virtual account on your integration. */
+  /** Deactivate a dedicated virtual account on your integration. */
   deactivate: (payload: {
-    /** @description The ID of the dedicated virtual account */
+    /** The ID of the dedicated virtual account */
     dedicated_account_id: number;
   }) => Promise<DeactivateDedicatedAccountResponsePayload>;
 
-  /** @description Split a dedicated virtual account transaction with one or more accounts. */
+  /** Split a dedicated virtual account transaction with one or more accounts. */
   splitTransaction: (
     payload: SplitDedicatedAccountTransactionPayload,
   ) => Promise<SplitDedicatedAccountTransactionResponsePayload>;
 
-  /** @description If you've previously set up split payment for transactions on a dedicated virtual account, you can remove it with this endpoint */
+  /** If you've previously set up split payment for transactions on a dedicated virtual account, you can remove it with this endpoint */
   removeSplit: (payload: {
-    /** @description Dedicated virtual account number */
+    /** Dedicated virtual account number */
     account_number: string;
   }) => Promise<{
     status: boolean;
     message: string;
   }>;
 
-  /** @description Get the list of available bank providers for dedicated virtual accounts. */
+  /** Get the list of available bank providers for dedicated virtual accounts. */
   listBankProviders: () => Promise<FetchBankProvidersResponsePayload>;
 };

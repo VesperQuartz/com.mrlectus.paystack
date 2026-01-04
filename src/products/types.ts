@@ -1,23 +1,23 @@
 import type { Currency } from "#/types";
 
 export type CreateProductPayload = {
-  /** @description Name of product */
+  /** Name of product */
   name: string;
-  /** @description Description of product */
+  /** Description of product */
   description: string;
   /**
-   * @description Price should be in the subunit of the supported currency
+   * Price should be in the subunit of the supported currency
    * @see https://paystack.com/docs/api/#supported-currency
    */
   price: number;
   /**
-   * @description Currency in which price is set
+   * Currency in which price is set
    * @see https://paystack.com/docs/api/#supported-currency
    */
   currency: Currency;
-  /** @description Set to `true` if the product has unlimited stock. Leave as `false` if the product has limited stock */
+  /** Set to `true` if the product has unlimited stock. Leave as `false` if the product has limited stock */
   unlimited?: boolean;
-  /** @description Number of products in stock. Use if `unlimited` is `false` */
+  /** Number of products in stock. Use if `unlimited` is `false` */
   quantity?: number;
   metadata?: Record<string, unknown>;
 };
@@ -56,19 +56,19 @@ export type CreateProductResponsePayload = {
 
 export type ListProductPayload = {
   /**
-   * @description Specify how many records you want to retrieve per page. If not specified, we use a default value of 50.
+   * Specify how many records you want to retrieve per page. If not specified, we use a default value of 50.
    */
   perPage?: number;
   /**
-   * @description Specify exactly what page you want to retrieve. If not specified, we use a default value of 1.
+   * Specify exactly what page you want to retrieve. If not specified, we use a default value of 1.
    */
   page?: number;
   /**
-   * @description A timestamp from which to start listing transaction e.g. `2016-09-24T00:00:05.000Z`, `2016-09-21`
+   * A timestamp from which to start listing transaction e.g. `2016-09-24T00:00:05.000Z`, `2016-09-21`
    */
   from?: string | Date;
   /**
-   * @description A timestamp at which to stop listing transaction e.g. `2016-09-24T00:00:05.000Z`, `2016-09-21`
+   * A timestamp at which to stop listing transaction e.g. `2016-09-24T00:00:05.000Z`, `2016-09-21`
    */
   to?: string | Date;
 };
@@ -115,7 +115,7 @@ export type FetchProductResponsePayload = {
 };
 
 export type UpdateProductPayload = {
-  /** @description Product ID */
+  /** Product ID */
   id: string;
 } & CreateProductPayload;
 
@@ -129,15 +129,15 @@ export type UpdateProductResponsePayload = {
 };
 
 export type CreateProductClient = {
-  /** @description Create a product on your integration */
+  /** Create a product on your integration */
   create: (payload: CreateProductPayload) => Promise<CreateProductResponsePayload>;
-  /** @description List products available on your integration */
+  /** List products available on your integration */
   list: (payload?: ListProductPayload) => Promise<ListProductResponsePayload>;
-  /** @description Get details of a product on your integration */
+  /** Get details of a product on your integration */
   fetch: (payload: {
-    /** @description The product ID you want to fetch */
+    /** The product ID you want to fetch */
     id: string;
   }) => Promise<FetchProductResponsePayload>;
-  /** @description Update a product's details on your integration */
+  /** Update a product's details on your integration */
   update: (payload: UpdateProductPayload) => Promise<UpdateProductResponsePayload>;
 };

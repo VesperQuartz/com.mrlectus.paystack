@@ -1,28 +1,28 @@
 export type SendEventPayload =
   | {
-      /** @description The ID of the Terminal the event should be sent to. */
+      /** The ID of the Terminal the event should be sent to. */
       terminal_id: string;
-      /** @description The type of event to push. We currently support `invoice` and `transaction` */
+      /** The type of event to push. We currently support `invoice` and `transaction` */
       type: "invoice";
-      /** @description The action the Terminal needs to perform. For the `invoice` type, the action can either be `process` or `view`. For the transaction type, the action can either be `process` or `print`. */
+      /** The action the Terminal needs to perform. For the `invoice` type, the action can either be `process` or `view`. For the transaction type, the action can either be `process` or `print`. */
       action: "process" | "view";
-      /** @description The paramters needed to perform the specified action. For the `invoice` type, you need to pass the invoice id and offline reference: `{id: invoice_id, reference: offline_reference}`. For the transaction type, you can pass the transaction id: `{id: transaction_id}` */
+      /** The paramters needed to perform the specified action. For the `invoice` type, you need to pass the invoice id and offline reference: `{id: invoice_id, reference: offline_reference}`. For the transaction type, you can pass the transaction id: `{id: transaction_id}` */
       data: {
-        /** @description Invoice ID */
+        /** Invoice ID */
         id: number;
-        /** @description Offline reference */
+        /** Offline reference */
         reference: number;
       };
     }
   | {
-      /** @description The ID of the Terminal the event should be sent to. */
+      /** The ID of the Terminal the event should be sent to. */
       terminal_id: string;
-      /** @description The type of event to push. We currently support `invoice` and `transaction` */
+      /** The type of event to push. We currently support `invoice` and `transaction` */
       type: "transaction";
-      /** @description The action the Terminal needs to perform. For the `invoice` type, the action can either be `process` or `view`. For the transaction type, the action can either be `process` or `print`. */
+      /** The action the Terminal needs to perform. For the `invoice` type, the action can either be `process` or `view`. For the transaction type, the action can either be `process` or `print`. */
       action: "process" | "print";
       data: {
-        /** @description Transaction ID */
+        /** Transaction ID */
         id: number;
       };
     };
@@ -36,9 +36,9 @@ export type SendEventResponsePayload = {
 };
 
 export type FetchEventStatusPayload = {
-  /** @description The ID of the Terminal the event was sent to. */
+  /** The ID of the Terminal the event was sent to. */
   terminal_id: string;
-  /** @description The ID of the event that was sent to the Terminal */
+  /** The ID of the event that was sent to the Terminal */
   event_id: string;
 };
 
@@ -60,15 +60,15 @@ export type FetchStatusResponsePayload = {
 };
 
 export type ListTerminalPayload = {
-  /** @description Filter by status ('active' or 'inactive') */
+  /** Filter by status ('active' or 'inactive') */
   status: "active" | "inactive";
-  /** @description Search query string */
+  /** Search query string */
   search?: string;
-  /** @description Specify how many records you want to retrieve per page. If not specified, we use a default value of 50. */
+  /** Specify how many records you want to retrieve per page. If not specified, we use a default value of 50. */
   perPage?: number;
-  /** @description A cursor that indicates your place in the list. It can be used to fetch the next page of the list */
+  /** A cursor that indicates your place in the list. It can be used to fetch the next page of the list */
   next?: string;
-  /** @description A cursor that indicates your place in the list. It should be used to fetch the previous page of the list after an intial next request */
+  /** A cursor that indicates your place in the list. It should be used to fetch the previous page of the list after an intial next request */
   previous?: string;
 };
 
@@ -104,36 +104,36 @@ export type FetchTerminalResponsePayload = {
 };
 
 export type UpdateTerminalPayload = {
-  /** @description The ID of the Terminal you want to update */
+  /** The ID of the Terminal you want to update */
   terminal_id: string;
-  /** @description The name of the Terminal */
+  /** The name of the Terminal */
   name: string;
-  /** @description The address of the Terminal */
+  /** The address of the Terminal */
   address: string;
 };
 
 export type CreateTerminalClient = {
-  /** @description Send an event from your application to the Paystack Terminal */
+  /** Send an event from your application to the Paystack Terminal */
   sendEvent: (payload: SendEventPayload) => Promise<SendEventResponsePayload>;
-  /** @description Check the status of an event sent to the Terminal */
+  /** Check the status of an event sent to the Terminal */
   fetchEventStatus: (payload: FetchEventStatusPayload) => Promise<FetchEventStatusResponsePayload>;
-  /** @description Check the availiability of a Terminal before sending an event to it */
+  /** Check the availiability of a Terminal before sending an event to it */
   fetchStatus: (payload: { terminal_id: string }) => Promise<FetchStatusResponsePayload>;
-  /** @description List the Terminals available on your integration */
+  /** List the Terminals available on your integration */
   list: (payload: ListTerminalPayload) => Promise<ListTerminalResponsePayload>;
-  /** @description Get the details of a Terminal */
+  /** Get the details of a Terminal */
   fetch: (payload: { terminal_id: string }) => Promise<FetchTerminalResponsePayload>;
-  /** @description Update the details of a Terminal */
+  /** Update the details of a Terminal */
   update: (payload: UpdateTerminalPayload) => Promise<{
     status: boolean;
     message: string;
   }>;
-  /** @description Activate your debug device by linking it to your integration */
+  /** Activate your debug device by linking it to your integration */
   commission: (payload: { serial_number: string }) => Promise<{
     status: boolean;
     message: string;
   }>;
-  /** @description Unlink your debug device from your integration */
+  /** Unlink your debug device from your integration */
   decommission: (payload: { serial_number: string }) => Promise<{
     status: boolean;
     message: string;

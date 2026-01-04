@@ -1,14 +1,14 @@
 export type ListDomainsPayload = {
   /**
-   * @description Flag to enable cursor pagination on the endpoint
+   * Flag to enable cursor pagination on the endpoint
    */
   use_cursor: boolean;
   /**
-   * @description A cursor that indicates your place in the list. It can be used to fetch the next page of the list
+   * A cursor that indicates your place in the list. It can be used to fetch the next page of the list
    */
   next?: string;
   /**
-   * @description A cursor that indicates your place in the list. It should be used to fetch the previous page of the list after an intial next request
+   * A cursor that indicates your place in the list. It should be used to fetch the previous page of the list after an intial next request
    */
   previous?: string;
 };
@@ -23,14 +23,14 @@ export type ListDomainsResponsePayload = {
 
 export type CreateApplePayClient = {
   /**
-   * @description Register a top-level domain or subdomain for your Apple Pay integration.
+   * Register a top-level domain or subdomain for your Apple Pay integration.
    *
    * > **Domain Registration**
    * > This endpoint can only be called with one domain or subdomain at a time.
    */
   registerDomain: (payload: {
     /**
-     * @description Domain name to be registered
+     * Domain name to be registered
      */
     domainName: string;
   }) => Promise<{
@@ -39,16 +39,16 @@ export type CreateApplePayClient = {
   }>;
 
   /**
-   * @description Lists all registered domains on your integration. Returns an empty array if no domains have been added.
+   * Lists all registered domains on your integration. Returns an empty array if no domains have been added.
    */
   listDomains: (payload: ListDomainsPayload) => Promise<ListDomainsResponsePayload>;
 
   /**
-   * @description Unregister a top-level domain or subdomain previously used for your Apple Pay integration.
+   * Unregister a top-level domain or subdomain previously used for your Apple Pay integration.
    */
   unregisterDomain: (payload: {
     /**
-     * @description Domain name to be unregistered
+     * Domain name to be unregistered
      */
     domainName: string;
   }) => Promise<{

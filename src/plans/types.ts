@@ -2,23 +2,23 @@ import type { Authorization } from "../transactions/types";
 import type { Currency } from "../types";
 
 export type CreatePlanPayload = {
-  /** @description Name of the plan */
+  /** Name of the plan */
   name: string;
-  /** @description Amount should be in the subunit of the supported currency
+  /** Amount should be in the subunit of the supported currency
    * @see https://paystack.com/docs/api/#supported-currency
    */
   amount: number;
-  /** @description Interval in words. Valid intervals are: `daily`, `weekly`, `monthly`,`quarterly`, `biannually` (every 6 months), `annually`. */
+  /** Interval in words. Valid intervals are: `daily`, `weekly`, `monthly`,`quarterly`, `biannually` (every 6 months), `annually`. */
   interval: "daily" | "weekly" | "monthly" | "quarterly" | "biannually" | "annually";
-  /** @description Description of the plan */
+  /** Description of the plan */
   description?: string;
-  /** @description Set to false if you don't want invoices to be sent to your customers */
+  /** Set to false if you don't want invoices to be sent to your customers */
   send_invoices?: boolean;
-  /** @description Set to false if you don't want text messages to be sent to your customers */
+  /** Set to false if you don't want text messages to be sent to your customers */
   send_sms?: boolean;
-  /** @description Currency in which amount is set */
+  /** Currency in which amount is set */
   currency?: Currency;
-  /** @description Number of invoices to raise during subscription to this plan. Can be overridden by specifying an `invoice_limit` while subscribing. */
+  /** Number of invoices to raise during subscription to this plan. Can be overridden by specifying an `invoice_limit` while subscribing. */
   invoice_limit?: number;
 };
 
@@ -45,15 +45,15 @@ export type CreatePlanResponsePayload = {
 };
 
 export type ListPlansPayload = {
-  /** @description Specify how many records you want to retrieve per page. If not specified, we use a default value of 50. */
+  /** Specify how many records you want to retrieve per page. If not specified, we use a default value of 50. */
   perPage?: number;
-  /** @description Specify exactly what page you want to retrieve. If not specified, we use a default value of 1. */
+  /** Specify exactly what page you want to retrieve. If not specified, we use a default value of 1. */
   page?: number;
-  /** @description Filter list by plans with specified status */
+  /** Filter list by plans with specified status */
   status?: string;
-  /** @description Filter list by plans with specified interval */
+  /** Filter list by plans with specified interval */
   interval?: "daily" | "weekly" | "monthly" | "quarterly" | "biannually" | "annually";
-  /** @description  Filter list by plans with specified amount using the supported currency */
+  /**  Filter list by plans with specified amount using the supported currency */
   amount?: number;
 };
 
@@ -130,33 +130,33 @@ export type FetchPlansResponsePayload = {
 
 export type UpdatePlanPayload = {
   id_or_code: string;
-  /** @description Set to `true` if you want the existing subscriptions to use the new changes. Set to `false` and only new subscriptions will be changed. Defaults to true when not set. */
+  /** Set to `true` if you want the existing subscriptions to use the new changes. Set to `false` and only new subscriptions will be changed. Defaults to true when not set. */
   update_existing_subscriptions?: boolean;
 } & CreatePlanPayload;
 
 export type CreatePlanClient = {
   /**
-   * @description Create a plan on your integration
+   * Create a plan on your integration
    */
   create: (payload: CreatePlanPayload) => Promise<CreatePlanResponsePayload>;
 
   /**
-   * @description List plans available on your integration
+   * List plans available on your integration
    */
   list: (payload: ListPlansPayload) => Promise<ListPlansResponsePayload>;
 
   /**
-   * @description Get details of a plan on your integration
+   * Get details of a plan on your integration
    */
   fetch: (payload: {
     /**
-     * @description Plan ID or code
+     * Plan ID or code
      */
     id_or_code: string;
   }) => Promise<FetchPlansResponsePayload>;
 
   /**
-   * @description Update a plan's details on your integration
+   * Update a plan's details on your integration
    */
   update: (payload: UpdatePlanPayload) => Promise<{
     status: boolean;

@@ -2,30 +2,30 @@ import type { Currency } from "../types";
 
 export type CreateSplitPayload = {
   /**
-   * @description Name of the transaction split
+   * Name of the transaction split
    */
   name: string;
   /**
-   * @description The type of transaction split you want to create. You can use one of the following: percentage | flat
+   * The type of transaction split you want to create. You can use one of the following: percentage | flat
    */
   type: "percentage" | "flat";
   /**
-   * @description Any of the supported currency
+   * Any of the supported currency
    */
   currency: Currency;
   /**
-   * @description A list of object containing subaccount code and number of shares: `[{subaccount: ‘ACT_xxxxxxxxxx’, share: xxx},{...}]`
+   * A list of object containing subaccount code and number of shares: `[{subaccount: ‘ACT_xxxxxxxxxx’, share: xxx},{...}]`
    */
   subaccounts: {
     subaccount: string;
     share: number;
   }[];
   /**
-   * @description Any of subaccount | account | all-proportional | all
+   * Any of subaccount | account | all-proportional | all
    */
   bearer_type: "subaccount" | "account" | "all-proportional" | "all";
   /**
-   * @description Subaccount code
+   * Subaccount code
    */
   bearer_subaccount: string;
 };
@@ -75,31 +75,31 @@ export type SplitResponsePayload = {
 
 export type ListSplitPayload = {
   /**
-   * @description The name of the split
+   * The name of the split
    */
   name: string;
   /**
-   * @description Any of true or false
+   * Any of true or false
    */
   active: boolean;
   /**
-   * @description Sort by name, defaults to createdAt date
+   * Sort by name, defaults to createdAt date
    */
   sort_by?: string;
   /**
-   * @description Number of splits per page. If not specified, we use a default value of 50.
+   * Number of splits per page. If not specified, we use a default value of 50.
    */
   perPage?: number;
   /**
-   * @description Page number to view. If not specified, we use a default value of 1.
+   * Page number to view. If not specified, we use a default value of 1.
    */
   page?: number;
   /**
-   * @description A timestamp from which to start listing splits e.g. `2016-09-24T00:00:05.000Z`, `2016-09-21`
+   * A timestamp from which to start listing splits e.g. `2016-09-24T00:00:05.000Z`, `2016-09-21`
    */
   from?: string | Date;
   /**
-   * @description A timestamp at which to stop listing splits e.g. `2016-09-24T00:00:05.000Z`, `2016-09-21`
+   * A timestamp at which to stop listing splits e.g. `2016-09-24T00:00:05.000Z`, `2016-09-21`
    */
   to?: string | Date;
 };
@@ -121,86 +121,86 @@ export type ListSplitResponsePayload = {
 
 export type SplitBase = {
   /**
-   * @description Split ID
+   * Split ID
    */
   id: string;
 } & Pick<ListSplitPayload, "name" | "active">;
 
 export type UpdateSplitPayload =
   | (SplitBase & {
-      /** @description Any of subaccount | account | all-proportional | all */
+      /** Any of subaccount | account | all-proportional | all */
       bearer_type: "subaccount";
       /**
-       * @description Subaccount code
+       * Subaccount code
        */
       bearer_subaccount: string;
     })
   | (SplitBase & {
-      /** @description Any of subaccount | account | all-proportional | all */
+      /** Any of subaccount | account | all-proportional | all */
       bearer_type: "account" | "all-proportional" | "all" | "subaccount";
       /**
-       * @description Subaccount code
+       * Subaccount code
        */
       bearer_subaccount?: never;
     })
   | (SplitBase & {
-      /** @description Any of subaccount | account | all-proportional | all */
+      /** Any of subaccount | account | all-proportional | all */
       bearer_type?: undefined;
       /**
-       * @description Subaccount code
+       * Subaccount code
        */
       bearer_subaccount?: never;
     });
 
 export type UpdateSubAccountSplitPayload = {
   /**
-   * @description Split ID
+   * Split ID
    */
   id: string;
   /**
-   * @description This is the sub account code
+   * This is the sub account code
    */
   subaccount: string;
   /**
-   * @description This is the transaction share for the subaccount
+   * This is the transaction share for the subaccount
    */
   share: number;
 };
 
 export type TransactionSplitsClient = {
   /**
-   * @description Create a split payment on your integration
+   * Create a split payment on your integration
    */
   create: (payload: CreateSplitPayload) => Promise<SplitResponsePayload>;
 
   /**
-   * @description List the transaction splits available on your integration
+   * List the transaction splits available on your integration
    */
   list: (payload: ListSplitPayload) => Promise<ListSplitResponsePayload>;
 
   /**
-   * @description Get details of a split on your integration
+   * Get details of a split on your integration
    */
 
   fetch: (payload: {
     /**
-     * @description The id of the split
+     * The id of the split
      */
     id: string;
   }) => Promise<SplitResponsePayload>;
 
   /**
-   * @description Update a transaction split details on your integration
+   * Update a transaction split details on your integration
    */
   update: (payload: UpdateSplitPayload) => Promise<SplitResponsePayload>;
 
   /**
-   * @description Add a Subaccount to a Transaction Split, or update the share of an existing Subaccount in a Transaction Split
+   * Add a Subaccount to a Transaction Split, or update the share of an existing Subaccount in a Transaction Split
    */
   updateSubaccount: (payload: UpdateSubAccountSplitPayload) => Promise<SplitResponsePayload>;
 
   /**
-   * @description Remove a subaccount from a transaction split
+   * Remove a subaccount from a transaction split
    */
   removeSubaccount: (
     payload: UpdateSubAccountSplitPayload,

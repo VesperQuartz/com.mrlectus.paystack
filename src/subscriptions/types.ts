@@ -3,13 +3,13 @@ import type { Plans } from "../plans";
 import type { Authorization } from "../transactions";
 
 export type CreateSubscriptionPayload = {
-  /** @description Customer's email address or customer code */
+  /** Customer's email address or customer code */
   customer: string;
-  /** @description Plan code */
+  /** Plan code */
   plan: string;
-  /** @description If customer has multiple authorizations, you can set the desired authorization you wish to use for this subscription here. If this is not supplied, the customer's most recent authorization would be used */
+  /** If customer has multiple authorizations, you can set the desired authorization you wish to use for this subscription here. If this is not supplied, the customer's most recent authorization would be used */
   authorization?: string;
-  /** @description Set the date for the first debit. (ISO 8601 format) e.g. `2017-05-16T00:30:13+01:00` */
+  /** Set the date for the first debit. (ISO 8601 format) e.g. `2017-05-16T00:30:13+01:00` */
   start_date?: string;
 };
 
@@ -37,13 +37,13 @@ export type CreateSubscriptionResponsePayload = {
 };
 
 export type ListSubscriptionPayload = {
-  /** @description Specify how many records you want to retrieve per page. If not specified, we use a default value of 50. */
+  /** Specify how many records you want to retrieve per page. If not specified, we use a default value of 50. */
   perPage?: number;
-  /** @description Specify exactly what page you want to retrieve. If not specified, we use a default value of 1. */
+  /** Specify exactly what page you want to retrieve. If not specified, we use a default value of 1. */
   page?: number;
-  /** @description Filter by Customer ID */
+  /** Filter by Customer ID */
   customer?: number;
-  /** @description Filter by Plan ID */
+  /** Filter by Plan ID */
   plan?: number;
 };
 
@@ -109,35 +109,35 @@ export type FetchSubscriptionResponsePayload = {
 
 export type CreateSubscriptionClient = {
   /**
-   * @description Create a subscription on your integration
+   * Create a subscription on your integration
    */
   create: (payload: CreateSubscriptionPayload) => Promise<CreateSubscriptionResponsePayload>;
 
   /**
-   * @description List subscriptions available on your integration
+   * List subscriptions available on your integration
    */
   list: (payload?: ListSubscriptionPayload) => Promise<ListSubscriptionResponsePayload>;
 
   /**
-   * @description Get details of a subscription on your integration
+   * Get details of a subscription on your integration
    */
   fetch: (payload: {
     /**
-     * @description The subscription ID or code you want to fetch
+     * The subscription ID or code you want to fetch
      */
     id_or_code: string;
   }) => Promise<FetchSubscriptionResponsePayload>;
 
   /**
-   * @description Enable a subscription on your integration
+   * Enable a subscription on your integration
    */
   enable: (payload: {
     /**
-     * @description Subscription code
+     * Subscription code
      */
     code: string;
     /**
-     * @description Email token
+     * Email token
      */
     token: string;
   }) => Promise<{
@@ -146,15 +146,15 @@ export type CreateSubscriptionClient = {
   }>;
 
   /**
-   * @description Disable a subscription on your integration
+   * Disable a subscription on your integration
    */
   disable: (payload: {
     /**
-     * @description Subscription code
+     * Subscription code
      */
     code: string;
     /**
-     * @description Email token
+     * Email token
      */
     token: string;
   }) => Promise<{
@@ -163,11 +163,11 @@ export type CreateSubscriptionClient = {
   }>;
 
   /**
-   * @description Generate a link for relevant steps an subscription update
+   * Generate a link for relevant steps an subscription update
    */
   generateUpdatelink: (payload: {
     /**
-     * @description Subscription code
+     * Subscription code
      */
     code: string;
   }) => Promise<{
@@ -179,11 +179,11 @@ export type CreateSubscriptionClient = {
   }>;
 
   /**
-   * @description Send an email for relevant steps an subscription update
+   * Send an email for relevant steps an subscription update
    */
   sendUpdatelink: (payload: {
     /**
-     * @description Subscription code
+     * Subscription code
      */
     code: string;
   }) => Promise<{

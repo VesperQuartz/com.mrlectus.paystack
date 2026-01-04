@@ -39,7 +39,7 @@ export const createTerminal = (instance: KyInstance): CreateTerminalClient => {
   };
 
   const fetchStatus = async (payload: {
-    /** @description The ID of the Terminal you want to check */
+    /** The ID of the Terminal you want to check */
     terminal_id: string;
   }) => {
     const parse = z
@@ -62,7 +62,7 @@ export const createTerminal = (instance: KyInstance): CreateTerminalClient => {
   };
 
   const fetch = async (payload: {
-    /** @description The ID of the Terminal the event was sent to. */
+    /** The ID of the Terminal the event was sent to. */
     terminal_id: string;
   }) => {
     const parse = z
@@ -87,7 +87,7 @@ export const createTerminal = (instance: KyInstance): CreateTerminalClient => {
   };
 
   const commission = async (payload: {
-    /** @description Device Serial Number */
+    /** Device Serial Number */
     serial_number: string;
   }) => {
     const parse = z
@@ -106,7 +106,7 @@ export const createTerminal = (instance: KyInstance): CreateTerminalClient => {
   };
 
   const decommission = async (payload: {
-    /** @description Device Serial Number */
+    /** Device Serial Number */
     serial_number: string;
   }) => {
     const parse = z

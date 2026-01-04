@@ -2,35 +2,35 @@ import type { Product } from "#/products";
 import type { Currency } from "#/types";
 
 export type CreatePaymentPagePayload = {
-  /** @description Name of page */
+  /** Name of page */
   name: string;
-  /** @description A description for this page */
+  /** A description for this page */
   description?: string;
-  /** @description Amount should be in the subunit of the supported currency */
+  /** Amount should be in the subunit of the supported currency */
   amount?: number;
-  /** @description The transaction currency. Defaults to your integration currency. */
+  /** The transaction currency. Defaults to your integration currency. */
   currency?: Currency;
-  /** @description URL slug you would like to be associated with this page. Page will be accessible at https://paystack.com/pay/[slug] */
+  /** URL slug you would like to be associated with this page. Page will be accessible at https://paystack.com/pay/[slug] */
   slug?: string;
-  /** @description The type of payment page to create. Options are `payment`, `subscription`, `product`, and `plan`. Defaults to payment if no type is specified. */
+  /** The type of payment page to create. Options are `payment`, `subscription`, `product`, and `plan`. Defaults to payment if no type is specified. */
   type?: "payment" | "subscription" | "product" | "plan";
-  /** @description The ID of the plan to subscribe customers on this payment page to when `type` is set to `subscription`. */
+  /** The ID of the plan to subscribe customers on this payment page to when `type` is set to `subscription`. */
   plan?: string;
-  /** @description Specifies whether to collect a fixed amount on the payment page. If true, `amount` must be passed. */
+  /** Specifies whether to collect a fixed amount on the payment page. If true, `amount` must be passed. */
   fixed_amount?: boolean;
-  /** @description The split code of the transaction split. e.g. `SPL_98WF13Eb3w` */
+  /** The split code of the transaction split. e.g. `SPL_98WF13Eb3w` */
   split_code?: string;
-  /** @description Extra data to configure the payment page including subaccount, logo image, transaction charge description, and more. */
+  /** Extra data to configure the payment page including subaccount, logo image, transaction charge description, and more. */
   metadata?: Record<string, unknown>;
-  /** @description If you would like Paystack to redirect someplace upon successful payment, specify the URL here. */
+  /** If you would like Paystack to redirect someplace upon successful payment, specify the URL here. */
   redirect_url?: string;
-  /** @description A success message to display to the customer after a successful transaction */
+  /** A success message to display to the customer after a successful transaction */
   success_message?: string;
-  /** @description An email address that will receive transaction notifications for this payment page */
+  /** An email address that will receive transaction notifications for this payment page */
   notification_email?: string;
-  /** @description Specify whether to collect phone numbers on the payment page */
+  /** Specify whether to collect phone numbers on the payment page */
   collect_phone?: boolean;
-  /** @description If you would like to accept custom fields, specify them here. */
+  /** If you would like to accept custom fields, specify them here. */
   custom_fields?: unknown[];
 };
 
@@ -61,19 +61,19 @@ export type CreatePaymentPageResponsePayload = {
 
 export type ListPaymentPagePayload = {
   /**
-   * @description Specify how many records you want to retrieve per page. If not specified, we use a default value of 50.
+   * Specify how many records you want to retrieve per page. If not specified, we use a default value of 50.
    */
   perPage?: number;
   /**
-   * @description Specify exactly what page you want to retrieve. If not specified, we use a default value of 1.
+   * Specify exactly what page you want to retrieve. If not specified, we use a default value of 1.
    */
   page?: number;
   /**
-   * @description A timestamp from which to start listing transaction e.g. `2016-09-24T00:00:05.000Z`, `2016-09-21`
+   * A timestamp from which to start listing transaction e.g. `2016-09-24T00:00:05.000Z`, `2016-09-21`
    */
   from?: string | Date;
   /**
-   * @description A timestamp at which to stop listing transaction e.g. `2016-09-24T00:00:05.000Z`, `2016-09-21`
+   * A timestamp at which to stop listing transaction e.g. `2016-09-24T00:00:05.000Z`, `2016-09-21`
    */
   to?: string | Date;
 };
@@ -100,36 +100,36 @@ export type FetchPaymentPageResponsePayload = {
 };
 
 export type UpdatePaymentPagePayload = {
-  /** @description Page ID or slug */
+  /** Page ID or slug */
   id_or_slug: string;
-  /** @description Name of page */
+  /** Name of page */
   name: string;
-  /** @description A description for this page */
+  /** A description for this page */
   description: string;
-  /** @description Default amount you want to accept using this page. If none is set, customer is free to provide any amount of their choice. The latter scenario is useful for accepting donations */
+  /** Default amount you want to accept using this page. If none is set, customer is free to provide any amount of their choice. The latter scenario is useful for accepting donations */
   amount?: number;
-  /** @description Set to false to deactivate page url */
+  /** Set to false to deactivate page url */
   active?: boolean;
 };
 
 export type CreatePaymentPageClient = {
-  /** @description Create a payment page on your integration */
+  /** Create a payment page on your integration */
   create: (payload: CreatePaymentPagePayload) => Promise<CreatePaymentPageResponsePayload>;
-  /** @description List payment pages available on your integration */
+  /** List payment pages available on your integration */
   list: (payload?: ListPaymentPagePayload) => Promise<ListPaymentPageResponsePayload>;
-  /** @description Get details of a payment page on your integration */
+  /** Get details of a payment page on your integration */
   fetch: (payload: {
     /** The page `ID` or `slug` you want to fetch */
     id_or_slug: string;
   }) => Promise<FetchPaymentPageResponsePayload>;
-  /** @description Update a payment page's details on your integration */
+  /** Update a payment page's details on your integration */
   update: (payload: UpdatePaymentPagePayload) => Promise<CreatePaymentPageResponsePayload>;
-  /** @description Check the availability of a slug for a payment page */
+  /** Check the availability of a slug for a payment page */
   checkSlugAvailability: (payload: {
     /** URL slug to be confirmed */
     slug: string;
   }) => Promise<{ status: boolean; message: string }>;
-  /** @description Add products to a payment page */
+  /** Add products to a payment page */
   addProduct: (payload: {
     /** Id of the payment page */
     id: number;

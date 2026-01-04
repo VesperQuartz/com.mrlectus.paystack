@@ -81,40 +81,40 @@ export const PaystackClient = (
   });
   return {
     /**
-     * @description The Transactions API allows you create and manage payments on your integration.
+     * The Transactions API allows you create and manage payments on your integration.
      */
     transactions: createTransactions(kyclient),
     /**
-     * @description The Transaction Splits API enables merchants split the settlement for a transaction across their payout account, and one or more subaccounts.
+     * The Transaction Splits API enables merchants split the settlement for a transaction across their payout account, and one or more subaccounts.
      */
     splits: createTransactionSplits(kyclient),
-    /** @description The Terminal API allows you to build delightful in-person payment experiences. */
+    /** The Terminal API allows you to build delightful in-person payment experiences. */
     terminal: createTerminal(kyclient),
-    /** @description The Virtual Terminal API allows you to accept in-person payments without a POS device. */
+    /** The Virtual Terminal API allows you to accept in-person payments without a POS device. */
     virtaulTerminal: createVirtualTerminal(kyclient),
-    /** @description The Customers API allows you create and manage customers on your integration. */
+    /** The Customers API allows you create and manage customers on your integration. */
     customers: createCustomer(kyclient),
-    /** @description The Direct Debit API allows you manage the authorization on your customer's bank accounts. */
+    /** The Direct Debit API allows you manage the authorization on your customer's bank accounts. */
     directDebit: createDirectDebit(kyclient),
-    /** @description The Dedicated Virtual Account API enables Nigerian and Ghanaian merchants to manage unique payment accounts of their customers. */
+    /** The Dedicated Virtual Account API enables Nigerian and Ghanaian merchants to manage unique payment accounts of their customers. */
     dedicatedVirtualAccount: createDedicatedVirtualAccounts(kyclient),
-    /** @description The Apple Pay API allows you register your application's top-level domain or subdomain. */
+    /** The Apple Pay API allows you register your application's top-level domain or subdomain. */
     applePay: createApplePay(kyclient),
-    /** @description The Subaccounts API allows you create and manage subaccounts on your integration. Subaccounts can be used to split payment between two accounts (your main account and a sub account). */
+    /** The Subaccounts API allows you create and manage subaccounts on your integration. Subaccounts can be used to split payment between two accounts (your main account and a sub account). */
     subaccounts: createSubaccounts(kyclient),
-    /** @description The Plans API allows you create and manage installment payment options on your integration. */
+    /** The Plans API allows you create and manage installment payment options on your integration. */
     plans: createPlans(kyclient),
-    /** @description The Subscriptions API allows you create and manage recurring payment on your integration. */
+    /** The Subscriptions API allows you create and manage recurring payment on your integration. */
     subscriptions: createSubscriptions(kyclient),
-    /** @description The Products API allows you create and manage inventories on your integration. */
+    /** The Products API allows you create and manage inventories on your integration. */
     products: createProducts(kyclient),
-    /** @description The Payment Pages API provides a quick and secure way to collect payment for products. */
+    /** The Payment Pages API provides a quick and secure way to collect payment for products. */
     paymentPage: createPaymentPage(kyclient),
-    /** @description The Payment Requests API allows you manage requests for payment of goods and services. */
+    /** The Payment Requests API allows you manage requests for payment of goods and services. */
     paymentRequests: createPaymentRequests(kyclient),
-    /** @description The Settlements API allows you gain insights into payouts made by Paystack to your bank account. */
+    /** The Settlements API allows you gain insights into payouts made by Paystack to your bank account. */
     settlements: createSettlements(kyclient),
-    /** @description The Transfer Recipients API allows you create and manage beneficiaries that you send money to. */
+    /** The Transfer Recipients API allows you create and manage beneficiaries that you send money to. */
     transferRecipients: createTransferRecipients(kyclient),
   };
 };

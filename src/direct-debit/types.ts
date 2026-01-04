@@ -1,11 +1,11 @@
 import type { CustomerMeta } from "../customers";
 
 export type ListMandateAuthorizationsPayload = {
-  /** @description The cursor value of the next set of authorizations to fetch. You can get this from the meta object of the response */
+  /** The cursor value of the next set of authorizations to fetch. You can get this from the meta object of the response */
   cursor?: string;
-  /** @description Filter by the authorization status. Accepted values are: `pending`, `active`, `revoked` */
+  /** Filter by the authorization status. Accepted values are: `pending`, `active`, `revoked` */
   status: "active" | "revoked" | "pending";
-  /** @description The number of authorizations to fetch per request */
+  /** The number of authorizations to fetch per request */
   per_page?: number;
 };
 
@@ -37,16 +37,16 @@ export type ListMandateAuthorizationsResponsePayload = {
 };
 
 export type CreateDirectDebitClient = {
-  /** @description Trigger an activation charge on pending mandates on behalf of your customers. */
+  /** Trigger an activation charge on pending mandates on behalf of your customers. */
   triggerActivationCharge: (payload: {
-    /** @description An array of customer IDs with pending mandate authorizations. */
+    /** An array of customer IDs with pending mandate authorizations. */
     customer_ids: number[];
   }) => Promise<{
     status: boolean;
     message: string;
   }>;
 
-  /** @description Get the list of direct debit mandates on your integration. */
+  /** Get the list of direct debit mandates on your integration. */
   listMandateAuthorizations: (
     payload: ListMandateAuthorizationsPayload,
   ) => Promise<ListMandateAuthorizationsResponsePayload>;
