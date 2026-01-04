@@ -19,7 +19,7 @@ export type CreateTransferRecipientPayload = {
   metadata?: Record<string, unknown>;
 };
 
-type Details = {
+export type Details = {
   authorization_code: string | null;
   account_number: string;
   account_name: string;
@@ -98,22 +98,30 @@ export type UpdateTransferRecipientPayload = {
 };
 
 export type CreateTransferRecipientClient = {
+  /** Creates a new recipient. A duplicate account number will lead to the retrieval of the existing record. */
   create: (
     payload: CreateTransferRecipientPayload,
   ) => Promise<CreateTransferRecipientResponsePayload>;
+  /** Create multiple transfer recipients in batches. A duplicate account number will lead to the retrieval of the existing record. */
   bulkCreate: (
     payload: BulkCreateTransferRecipientPayload,
   ) => Promise<BulkCreateTransferRecipientResponsePayload>;
+  /** List transfer recipients available on your integration */
   list: (
     payload?: ListTransferRecipientsPayload,
   ) => Promise<ListTransferRecipientsResponsePayload>;
+  /** Fetch the details of a transfer recipient */
   fetch: (payload: {
+    /** An ID or code for the recipient whose details you want to receive. */
     id_or_code: string;
   }) => Promise<CreateTransferRecipientResponsePayload>;
+  /** Update transfer recipients available on your integration */
   update: (
     payload: UpdateTransferRecipientPayload,
   ) => Promise<CreateTransferRecipientResponsePayload>;
+  /** Delete a transfer recipient (sets the transfer recipient to inactive) */
   delete: (payload: {
+    /** An ID or code for the recipient who you want to delete. */
     id_or_code: string;
   }) => Promise<{ status: boolean; message: string }>;
 };

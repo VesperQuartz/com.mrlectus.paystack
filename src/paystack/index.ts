@@ -14,6 +14,7 @@ import { createSubscriptions } from "#/subscriptions";
 import { createTerminal } from "#/terminal";
 import { createTransactionSplits } from "#/transaction-splits";
 import { createTransactions } from "#/transactions/transactions";
+import { createTransfers } from "#/transfers";
 import { createTransferRecipients } from "#/transfers-recipients";
 import { createVirtualTerminal } from "#/virtual-terminal";
 
@@ -59,6 +60,7 @@ export const PaystackClient = (
       ],
       beforeError: [
         async (error) => {
+          console.error("CHECK", error);
           const { response } = error;
           if (response) {
             const errorBody = await response.json<{
@@ -116,5 +118,7 @@ export const PaystackClient = (
     settlements: createSettlements(kyclient),
     /** The Transfer Recipients API allows you create and manage beneficiaries that you send money to. */
     transferRecipients: createTransferRecipients(kyclient),
+    /** The Transfers API allows you automate sending money to your customers. */
+    transfers: createTransfers(kyclient),
   };
 };
