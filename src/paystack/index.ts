@@ -15,6 +15,7 @@ import { createTerminal } from "#/terminal";
 import { createTransactionSplits } from "#/transaction-splits";
 import { createTransactions } from "#/transactions/transactions";
 import { createTransfers } from "#/transfers";
+import { createTransfersControl } from "#/transfers-control";
 import { createTransferRecipients } from "#/transfers-recipients";
 import { createVirtualTerminal } from "#/virtual-terminal";
 
@@ -120,5 +121,7 @@ export const PaystackClient = (
     transferRecipients: createTransferRecipients(kyclient),
     /** The Transfers API allows you automate sending money to your customers. */
     transfers: createTransfers(kyclient),
+    /** The Transfers Control API allows you manage settings of your transfers. */
+    transfersControl: createTransfersControl(kyclient),
   };
 };
