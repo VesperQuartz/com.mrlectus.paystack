@@ -1,6 +1,7 @@
 import ky from "ky";
 import { createApplePay } from "#/apple-pay";
 import { createBulkCharges } from "#/bulk-charges";
+import { createCharges } from "#/charges";
 import { createCustomer } from "#/customers";
 import { createDedicatedVirtualAccounts } from "#/dedicated-virtual-accounts";
 import { createDirectDebit } from "#/direct-debit";
@@ -129,5 +130,7 @@ export const PaystackClient = (
     bulkCharges: createBulkCharges(kyclient),
     /** The Integration API allows you manage some settings on your integration. */
     integration: createIntegration(kyclient),
+    /** The Charge API allows you to configure payment channel of your choice when initiating a payment. */
+    charges: createCharges(kyclient),
   };
 };
