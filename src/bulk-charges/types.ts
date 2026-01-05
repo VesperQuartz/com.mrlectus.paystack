@@ -116,26 +116,26 @@ export type FetchChargesBatchResponsePayload = {
 
 export type CreateBulkChargeClient = {
   /**
-   * Send an array of objects with authorization codes and amount, in kobo or cents, so we can process charges as a batch.
+   * Send an array of objects with authorization codes and amount, using the supported currency format, so we can process transactions as a batch.
    */
   initiate: (
     payload: InitiateBulkChargePayload,
   ) => Promise<InitiateBulkChargeResponsePayload>;
   /**
-   * List the bulk charge batches made on your integration.
+   * This lists all bulk charge batches created by the integration. Statuses can be `active`, `paused`, or `complete`
    */
   listBatches: (
     payload: ListBulkChargeBatchesPayload,
   ) => Promise<ListBulkChargeBatchesResponsePayload>;
   /**
-   * This endpoint retrieves a specific batch code. It also returns useful information on its progress by way of the total_charges and pending_charges attributes.
+   * This endpoint retrieves a specific batch code. It also returns useful information on its progress by way of the `total_charges` and `pending_charges` attributes.
    */
   fetch: (payload: {
     /** An ID or code for the batch whose details you want to retrieve. */
     id_or_code: string;
   }) => Promise<FetchBulkChargeBatchResponsePayload>;
   /**
-   * This endpoint retrieves the charges associated with a specified batch code.
+   * This endpoint retrieves the charges associated with a specified batch code. Pagination parameters are available. You can also filter by status. Charge statuses can be `pending`, `success` or `failed`.
    */
   fetchBatch: (
     payload: FetchChargesBatchPayload,

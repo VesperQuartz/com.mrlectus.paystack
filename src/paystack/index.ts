@@ -5,6 +5,7 @@ import { createCustomer } from "#/customers";
 import { createDedicatedVirtualAccounts } from "#/dedicated-virtual-accounts";
 import { createDirectDebit } from "#/direct-debit";
 import { PaystackApiError } from "#/errors";
+import { createIntegration } from "#/integration";
 import { createPaymentPage } from "#/payment-page";
 import { createPaymentRequests } from "#/payment-requests";
 import { createPlans } from "#/plans";
@@ -126,5 +127,7 @@ export const PaystackClient = (
     transfersControl: createTransfersControl(kyclient),
     /** The Bulk Charges API allows you create and manage multiple recurring payments from your customers. */
     bulkCharges: createBulkCharges(kyclient),
+    /** The Integration API allows you manage some settings on your integration. */
+    integration: createIntegration(kyclient),
   };
 };
