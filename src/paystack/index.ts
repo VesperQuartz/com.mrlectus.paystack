@@ -1,5 +1,6 @@
 import ky from "ky";
 import { createApplePay } from "#/apple-pay";
+import { createBulkCharges } from "#/bulk-charges";
 import { createCustomer } from "#/customers";
 import { createDedicatedVirtualAccounts } from "#/dedicated-virtual-accounts";
 import { createDirectDebit } from "#/direct-debit";
@@ -123,5 +124,7 @@ export const PaystackClient = (
     transfers: createTransfers(kyclient),
     /** The Transfers Control API allows you manage settings of your transfers. */
     transfersControl: createTransfersControl(kyclient),
+    /** The Bulk Charges API allows you create and manage multiple recurring payments from your customers. */
+    bulkCharges: createBulkCharges(kyclient),
   };
 };
