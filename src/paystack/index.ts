@@ -5,6 +5,7 @@ import { createCharges } from "#/charges";
 import { createCustomer } from "#/customers";
 import { createDedicatedVirtualAccounts } from "#/dedicated-virtual-accounts";
 import { createDirectDebit } from "#/direct-debit";
+import { createDisputes } from "#/disputes";
 import { PaystackApiError } from "#/errors";
 import { createIntegration } from "#/integration";
 import { createPaymentPage } from "#/payment-page";
@@ -132,5 +133,7 @@ export const PaystackClient = (
     integration: createIntegration(kyclient),
     /** The Charge API allows you to configure payment channel of your choice when initiating a payment. */
     charges: createCharges(kyclient),
+    /** The Disputes API allows you manage transaction disputes on your integration. */
+    disputes: createDisputes(kyclient),
   };
 };

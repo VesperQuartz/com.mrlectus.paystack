@@ -98,6 +98,7 @@ export type Transaction = {
   subaccount: object;
   paidAt: string;
   createdAt: string;
+  transaction_reference?: string | null;
 };
 
 export type FetchChargesBatchResponsePayload = {
