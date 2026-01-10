@@ -152,9 +152,11 @@ export type CreateDisputeClient = {
   addEvidence: (
     payload: AddEvidencePayload,
   ) => Promise<AddEvidenceResponsePayload>;
-  /** Get URL to upload a dispute evidence */
+  /** This endpoint retrieves disputes for a particular transaction */
   getUploadUrl: (payload: {
+    /** Dispute ID */
     id: string;
+    /** The file name, with its extension, that you want to upload. e.g `filename.pdf` */
     upload_filename: string;
   }) => Promise<{
     status: boolean;
@@ -168,7 +170,7 @@ export type CreateDisputeClient = {
   resolve: (
     payload: ResolveDisputePayload,
   ) => Promise<ResolveDisputeResponsePayload>;
-  /** Export disputes to CSV */
+  /** Export disputes available on your integration */
   exports: (payload: ListDisputesPayload) => Promise<{
     status: boolean;
     message: string;

@@ -12,6 +12,7 @@ import { createPaymentPage } from "#/payment-page";
 import { createPaymentRequests } from "#/payment-requests";
 import { createPlans } from "#/plans";
 import { createProducts } from "#/products";
+import { createRefunds } from "#/refunds";
 import { createSettlements } from "#/settlements";
 import { createSubaccounts } from "#/subaccounts";
 import { createSubscriptions } from "#/subscriptions";
@@ -135,5 +136,7 @@ export const PaystackClient = (
     charges: createCharges(kyclient),
     /** The Disputes API allows you manage transaction disputes on your integration. */
     disputes: createDisputes(kyclient),
+    /** The Refunds API allows you create and manage transaction refunds. */
+    refunds: createRefunds(kyclient),
   };
 };
