@@ -1,11 +1,19 @@
 {
   "name": "@mrlectus/paystack",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "An sdk for interacting with the paystack api",
   "homepage": "https://github.com/VesperQuartz/com.mrlectus.paystack#readme",
   "bugs": {
     "url": "https://github.com/VesperQuartz/com.mrlectus.paystack/issues"
   },
+  "keywords": [
+    "paystack",
+    "typescript",
+    "sdk",
+    "payments",
+    "terminals",
+    "cards"
+  ],
   "license": "MIT",
   "author": "mrlectus <mrlectus@lectuslab.online>",
   "repository": {
