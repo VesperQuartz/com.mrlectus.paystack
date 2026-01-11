@@ -1,6 +1,6 @@
 {
   "name": "@mrlectus/paystack",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "An sdk for interacting with the paystack api",
   "homepage": "https://github.com/VesperQuartz/com.mrlectus.paystack#readme",
   "bugs": {
