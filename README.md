@@ -182,9 +182,18 @@ try {
 }
 ```
 
+## Runtime Schema Validation
+
+This SDK uses [Zod](https://zod.dev) for strict runtime schema validation. Every API request is validated against its expected schema *before* it is sent to Paystack. This prevents malformed requests and ensures your application fails fast with clear error messages if the input data is invalid.
+
 ## TypeScript Support
 
-This package is written in TypeScript and ships with type definitions. This means you get autocompletion and type checking for all API payloads and responses, ensuring you integrate with Paystack correctly and efficiently.
+The package is built with TypeScript and provides comprehensive type definitions for all API modules. This gives you:
+- **Autocompletion**: Quickly discover available methods and payload properties.
+- **Type Safety**: Catch potential bugs during development with strict typing for both requests and responses.
+- **Improved DX**: Get inline documentation and hints directly in your IDE.
+
+Together with runtime validation, this ensures a robust integration with the Paystack ecosystem.
 
 ## License
 
