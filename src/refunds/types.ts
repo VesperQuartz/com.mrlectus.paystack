@@ -125,14 +125,17 @@ export type ListRefundsResponsePayload = {
 };
 
 export type CreateRefundsClient = {
-  /** Initiate a refund */
+  /** Initiate a refund on your integration */
   create: (
     payload: CreateRefundPayload,
   ) => Promise<CreateRefundResponsePauload>;
-  /** Retrieve a refund for a transaction */
+  /** List refunds available on your integration */
   list: (payload: ListRefundsPayload) => Promise<ListRefundsResponsePayload>;
-  /** Fetch details of a refund */
-  fetch: (payload: { id: number }) => Promise<RetryRefundResponsePayload>;
-  /** Retry a refund */
+  /** Get details of a refund on your integration */
+  fetch: (payload: {
+    /** The ID of the initiated refund */
+    id: number;
+  }) => Promise<RetryRefundResponsePayload>;
+  /** Retry a refund with a `needs-attention` status by providing the bank account details of a customer. */
   retry: (payload: RetryRefundPayload) => Promise<RetryRefundResponsePayload>;
 };

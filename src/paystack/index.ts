@@ -22,6 +22,7 @@ import { createTransactions } from "#/transactions/transactions";
 import { createTransfers } from "#/transfers";
 import { createTransfersControl } from "#/transfers-control";
 import { createTransferRecipients } from "#/transfers-recipients";
+import { createVerification } from "#/verification";
 import { createVirtualTerminal } from "#/virtual-terminal";
 
 type ApiConfig = {
@@ -138,5 +139,7 @@ export const PaystackClient = (
     disputes: createDisputes(kyclient),
     /** The Refunds API allows you create and manage transaction refunds. */
     refunds: createRefunds(kyclient),
+    /** The Verification API allows you to perform KYC processes. */
+    verification: createVerification(kyclient),
   };
 };
