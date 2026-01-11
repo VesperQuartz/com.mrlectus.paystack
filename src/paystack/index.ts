@@ -8,6 +8,7 @@ import { createDirectDebit } from "#/direct-debit";
 import { createDisputes } from "#/disputes";
 import { PaystackApiError } from "#/errors";
 import { createIntegration } from "#/integration";
+import { createMiscellaneous } from "#/miscellaneous";
 import { createPaymentPage } from "#/payment-page";
 import { createPaymentRequests } from "#/payment-requests";
 import { createPlans } from "#/plans";
@@ -141,5 +142,7 @@ export const PaystackClient = (
     refunds: createRefunds(kyclient),
     /** The Verification API allows you to perform KYC processes. */
     verification: createVerification(kyclient),
+    /** The Miscellaneous API are supporting APIs that can be used to provide more details to other APIs. */
+    miscellaneous: createMiscellaneous(kyclient),
   };
 };

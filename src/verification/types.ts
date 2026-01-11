@@ -35,7 +35,9 @@ export type ValidateAccountResponsePayload = {
 export type CreateVerificationClient = {
   /** Confirm an account belongs to the right customer */
   resolveAccount: (payload: {
+    /** Account Number */
     account_number: string;
+    /** You can get the list of bank codes by calling the List Banks endpoint */
     bank_code: string;
   }) => Promise<{
     status: boolean;
@@ -51,6 +53,7 @@ export type CreateVerificationClient = {
   ) => Promise<ValidateAccountResponsePayload>;
   /** Get more information about a customer's card */
   resolveCardBIN: (payload: {
+    /** First 6 characters of card */
     bin: string;
   }) => Promise<{
     status: boolean;
