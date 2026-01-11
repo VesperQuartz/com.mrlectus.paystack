@@ -63,7 +63,7 @@ try {
   if (error instanceof PaystackApiError) {
     console.error("Paystack API Error:", error.message);
     console.error("Status Code:", error.statusCode); // e.g., 404
-    console.error("Response Body:", error.body); // Full error response from Paystack
+    console.error("Error Details:", error.toJSON()); // Full error response from Paystack
   } else {
     console.error("Unexpected Error:", error);
   }
