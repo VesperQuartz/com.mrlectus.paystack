@@ -47,6 +47,29 @@ const client = PaystackClient("YOUR_SECRET_KEY", {
 });
 ```
 
+## Error Handling
+
+The SDK throws `PaystackApiError` when the API returns a non-success status code (e.g., 4xx, 5xx) or when the API response indicates failure (`status: false`). You should wrap your API calls in a `try-catch` block to handle these errors gracefully.
+
+```typescript
+import { PaystackClient, PaystackApiError } from "@mrlectus/paystack";
+
+const client = PaystackClient();
+
+try {
+  const response = await client.transactions.verify({ reference: "invalid-ref" });
+  console.log(response.data);
+} catch (error) {
+  if (error instanceof PaystackApiError) {
+    console.error("Paystack API Error:", error.message);
+    console.error("Status Code:", error.statusCode); // e.g., 404
+    console.error("Response Body:", error.body); // Full error response from Paystack
+  } else {
+    console.error("Unexpected Error:", error);
+  }
+}
+```
+
 ## Features
 
 The SDK covers the entire Paystack API surface area:
@@ -75,74 +98,88 @@ The SDK covers the entire Paystack API surface area:
 ### Initialize a Transaction
 
 ```typescript
-const response = await client.transactions.initialize({
-  email: "customer@example.com",
-  amount: "5000", // Amount in kobo (or subunit of currency)
-  channels: ["card", "bank"],
-});
+import { PaystackClient, PaystackApiError } from "@mrlectus/paystack";
 
-console.log(response.data.authorization_url);
-```
+const client = PaystackClient();
 
-### Verify a Transaction
+try {
+  const response = await client.transactions.initialize({
+    email: "customer@example.com",
+    amount: "5000", // Amount in kobo
+    channels: ["card", "bank"],
+  });
 
-```typescript
-const response = await client.transactions.verify({
-  reference: "T1234567890",
-});
-
-if (response.data.status === "success") {
-  console.log("Payment successful!");
+  console.log("Authorization URL:", response.data.authorization_url);
+} catch (error) {
+  if (error instanceof PaystackApiError) {
+    console.error("Initialization Failed:", error.message);
+  }
 }
 ```
 
 ### Create a Customer
 
 ```typescript
-const customer = await client.customers.create({
-  email: "new.user@example.com",
-  first_name: "John",
-  last_name: "Doe",
-  phone: "+2348012345678",
-});
+try {
+  const customer = await client.customers.create({
+    email: "new.user@example.com",
+    first_name: "John",
+    last_name: "Doe",
+    phone: "+2348012345678",
+  });
 
-console.log("Customer ID:", customer.data.id);
+  console.log("Customer ID:", customer.data.id);
+} catch (error) {
+  if (error instanceof PaystackApiError) {
+    console.error("Customer Creation Failed:", error.message);
+  }
+}
 ```
 
 ### Initiate a Transfer
 
 ```typescript
-// 1. Create a recipient
-const recipient = await client.transferRecipients.create({
-  type: "nuban",
-  name: "Zombie Recipient",
-  account_number: "0123456789",
-  bank_code: "058",
-  currency: "NGN",
-});
+try {
+  // 1. Create a recipient
+  const recipient = await client.transferRecipients.create({
+    type: "nuban",
+    name: "Zombie Recipient",
+    account_number: "0123456789",
+    bank_code: "058",
+    currency: "NGN",
+  });
 
-// 2. Initiate transfer
-const transfer = await client.transfers.initiate({
-  source: "balance",
-  amount: 5000,
-  recipient: recipient.data.recipient_code,
-  reference: `ref-${Date.now()}`,
-  reason: "Holiday Bonus",
-});
+  // 2. Initiate transfer
+  const transfer = await client.transfers.initiate({
+    source: "balance",
+    amount: 5000,
+    recipient: recipient.data.recipient_code,
+    reference: `ref-${Date.now()}`,
+    reason: "Holiday Bonus",
+  });
 
-console.log("Transfer status:", transfer.data.status);
+  console.log("Transfer status:", transfer.data.status);
+} catch (error) {
+  if (error instanceof PaystackApiError) {
+    console.error("Transfer Failed:", error.message);
+  }
+}
 ```
 
 ### List Banks
 
 ```typescript
-const banks = await client.miscellaneous.listBanks({
-  country: "nigeria",
-  use_cursor: true,
-  perPage: 10,
-});
+try {
+  const banks = await client.miscellaneous.listBanks({
+    country: "nigeria",
+    use_cursor: true,
+    perPage: 10,
+  });
 
-console.log(banks.data);
+  console.log("Banks retrieved:", banks.data.length);
+} catch (error) {
+  console.error("Failed to list banks", error);
+}
 ```
 
 ## TypeScript Support
