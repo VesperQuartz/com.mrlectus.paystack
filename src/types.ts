@@ -15,6 +15,12 @@ export type MetaV1 = {
   pageCount: number;
 };
 
+export type MetaV2 = {
+  next: string | null;
+  previous: string | null;
+  perPage: number;
+};
+
 export type Pagination = {
   /**
    * Specify how many records you want to retrieve per page. If not specified, we use a default value of 50.

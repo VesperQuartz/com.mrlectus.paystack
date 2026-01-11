@@ -1,10 +1,13 @@
 import { z } from "zod/v4-mini";
-import type { CreatePaymentRequestPayload, ListPaymentRequestPayload } from "#/payment-requests";
-import { CurrencySchema } from "#/schemas";
+import type {
+  CreatePaymentRequestPayload,
+  ListPaymentRequestPayload,
+} from "#/payment-requests";
+import { CurrencySchema, PaginationSchema } from "#/schemas";
 
 export const CreatePaymentRequestPayloadSchema = z.object({
   customer: z.string(),
-  amount: z.number(),
+  amount: z.number().check(z.positive()),
   due_date: z.pipe(
     z.optional(z.coerce.date()),
     z.transform((date) => date?.toISOString()),
@@ -36,23 +39,16 @@ export const CreatePaymentRequestPayloadSchema = z.object({
   metadata: z.optional(z.record(z.string(), z.unknown())),
 }) satisfies z.ZodMiniType<CreatePaymentRequestPayload>;
 
-export const ListPaymentRequestPayloadSchema = z.object({
-  perPage: z.optional(z.int()),
-  page: z.optional(z.int()),
-  from: z.pipe(
-    z.optional(z.coerce.date()),
-    z.transform((date) => date?.toISOString()),
-  ),
+export const ListPaymentRequestPayloadSchema = z.extend(PaginationSchema, {
   customer: z.string(),
   status: z.string(),
   currency: CurrencySchema,
   include_archive: z.string(),
-  to: z.pipe(
-    z.optional(z.coerce.date()),
-    z.transform((date) => date?.toISOString()),
-  ),
 }) satisfies z.ZodMiniType<ListPaymentRequestPayload>;
 
-export const UpdatePaymentRequestPayloadSchema = z.extend(CreatePaymentRequestPayloadSchema, {
-  id_or_code: z.string(),
-});
+export const UpdatePaymentRequestPayloadSchema = z.extend(
+  CreatePaymentRequestPayloadSchema,
+  {
+    id_or_code: z.string(),
+  },
+);

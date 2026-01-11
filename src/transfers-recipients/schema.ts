@@ -1,5 +1,5 @@
 import { z } from "zod/v4-mini";
-import { CurrencySchema } from "#/schemas";
+import { CurrencySchema, PaginationSchema } from "#/schemas";
 import type {
   BulkCreateTransferRecipientPayload,
   CreateTransferRecipientPayload,
@@ -9,8 +9,8 @@ import type {
 export const CreateTransferRecipientPayloadSchema = z.object({
   type: z.enum(["nuban", "ghipss", "mobile_money", "basa"]),
   name: z.string(),
-  account_number: z.string(),
-  bank_code: z.string(),
+  account_number: z.string().check(z.length(10)),
+  bank_code: z.string().check(z.length(3)),
   description: z.optional(z.string()),
   currency: z.optional(CurrencySchema),
   authorization_code: z.optional(z.string()),
@@ -21,18 +21,8 @@ export const BulkCreateTransferRecipientPayloadSchema = z.object({
   batch: z.array(CreateTransferRecipientPayloadSchema).check(z.minLength(1)),
 }) satisfies z.ZodMiniType<BulkCreateTransferRecipientPayload>;
 
-export const ListTransferRecipientsSchema = z.object({
-  perPage: z.optional(z.int()),
-  page: z.optional(z.int()),
-  from: z.pipe(
-    z.optional(z.coerce.date()),
-    z.transform((date) => date?.toISOString()),
-  ),
-  to: z.pipe(
-    z.optional(z.coerce.date()),
-    z.transform((date) => date?.toISOString()),
-  ),
-}) satisfies z.ZodMiniType<ListTransferRecipientsPayload>;
+export const ListTransferRecipientsSchema =
+  PaginationSchema satisfies z.ZodMiniType<ListTransferRecipientsPayload>;
 
 export const UpdateTransferRecipientPayloadSchema = z.object({
   id_or_code: z.string(),

@@ -1,5 +1,5 @@
 import { z } from "zod/v4-mini";
-import { CurrencySchema } from "#/schemas";
+import { CurrencySchema, PaginationSchema } from "#/schemas";
 import type {
   InitiateBulkTransferPayload,
   InitiateTransferPayload,
@@ -21,16 +21,6 @@ export const InitiateBulkTransferPayloadSchema = z.object({
   transfers: z.array(InitiateTransferPayloadSchema),
 }) satisfies z.ZodMiniType<InitiateBulkTransferPayload>;
 
-export const ListTransfersPayloadSchema = z.object({
-  perPage: z.optional(z.int()),
-  page: z.optional(z.int()),
+export const ListTransfersPayloadSchema = z.extend(PaginationSchema, {
   recipient: z.number(),
-  from: z.pipe(
-    z.optional(z.coerce.date()),
-    z.transform((date) => date?.toISOString()),
-  ),
-  to: z.pipe(
-    z.optional(z.coerce.date()),
-    z.transform((date) => date?.toISOString()),
-  ),
 }) satisfies z.ZodMiniType<ListTransfersPayload>;

@@ -1,5 +1,5 @@
 import { z } from "zod/v4-mini";
-import { CurrencySchema } from "../schemas";
+import { CurrencySchema, PaginationSchema } from "../schemas";
 import type {
   ChargeAuthorizationPayload,
   ExportTransactionPayload,
@@ -37,20 +37,10 @@ export const InitializePayloadSchema = z.object({
   bearer: z.optional(z.enum(["account", "subaccount"])),
 }) satisfies z.ZodMiniType<InitializePayload>;
 
-export const ListPayloadSchema = z.object({
-  perPage: z.optional(z.int()),
-  page: z.optional(z.int()),
+export const ListPayloadSchema = z.extend(PaginationSchema, {
   customer: z.optional(z.int()),
   terminalid: z.optional(z.string()),
   status: z.optional(z.enum(["failed", "success", "abandoned"])),
-  from: z.pipe(
-    z.optional(z.coerce.date()),
-    z.transform((date) => date?.toISOString()),
-  ),
-  to: z.pipe(
-    z.optional(z.coerce.date()),
-    z.transform((date) => date?.toISOString()),
-  ),
   amount: z.optional(z.int()),
 }) satisfies z.ZodMiniType<ListPayload>;
 
@@ -68,17 +58,7 @@ export const ChargeAuthorizationPayloadSchema = z.object({
   queue: z.optional(z.boolean()),
 }) satisfies z.ZodMiniType<ChargeAuthorizationPayload>;
 
-export const TransactionTotalPayloadSchema = z.object({
-  perPage: z.optional(z.int()),
-  page: z.optional(z.int()),
-  from: z.pipe(
-    z.optional(z.coerce.date()),
-    z.transform((date) => date?.toISOString()),
-  ),
-  to: z.pipe(
-    z.optional(z.coerce.date()),
-    z.transform((date) => date?.toISOString()),
-  ),
+export const TransactionTotalPayloadSchema = z.extend(PaginationSchema, {
   amount: z.optional(z.int()),
 }) satisfies z.ZodMiniType<TransactionTotalPayload>;
 

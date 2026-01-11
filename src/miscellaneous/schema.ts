@@ -5,7 +5,7 @@ import { CurrencySchema } from "#/schemas";
 export const ListBanksPayloadSchema = z.object({
   country: z.enum(["ghana", "kenya", "nigeria", "south africa"]),
   use_cursor: z.boolean(),
-  perPage: z.optional(z.number()),
+  perPage: z.optional(z.number().check(z.positive())),
   pay_with_bank_transfer: z.optional(z.boolean()),
   pay_with_bank: z.optional(z.boolean()),
   enabled_for_verification: z.optional(z.boolean()),

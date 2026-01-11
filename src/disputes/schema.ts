@@ -1,4 +1,3 @@
-import { id } from "zod/locales";
 import { z } from "zod/v4-mini";
 import type {
   AddEvidencePayload,
@@ -22,15 +21,15 @@ export const ListDisputesPayloadSchema = z.extend(PaginationSchema, {
 
 export const UpdateDisputePayloadSchema = z.object({
   id: z.string(),
-  refund_amount: z.number(),
+  refund_amount: z.number().check(z.positive()),
   uploaded_filename: z.optional(z.string()),
 }) satisfies z.ZodMiniType<UpdateDisputePayload>;
 
 export const AddEvidencePayloadSchema = z.object({
   id: z.string(),
-  customer_email: z.string(),
+  customer_email: z.email(),
   customer_name: z.string(),
-  customer_phone: z.string(),
+  customer_phone: z.string().check(z.length(10)),
   service_details: z.string(),
   delivery_address: z.optional(z.string()),
   delivery_date: z.pipe(
@@ -43,7 +42,7 @@ export const ResolveDisputePayloadSchema = z.object({
   id: z.string(),
   resolution: z.enum(["merchant-accepted", "declined"]),
   message: z.string(),
-  refund_amount: z.number(),
+  refund_amount: z.number().check(z.positive()),
   uploaded_filename: z.string(),
   evidence: z.optional(z.number()),
 }) satisfies z.ZodMiniType<ResolveDisputePayload>;

@@ -1,3 +1,4 @@
+import type { Pagination } from "#/types";
 import type { Customer } from "../customers";
 import type { Plans } from "../plans";
 import type { Authorization } from "../transactions";
@@ -36,11 +37,7 @@ export type CreateSubscriptionResponsePayload = {
   data: Subscription;
 };
 
-export type ListSubscriptionPayload = {
-  /** Specify how many records you want to retrieve per page. If not specified, we use a default value of 50. */
-  perPage?: number;
-  /** Specify exactly what page you want to retrieve. If not specified, we use a default value of 1. */
-  page?: number;
+export type ListSubscriptionPayload = Pagination & {
   /** Filter by Customer ID */
   customer?: number;
   /** Filter by Plan ID */
@@ -112,13 +109,17 @@ export type CreateSubscriptionClient = {
    * Create a subscription on your integration
    * @remarks This is a mutation.
    */
-  create: (payload: CreateSubscriptionPayload) => Promise<CreateSubscriptionResponsePayload>;
+  create: (
+    payload: CreateSubscriptionPayload,
+  ) => Promise<CreateSubscriptionResponsePayload>;
 
   /**
    * List subscriptions available on your integration
    * @remarks This is a query.
    */
-  list: (payload?: ListSubscriptionPayload) => Promise<ListSubscriptionResponsePayload>;
+  list: (
+    payload?: ListSubscriptionPayload,
+  ) => Promise<ListSubscriptionResponsePayload>;
 
   /**
    * Get details of a subscription on your integration

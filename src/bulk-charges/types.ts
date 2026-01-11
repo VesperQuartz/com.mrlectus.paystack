@@ -8,6 +8,7 @@ export type InitiateBulkChargePayload = {
 }[];
 
 type BulkCharge = {
+  easy_cron_id?: string | null;
   batch_code: `BCH_${string}`;
   reference: string;
   id: number;
@@ -52,11 +53,12 @@ export type ListBulkChargeBatchesResponsePayload = {
     Pick<
       BulkCharge,
       | "domain"
+      | "easy_cron_id"
+      | "integration"
+      | "reference"
       | "batch_code"
       | "status"
       | "id"
-      | "total_charges"
-      | "pending_charges"
       | "createdAt"
       | "updatedAt"
     >
@@ -67,7 +69,7 @@ export type ListBulkChargeBatchesResponsePayload = {
 export type FetchBulkChargeBatchResponsePayload = {
   status: boolean;
   message: string;
-  data: Omit<BulkCharge, "integration" | "reference">;
+  data: Omit<BulkCharge, "easy_cron_id">;
 };
 
 export type FetchChargesBatchPayload = ListBulkChargeBatchesPayload & {

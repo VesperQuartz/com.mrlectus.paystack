@@ -1,5 +1,5 @@
-import type { Authorization } from "../transactions/types";
-import type { Currency } from "../types";
+import type { Authorization } from "#/transactions/types";
+import type { Currency, MetaV1, Pagination } from "#/types";
 
 export type CreatePlanPayload = {
   /** Name of the plan */
@@ -9,7 +9,13 @@ export type CreatePlanPayload = {
    */
   amount: number;
   /** Interval in words. Valid intervals are: `daily`, `weekly`, `monthly`,`quarterly`, `biannually` (every 6 months), `annually`. */
-  interval: "daily" | "weekly" | "monthly" | "quarterly" | "biannually" | "annually";
+  interval:
+    | "daily"
+    | "weekly"
+    | "monthly"
+    | "quarterly"
+    | "biannually"
+    | "annually";
   /** Description of the plan */
   description?: string;
   /** Set to false if you don't want invoices to be sent to your customers */
@@ -44,15 +50,17 @@ export type CreatePlanResponsePayload = {
   data: Plans;
 };
 
-export type ListPlansPayload = {
-  /** Specify how many records you want to retrieve per page. If not specified, we use a default value of 50. */
-  perPage?: number;
-  /** Specify exactly what page you want to retrieve. If not specified, we use a default value of 1. */
-  page?: number;
+export type ListPlansPayload = Pagination & {
   /** Filter list by plans with specified status */
   status?: string;
   /** Filter list by plans with specified interval */
-  interval?: "daily" | "weekly" | "monthly" | "quarterly" | "biannually" | "annually";
+  interval?:
+    | "daily"
+    | "weekly"
+    | "monthly"
+    | "quarterly"
+    | "biannually"
+    | "annually";
   /**  Filter list by plans with specified amount using the supported currency */
   amount?: number;
 };
@@ -90,7 +98,13 @@ export type ListPlansResponsePayload = {
       plan_code: `PLN_${string}`;
       description: string | null;
       amount: number;
-      interval: "daily" | "weekly" | "monthly" | "quarterly" | "biannually" | "annually";
+      interval:
+        | "daily"
+        | "weekly"
+        | "monthly"
+        | "quarterly"
+        | "biannually"
+        | "annually";
       send_invoices: boolean;
       send_sms: boolean;
       hosted_page: boolean;
@@ -102,6 +116,7 @@ export type ListPlansResponsePayload = {
       updatedAt: string;
     }[]
   >;
+  meta: MetaV1;
 };
 
 export type FetchPlansResponsePayload = {
@@ -115,7 +130,13 @@ export type FetchPlansResponsePayload = {
     plan_code: `PLN_${string}`;
     description: string | null;
     amount: number;
-    interval: "daily" | "weekly" | "monthly" | "quarterly" | "biannually" | "annually";
+    interval:
+      | "daily"
+      | "weekly"
+      | "monthly"
+      | "quarterly"
+      | "biannually"
+      | "annually";
     send_invoices: boolean;
     send_sms: boolean;
     hosted_page: boolean;

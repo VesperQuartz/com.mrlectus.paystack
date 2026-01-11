@@ -1,6 +1,10 @@
 import { z } from "zod/v4-mini";
-import { CurrencySchema } from "../schemas";
-import type { CreateSplitPayload, UpdateSplitPayload, UpdateSubAccountSplitPayload } from "./types";
+import { CurrencySchema, PaginationSchema } from "../schemas";
+import type {
+  CreateSplitPayload,
+  UpdateSplitPayload,
+  UpdateSubAccountSplitPayload,
+} from "./types";
 
 export const createSplitPayloadSchema = z.object({
   name: z.string(),
@@ -18,20 +22,10 @@ export const createSplitPayloadSchema = z.object({
   bearer_subaccount: z.string(),
 }) satisfies z.ZodMiniType<CreateSplitPayload>;
 
-export const ListSplitPayloadSchema = z.object({
+export const ListSplitPayloadSchema = z.extend(PaginationSchema, {
   name: z.string(),
   active: z.boolean(),
   sort_by: z.optional(z.string()),
-  perPage: z.optional(z.int()),
-  page: z.optional(z.int()),
-  from: z.pipe(
-    z.optional(z.coerce.date()),
-    z.transform((date) => date?.toISOString()),
-  ),
-  to: z.pipe(
-    z.optional(z.coerce.date()),
-    z.transform((date) => date?.toISOString()),
-  ),
 });
 
 export const SplitBaseSchema = {

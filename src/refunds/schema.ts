@@ -8,7 +8,7 @@ import { CurrencySchema, PaginationSchema } from "#/schemas";
 
 export const CreateRefundPayloadSchema = z.object({
   transaction: z.string(),
-  amount: z.optional(z.number()),
+  amount: z.optional(z.number().check(z.positive())),
   currency: z.optional(CurrencySchema),
   customer_note: z.optional(z.string()),
   merchant_note: z.optional(z.string()),

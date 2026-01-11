@@ -1,18 +1,9 @@
 import { z } from "zod/v4-mini";
+import { PaginationSchema } from "#/schemas";
 
-export const ListSettlementsPayloadSchema = z.object({
-  perPage: z.optional(z.int()),
-  page: z.optional(z.int()),
+export const ListSettlementsPayloadSchema = z.extend(PaginationSchema, {
   status: z.optional(z.enum(["success", "processing", "failed", "pending"])),
   subaccount: z.optional(z.string()),
-  from: z.pipe(
-    z.optional(z.coerce.date()),
-    z.transform((date) => date?.toISOString()),
-  ),
-  to: z.pipe(
-    z.optional(z.coerce.date()),
-    z.transform((date) => date?.toISOString()),
-  ),
 });
 
 export const ListSettlementTransactionsPayloadSchema = z.omit(

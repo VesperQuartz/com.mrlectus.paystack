@@ -1,4 +1,4 @@
-import type { Currency } from "#/types";
+import type { Currency, MetaV2 } from "#/types";
 
 export type ListBanksPayload = {
   /** The country from which to obtain the list of supported banks. Accepted values are: `ghana`, `kenya`, `nigeria`, `south africa` */
@@ -25,6 +25,9 @@ export type ListBanksPayload = {
   currency?: Currency;
   /** A flag that returns Nigerian banks with their `nip institution` code. The returned value can be used in identifying institutions on NIP. */
   include_nip_sort_code?: boolean;
+  supports_transfers?: boolean;
+  available_for_direct_debit?: boolean;
+  is_deleted?: boolean;
 };
 
 type Banks = {
@@ -48,6 +51,7 @@ export type ListBanksResponsePayload = {
   status: boolean;
   message: string;
   data: Partial<Banks[]>;
+  meta?: MetaV2;
 };
 
 export type Country = {
@@ -60,6 +64,7 @@ export type Country = {
     currency: {
       type: string;
       data: Partial<string>;
+      supported_currencies: Partial<Record<string, unknown>>;
     };
     integration_feature: {
       type: string;
