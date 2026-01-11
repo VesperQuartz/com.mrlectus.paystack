@@ -113,23 +113,41 @@ export type UpdatePaymentPagePayload = {
 };
 
 export type CreatePaymentPageClient = {
-  /** Create a payment page on your integration */
+  /**
+   * Create a payment page on your integration
+   * @remarks This is a mutation.
+   */
   create: (payload: CreatePaymentPagePayload) => Promise<CreatePaymentPageResponsePayload>;
-  /** List payment pages available on your integration */
+  /**
+   * List payment pages available on your integration
+   * @remarks This is a query.
+   */
   list: (payload?: ListPaymentPagePayload) => Promise<ListPaymentPageResponsePayload>;
-  /** Get details of a payment page on your integration */
+  /**
+   * Get details of a payment page on your integration
+   * @remarks This is a query.
+   */
   fetch: (payload: {
     /** The page `ID` or `slug` you want to fetch */
     id_or_slug: string;
   }) => Promise<FetchPaymentPageResponsePayload>;
-  /** Update a payment page's details on your integration */
+  /**
+   * Update a payment page's details on your integration
+   * @remarks This is a mutation.
+   */
   update: (payload: UpdatePaymentPagePayload) => Promise<CreatePaymentPageResponsePayload>;
-  /** Check the availability of a slug for a payment page */
+  /**
+   * Check the availability of a slug for a payment page
+   * @remarks This is a query.
+   */
   checkSlugAvailability: (payload: {
     /** URL slug to be confirmed */
     slug: string;
   }) => Promise<{ status: boolean; message: string }>;
-  /** Add products to a payment page */
+  /**
+   * Add products to a payment page
+   * @remarks This is a mutation.
+   */
   addProduct: (payload: {
     /** Id of the payment page */
     id: number;

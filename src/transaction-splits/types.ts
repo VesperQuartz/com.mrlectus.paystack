@@ -170,16 +170,19 @@ export type UpdateSubAccountSplitPayload = {
 export type TransactionSplitsClient = {
   /**
    * Create a split payment on your integration
+   * @remarks This is a mutation.
    */
   create: (payload: CreateSplitPayload) => Promise<SplitResponsePayload>;
 
   /**
    * List the transaction splits available on your integration
+   * @remarks This is a query.
    */
   list: (payload: ListSplitPayload) => Promise<ListSplitResponsePayload>;
 
   /**
    * Get details of a split on your integration
+   * @remarks This is a query.
    */
 
   fetch: (payload: {
@@ -191,16 +194,19 @@ export type TransactionSplitsClient = {
 
   /**
    * Update a transaction split details on your integration
+   * @remarks This is a mutation.
    */
   update: (payload: UpdateSplitPayload) => Promise<SplitResponsePayload>;
 
   /**
    * Add a Subaccount to a Transaction Split, or update the share of an existing Subaccount in a Transaction Split
+   * @remarks This is a mutation.
    */
   updateSubaccount: (payload: UpdateSubAccountSplitPayload) => Promise<SplitResponsePayload>;
 
   /**
    * Remove a subaccount from a transaction split
+   * @remarks This is a mutation.
    */
   removeSubaccount: (
     payload: UpdateSubAccountSplitPayload,

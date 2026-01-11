@@ -282,16 +282,19 @@ export type CreateCustomerClient = {
    * > However, when creating a customer that would be assigned a Dedicated Virtual Account and your
    * > business category falls under Betting, Financial services, and General Service, then these
    * > parameters become compulsory.
+   * @remarks This is a mutation.
    */
   create: (payload: CreateCustomerPayload) => Promise<CreateCustomerResponsePayload>;
 
   /**
    * List customers available on your integration
+   * @remarks This is a query.
    */
   list: (payload?: ListCustomerPayload) => Promise<ListCustomerResponsePayload>;
 
   /**
    * Get details of a customer on your integration.
+   * @remarks This is a query.
    */
   fetch: (payload: {
     /**
@@ -302,11 +305,13 @@ export type CreateCustomerClient = {
 
   /**
    * Update a customer's details on your integration
+   * @remarks This is a mutation.
    */
   update: (payload: UpdateCustomerPayload) => Promise<UpdateCustomerResponsePayload>;
 
   /**
    * Validate a customer's identity
+   * @remarks This is a mutation.
    */
   validate: (payload: ValidateCustomerPayload) => Promise<{
     status: boolean;
@@ -315,11 +320,13 @@ export type CreateCustomerClient = {
 
   /**
    * Whitelist or blacklist a customer on your integration
+   * @remarks This is a mutation.
    */
   setRiskAction: (payload: SetRiskActionPayload) => Promise<SetRiskActionResponsePayload>;
 
   /**
    * Initiate a request to create a reusable authorization code for recurring transactions.
+   * @remarks This is a mutation.
    */
   initializeAuthorization: (
     payload: InitializeAuthorizationPayload,
@@ -327,6 +334,7 @@ export type CreateCustomerClient = {
 
   /**
    * Check the status of an authorization request.
+   * @remarks This is a query.
    */
   verifyAuthorization: (payload: {
     /**
@@ -337,6 +345,7 @@ export type CreateCustomerClient = {
 
   /**
    * Initialize the process of linking an account to a customer for Direct Debit transactions.
+   * @remarks This is a mutation.
    */
   initializeDirectDebit: (
     payload: InitializeDirectDebitPayload,
@@ -344,6 +353,7 @@ export type CreateCustomerClient = {
 
   /**
    * Trigger an activation charge on an inactive mandate on behalf of your customer.
+   * @remarks This is a mutation.
    */
   directDebitActivationCharge: (payload: {
     /**
@@ -361,6 +371,7 @@ export type CreateCustomerClient = {
 
   /**
    * Get the list of direct debit mandates associated with a customer.
+   * @remarks This is a query.
    */
   fetchMandateAuthorizations: (payload: {
     /**
@@ -371,6 +382,7 @@ export type CreateCustomerClient = {
 
   /**
    * Deactivate an authorization for any payment channel.
+   * @remarks This is a mutation.
    */
   deactivateAuthorization: (payload: {
     /**

@@ -214,46 +214,70 @@ export type FetchBankProvidersResponsePayload = {
 };
 
 export type CreateDedicatedAccountClient = {
-  /** Create a dedicated virtual account for an existing customer. */
+  /**
+   * Create a dedicated virtual account for an existing customer.
+   * @remarks This is a mutation.
+   */
   create: (
     payload: CreateDedicatedVirtualAccountPayload,
   ) => Promise<CreateDedicatedVirtualAccountResponsePayload>;
 
-  /** You can create a customer, validate the customer, and assign a DVA to the customer. */
+  /**
+   * You can create a customer, validate the customer, and assign a DVA to the customer.
+   * @remarks This is a mutation.
+   */
   assign: (payload: AssignDedicatedVirtualAccountPayload) => Promise<{
     status: boolean;
     message: string;
   }>;
 
-  /** List dedicated virtual accounts available on your integration. */
+  /**
+   * List dedicated virtual accounts available on your integration.
+   * @remarks This is a query.
+   */
   list: (
     payload: ListDedicatedVirtualAccountsPayload,
   ) => Promise<ListDedicatedVirtualAccountsResponsePayload>;
 
-  /** Get details of a dedicated virtual account on your integration. */
+  /**
+   * Get details of a dedicated virtual account on your integration.
+   * @remarks This is a query.
+   */
   fetch: (payload: {
     /** The ID of the dedicated virtual account */
     dedicated_account_id: number;
   }) => Promise<FetchDedicatedVirtualAccountResponsePayload>;
 
-  /** Requery a dedicated virtual account for new transactions. */
+  /**
+   * Requery a dedicated virtual account for new transactions.
+   * @remarks This is a query.
+   */
   requery: (payload: RequeryDedicatedAccountPayload) => Promise<{
     status: boolean;
     message: string;
   }>;
 
-  /** Deactivate a dedicated virtual account on your integration. */
+  /**
+   * Deactivate a dedicated virtual account on your integration.
+   * @remarks This is a mutation.
+   */
   deactivate: (payload: {
     /** The ID of the dedicated virtual account */
     dedicated_account_id: number;
   }) => Promise<DeactivateDedicatedAccountResponsePayload>;
 
-  /** Split a dedicated virtual account transaction with one or more accounts. */
+  /**
+   * Split a dedicated virtual account transaction with one or more accounts.
+   * @remarks This is a mutation.
+   */
   splitTransaction: (
     payload: SplitDedicatedAccountTransactionPayload,
   ) => Promise<SplitDedicatedAccountTransactionResponsePayload>;
 
-  /** If you've previously set up split payment for transactions on a dedicated virtual account, you can remove it with this endpoint */
+  /**
+   * If you've previously set up split payment for transactions on a dedicated virtual account, you can remove it with this endpoint
+   * @remarks This is a mutation.
+   */
   removeSplit: (payload: {
     /** Dedicated virtual account number */
     account_number: string;
@@ -262,6 +286,9 @@ export type CreateDedicatedAccountClient = {
     message: string;
   }>;
 
-  /** Get the list of available bank providers for dedicated virtual accounts. */
+  /**
+   * Get the list of available bank providers for dedicated virtual accounts.
+   * @remarks This is a query.
+   */
   listBankProviders: () => Promise<FetchBankProvidersResponsePayload>;
 };

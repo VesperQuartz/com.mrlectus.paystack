@@ -10,8 +10,8 @@ export const CurrencySchema = z.enum([
 ]);
 
 export const PaginationSchema = z.object({
-  perPage: z.optional(z.int()),
-  page: z.optional(z.int()),
+  perPage: z.optional(z.int().check(z.positive())),
+  page: z.optional(z.int().check(z.positive())),
   from: z.pipe(
     z.optional(z.coerce.date()),
     z.transform((date) => date?.toISOString()),

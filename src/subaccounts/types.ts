@@ -144,16 +144,23 @@ export type UpdateSubAccountPayload = {
 export type CreateSubaccountClient = {
   /**
    * Create a subaccount on your integration
+   * @remarks This is a mutation.
    */
-  create: (payload: CreateSubaccountPayload) => Promise<CreateSubaccountResponsePayload>;
+  create: (
+    payload: CreateSubaccountPayload,
+  ) => Promise<CreateSubaccountResponsePayload>;
 
   /**
    * List subaccounts available on your integration
+   * @remarks This is a query.
    */
-  list: (payload: ListSubAccountsPayload) => Promise<ListSubAccountsResponsePayload>;
+  list: (
+    payload: ListSubAccountsPayload,
+  ) => Promise<ListSubAccountsResponsePayload>;
 
   /**
    * Get details of a subaccount on your integration
+   * @remarks This is a query.
    */
   fetch: (payload: {
     /**
@@ -164,6 +171,9 @@ export type CreateSubaccountClient = {
 
   /**
    * Update a subaccount's details on your integration
+   * @remarks This is a mutation.
    */
-  update: (payload: UpdateSubAccountPayload) => Promise<FetchSubAccountResponsePayload>;
+  update: (
+    payload: UpdateSubAccountPayload,
+  ) => Promise<FetchSubAccountResponsePayload>;
 };

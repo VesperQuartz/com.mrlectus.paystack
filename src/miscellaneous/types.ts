@@ -83,12 +83,22 @@ export type ListCountriesResponsePayload = {
 };
 
 export type CreateMiscellaneousClient = {
-  /** Get a list of all supported banks and their properties */
+  /**
+   * Get a list of all supported banks and their properties
+   * @remarks This is a query.
+   */
   listBanks: (payload: ListBanksPayload) => Promise<ListBanksResponsePayload>;
-  /** Gets a list of countries that Paystack currently supports */
+  /**
+   * Gets a list of countries that Paystack currently supports
+   * @remarks This is a query.
+   */
   listCountries: () => Promise<ListCountriesResponsePayload>;
-  /** Get a list of states for a country for address verification */
+  /**
+   * Get a list of states for a country for address verification
+   * @remarks This is a query.
+   */
   listStates: (payload: {
+    /** The country code of the states to list. It is gotten after the charge request. */
     country: number;
   }) => Promise<{
     status: boolean;

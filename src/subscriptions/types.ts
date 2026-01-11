@@ -110,16 +110,19 @@ export type FetchSubscriptionResponsePayload = {
 export type CreateSubscriptionClient = {
   /**
    * Create a subscription on your integration
+   * @remarks This is a mutation.
    */
   create: (payload: CreateSubscriptionPayload) => Promise<CreateSubscriptionResponsePayload>;
 
   /**
    * List subscriptions available on your integration
+   * @remarks This is a query.
    */
   list: (payload?: ListSubscriptionPayload) => Promise<ListSubscriptionResponsePayload>;
 
   /**
    * Get details of a subscription on your integration
+   * @remarks This is a query.
    */
   fetch: (payload: {
     /**
@@ -130,6 +133,7 @@ export type CreateSubscriptionClient = {
 
   /**
    * Enable a subscription on your integration
+   * @remarks This is a mutation.
    */
   enable: (payload: {
     /**
@@ -147,6 +151,7 @@ export type CreateSubscriptionClient = {
 
   /**
    * Disable a subscription on your integration
+   * @remarks This is a mutation.
    */
   disable: (payload: {
     /**
@@ -164,6 +169,7 @@ export type CreateSubscriptionClient = {
 
   /**
    * Generate a link for relevant steps an subscription update
+   * @remarks This is a mutation.
    */
   generateUpdatelink: (payload: {
     /**
@@ -180,6 +186,7 @@ export type CreateSubscriptionClient = {
 
   /**
    * Send an email for relevant steps an subscription update
+   * @remarks This is a mutation.
    */
   sendUpdatelink: (payload: {
     /**

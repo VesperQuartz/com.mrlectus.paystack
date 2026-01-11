@@ -138,11 +138,15 @@ export type CreateTransferClient = {
    * Send money to your customers.
    *
    * Status of transfer object returned will be `pending` if OTP is disabled. In the event that an OTP is required, status will read `otp`.
+   * @remarks This is a mutation.
    */
   initiate: (
     payload: InitiateTransferPayload,
   ) => Promise<InitiateTransferResponsePayload>;
-  /** Finalize an initiated transfer */
+  /**
+   * Finalize an initiated transfer
+   * @remarks This is a mutation.
+   */
   finalize: (payload: {
     /** The transfer code you want to finalize */
     transfer_code: string;
@@ -152,20 +156,30 @@ export type CreateTransferClient = {
   /**
    * Batch multiple transfers in a single request.
    * You need to disable the Transfers OTP requirement to use this endpoint.
+   * @remarks This is a mutation.
    */
   initiateBulk: (
     payload: InitiateBulkTransferPayload,
   ) => Promise<InitiateBulkTransferResponsePayload>;
-  /** List the transfers made on your integration. */
+  /**
+   * List the transfers made on your integration.
+   * @remarks This is a query.
+   */
   list: (
     payload: ListTransfersPayload,
   ) => Promise<ListTransfersResponsePayload>;
-  /** Get details of a transfer on your integration. */
+  /**
+   * Get details of a transfer on your integration.
+   * @remarks This is a query.
+   */
   fetch: (payload: {
     /** The transfer `ID` or `code` you want to fetch */
     id_or_code: string;
   }) => Promise<FetchTransferResponsePayload>;
-  /** Verify the status of a transfer on your integration. */
+  /**
+   * Verify the status of a transfer on your integration.
+   * @remarks This is a query.
+   */
   verify: (payload: {
     /** Verify the status of a transfer on your integration. */
     reference: string;

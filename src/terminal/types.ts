@@ -113,27 +113,51 @@ export type UpdateTerminalPayload = {
 };
 
 export type CreateTerminalClient = {
-  /** Send an event from your application to the Paystack Terminal */
+  /**
+   * Send an event from your application to the Paystack Terminal
+   * @remarks This is a mutation.
+   */
   sendEvent: (payload: SendEventPayload) => Promise<SendEventResponsePayload>;
-  /** Check the status of an event sent to the Terminal */
+  /**
+   * Check the status of an event sent to the Terminal
+   * @remarks This is a query.
+   */
   fetchEventStatus: (payload: FetchEventStatusPayload) => Promise<FetchEventStatusResponsePayload>;
-  /** Check the availiability of a Terminal before sending an event to it */
+  /**
+   * Check the availiability of a Terminal before sending an event to it
+   * @remarks This is a query.
+   */
   fetchStatus: (payload: { terminal_id: string }) => Promise<FetchStatusResponsePayload>;
-  /** List the Terminals available on your integration */
+  /**
+   * List the Terminals available on your integration
+   * @remarks This is a query.
+   */
   list: (payload: ListTerminalPayload) => Promise<ListTerminalResponsePayload>;
-  /** Get the details of a Terminal */
+  /**
+   * Get the details of a Terminal
+   * @remarks This is a query.
+   */
   fetch: (payload: { terminal_id: string }) => Promise<FetchTerminalResponsePayload>;
-  /** Update the details of a Terminal */
+  /**
+   * Update the details of a Terminal
+   * @remarks This is a mutation.
+   */
   update: (payload: UpdateTerminalPayload) => Promise<{
     status: boolean;
     message: string;
   }>;
-  /** Activate your debug device by linking it to your integration */
+  /**
+   * Activate your debug device by linking it to your integration
+   * @remarks This is a mutation.
+   */
   commission: (payload: { serial_number: string }) => Promise<{
     status: boolean;
     message: string;
   }>;
-  /** Unlink your debug device from your integration */
+  /**
+   * Unlink your debug device from your integration
+   * @remarks This is a mutation.
+   */
   decommission: (payload: { serial_number: string }) => Promise<{
     status: boolean;
     message: string;

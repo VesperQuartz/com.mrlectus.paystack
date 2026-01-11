@@ -136,23 +136,41 @@ export type ResolveDisputeResponsePayload = {
 };
 
 export type CreateDisputeClient = {
-  /** List disputes filed against you */
+  /**
+   * List disputes filed against you
+   * @remarks This is a query.
+   */
   list: (payload?: ListDisputesPayload) => Promise<ListDisputesResponsePayload>;
-  /** Get more details about a dispute. */
+  /**
+   * Get more details about a dispute.
+   * @remarks This is a query.
+   */
   fetch: (payload: { id: string }) => Promise<FetchDisputeResponsePayload>;
-  /** This endpoint retrieves the disputes for a particular transaction */
+  /**
+   * This endpoint retrieves the disputes for a particular transaction
+   * @remarks This is a query.
+   */
   listTranaction: (payload: {
     id: string;
   }) => Promise<FetchDisputeResponsePayload>;
-  /** Update details of a dispute on your integration */
+  /**
+   * Update details of a dispute on your integration
+   * @remarks This is a mutation.
+   */
   update: (
     payload: UpdateDisputePayload,
   ) => Promise<ListDisputesResponsePayload>;
-  /** Provide evidence for a dispute */
+  /**
+   * Provide evidence for a dispute
+   * @remarks This is a mutation.
+   */
   addEvidence: (
     payload: AddEvidencePayload,
   ) => Promise<AddEvidenceResponsePayload>;
-  /** This endpoint retrieves disputes for a particular transaction */
+  /**
+   * This endpoint retrieves disputes for a particular transaction
+   * @remarks This is a query.
+   */
   getUploadUrl: (payload: {
     /** Dispute ID */
     id: string;
@@ -166,11 +184,17 @@ export type CreateDisputeClient = {
       filename: string;
     };
   }>;
-  /** Resolve a dispute on your integration */
+  /**
+   * Resolve a dispute on your integration
+   * @remarks This is a mutation.
+   */
   resolve: (
     payload: ResolveDisputePayload,
   ) => Promise<ResolveDisputeResponsePayload>;
-  /** Export disputes available on your integration */
+  /**
+   * Export disputes available on your integration
+   * @remarks This is a mutation.
+   */
   exports: (payload: ListDisputesPayload) => Promise<{
     status: boolean;
     message: string;

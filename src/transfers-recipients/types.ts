@@ -98,28 +98,46 @@ export type UpdateTransferRecipientPayload = {
 };
 
 export type CreateTransferRecipientClient = {
-  /** Creates a new recipient. A duplicate account number will lead to the retrieval of the existing record. */
+  /**
+   * Creates a new recipient. A duplicate account number will lead to the retrieval of the existing record.
+   * @remarks This is a mutation.
+   */
   create: (
     payload: CreateTransferRecipientPayload,
   ) => Promise<CreateTransferRecipientResponsePayload>;
-  /** Create multiple transfer recipients in batches. A duplicate account number will lead to the retrieval of the existing record. */
+  /**
+   * Create multiple transfer recipients in batches. A duplicate account number will lead to the retrieval of the existing record.
+   * @remarks This is a mutation.
+   */
   bulkCreate: (
     payload: BulkCreateTransferRecipientPayload,
   ) => Promise<BulkCreateTransferRecipientResponsePayload>;
-  /** List transfer recipients available on your integration */
+  /**
+   * List transfer recipients available on your integration
+   * @remarks This is a query.
+   */
   list: (
     payload?: ListTransferRecipientsPayload,
   ) => Promise<ListTransferRecipientsResponsePayload>;
-  /** Fetch the details of a transfer recipient */
+  /**
+   * Fetch the details of a transfer recipient
+   * @remarks This is a query.
+   */
   fetch: (payload: {
     /** An ID or code for the recipient whose details you want to receive. */
     id_or_code: string;
   }) => Promise<CreateTransferRecipientResponsePayload>;
-  /** Update transfer recipients available on your integration */
+  /**
+   * Update transfer recipients available on your integration
+   * @remarks This is a mutation.
+   */
   update: (
     payload: UpdateTransferRecipientPayload,
   ) => Promise<CreateTransferRecipientResponsePayload>;
-  /** Delete a transfer recipient (sets the transfer recipient to inactive) */
+  /**
+   * Delete a transfer recipient (sets the transfer recipient to inactive)
+   * @remarks This is a mutation.
+   */
   delete: (payload: {
     /** An ID or code for the recipient who you want to delete. */
     id_or_code: string;

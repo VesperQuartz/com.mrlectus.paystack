@@ -129,15 +129,31 @@ export type UpdateProductResponsePayload = {
 };
 
 export type CreateProductClient = {
-  /** Create a product on your integration */
-  create: (payload: CreateProductPayload) => Promise<CreateProductResponsePayload>;
-  /** List products available on your integration */
+  /**
+   * Create a product on your integration
+   * @remarks This is a mutation.
+   */
+  create: (
+    payload: CreateProductPayload,
+  ) => Promise<CreateProductResponsePayload>;
+  /**
+   * List products available on your integration
+   * @remarks This is a query.
+   */
   list: (payload?: ListProductPayload) => Promise<ListProductResponsePayload>;
-  /** Get details of a product on your integration */
+  /**
+   * Get details of a product on your integration
+   * @remarks This is a query.
+   */
   fetch: (payload: {
     /** The product ID you want to fetch */
     id: string;
   }) => Promise<FetchProductResponsePayload>;
-  /** Update a product's details on your integration */
-  update: (payload: UpdateProductPayload) => Promise<UpdateProductResponsePayload>;
+  /**
+   * Update a product's details on your integration
+   * @remarks This is a mutation.
+   */
+  update: (
+    payload: UpdateProductPayload,
+  ) => Promise<UpdateProductResponsePayload>;
 };

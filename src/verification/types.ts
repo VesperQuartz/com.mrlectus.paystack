@@ -33,7 +33,10 @@ export type ValidateAccountResponsePayload = {
 };
 
 export type CreateVerificationClient = {
-  /** Confirm an account belongs to the right customer */
+  /**
+   * Confirm an account belongs to the right customer
+   * @remarks This is a query.
+   */
   resolveAccount: (payload: {
     /** Account Number */
     account_number: string;
@@ -47,11 +50,17 @@ export type CreateVerificationClient = {
       account_name: string;
     };
   }>;
-  /** Confirm the authenticity of a customer's account number before sending money */
+  /**
+   * Confirm the authenticity of a customer's account number before sending money
+   * @remarks This is a mutation.
+   */
   validateAccount: (
     payload: ValidateAccountPayload,
   ) => Promise<ValidateAccountResponsePayload>;
-  /** Get more information about a customer's card */
+  /**
+   * Get more information about a customer's card
+   * @remarks This is a query.
+   */
   resolveCardBIN: (payload: {
     /** First 6 characters of card */
     bin: string;

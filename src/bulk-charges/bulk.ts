@@ -27,7 +27,7 @@ export const createBulkCharges = (
     return response.json<InitiateBulkChargeResponsePayload>();
   };
 
-  const listBatches = async (payload: ListBulkChargeBatchesPayload) => {
+  const listBatches = async (payload: ListBulkChargeBatchesPayload = {}) => {
     const data = ListBulkChargeBatchesPayloadSchema.parse(payload);
     const response = await instance.get("bulkcharge", {
       searchParams: data,

@@ -118,18 +118,21 @@ export type FetchChargesBatchResponsePayload = {
 export type CreateBulkChargeClient = {
   /**
    * Send an array of objects with authorization codes and amount, using the supported currency format, so we can process transactions as a batch.
+   * @remarks This is a mutation.
    */
   initiate: (
     payload: InitiateBulkChargePayload,
   ) => Promise<InitiateBulkChargeResponsePayload>;
   /**
    * This lists all bulk charge batches created by the integration. Statuses can be `active`, `paused`, or `complete`
+   * @remarks This is a query.
    */
   listBatches: (
     payload: ListBulkChargeBatchesPayload,
   ) => Promise<ListBulkChargeBatchesResponsePayload>;
   /**
    * This endpoint retrieves a specific batch code. It also returns useful information on its progress by way of the `total_charges` and `pending_charges` attributes.
+   * @remarks This is a query.
    */
   fetch: (payload: {
     /** An ID or code for the batch whose details you want to retrieve. */
@@ -137,12 +140,14 @@ export type CreateBulkChargeClient = {
   }) => Promise<FetchBulkChargeBatchResponsePayload>;
   /**
    * This endpoint retrieves the charges associated with a specified batch code. Pagination parameters are available. You can also filter by status. Charge statuses can be `pending`, `success` or `failed`.
+   * @remarks This is a query.
    */
   fetchBatch: (
     payload: FetchChargesBatchPayload,
   ) => Promise<FetchChargesBatchResponsePayload>;
   /**
    * Use this endpoint to pause processing a batch
+   * @remarks This is a mutation.
    */
   pauseBatch: (payload: {
     /** The batch code for the bulk charge you want to pause. */
@@ -153,6 +158,7 @@ export type CreateBulkChargeClient = {
   }>;
   /**
    * Use this endpoint to resume processing a batch
+   * @remarks This is a mutation.
    */
   resumeBatch: (payload: {
     /** The batch code for the bulk charge you want to resume. */

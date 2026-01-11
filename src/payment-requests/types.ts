@@ -147,37 +147,70 @@ export type UpdatePaymentRequestPayload = CreatePaymentRequestPayload & {
 };
 
 export type CreatePaymentRequestClient = {
-  /** Create a payment request for a transaction on your integration */
-  create: (payload: CreatePaymentRequestPayload) => Promise<CreatePaymentRequestResponsePayload>;
-  /** List payment requests available on your integration */
-  list: (payload: ListPaymentRequestPayload) => Promise<ListPaymentRequestResponsePayload>;
-  /** Get details of a payment request on your integration */
+  /**
+   * Create a payment request for a transaction on your integration
+   * @remarks This is a mutation.
+   */
+  create: (
+    payload: CreatePaymentRequestPayload,
+  ) => Promise<CreatePaymentRequestResponsePayload>;
+  /**
+   * List payment requests available on your integration
+   * @remarks This is a query.
+   */
+  list: (
+    payload: ListPaymentRequestPayload,
+  ) => Promise<ListPaymentRequestResponsePayload>;
+  /**
+   * Get details of a payment request on your integration
+   * @remarks This is a query.
+   */
   fetch: (payload: {
     /** The payment request `ID` or `code` you want to fetch */
     id_or_code: string;
   }) => Promise<FetchPaymentRequestResponsePayload>;
-  /** Verify details of a payment request on your integration */
+  /**
+   * Verify details of a payment request on your integration
+   * @remarks This is a query.
+   */
   verify: (payload: {
     /** Payment Request code */
     code: string;
   }) => Promise<VerifyPaymentRequestResponsePayload>;
-  /** Send notification of a payment request to your customers */
+  /**
+   * Send notification of a payment request to your customers
+   * @remarks This is a mutation.
+   */
   sendNotification: (payload: {
     /** Payment Request code */
     code: string;
   }) => Promise<{ status: boolean; message: string }>;
-  /** Get payment requests metric */
+  /**
+   * Get payment requests metric
+   * @remarks This is a query.
+   */
   totals: () => Promise<PaymentReuestTotalResponsePayload>;
-  /** Finalize a draft payment request */
+  /**
+   * Finalize a draft payment request
+   * @remarks This is a mutation.
+   */
   finalize: (payload: {
     /** Payment Request code */
     code: string;
     /** Indicates whether Paystack sends an email notification to customer. Defaults to `true` */
     send_notification?: boolean;
   }) => Promise<CreatePaymentRequestResponsePayload>;
-  /** Update a payment request's details on your integration */
-  update: (payload: UpdatePaymentRequestPayload) => Promise<CreatePaymentRequestResponsePayload>;
-  /** Used to archive a payment request. A payment request will no longer be fetched on list or returned on verify */
+  /**
+   * Update a payment request's details on your integration
+   * @remarks This is a mutation.
+   */
+  update: (
+    payload: UpdatePaymentRequestPayload,
+  ) => Promise<CreatePaymentRequestResponsePayload>;
+  /**
+   * Used to archive a payment request. A payment request will no longer be fetched on list or returned on verify
+   * @remarks This is a mutation.
+   */
   archive: (payload: {
     /** Payment Request code */
     code: string;

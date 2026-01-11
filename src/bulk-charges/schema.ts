@@ -3,6 +3,7 @@ import type {
   FetchChargesBatchPayload,
   InitiateBulkChargePayload,
 } from "#/bulk-charges/types";
+import { PaginationSchema } from "#/schemas";
 
 export const InitiateBulkChargePayloadSchema = z.array(
   z.object({
@@ -12,18 +13,7 @@ export const InitiateBulkChargePayloadSchema = z.array(
   }),
 ) satisfies z.ZodMiniType<InitiateBulkChargePayload>;
 
-export const ListBulkChargeBatchesPayloadSchema = z.object({
-  perPage: z.optional(z.int()),
-  page: z.optional(z.int()),
-  from: z.pipe(
-    z.optional(z.coerce.date()),
-    z.transform((date) => date?.toISOString()),
-  ),
-  to: z.pipe(
-    z.optional(z.coerce.date()),
-    z.transform((date) => date?.toISOString()),
-  ),
-});
+export const ListBulkChargeBatchesPayloadSchema = PaginationSchema;
 
 export const FetchChargesBatchPayloadSchema = z.extend(
   ListBulkChargeBatchesPayloadSchema,

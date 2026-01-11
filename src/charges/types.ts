@@ -119,43 +119,64 @@ export type SubmitAddressPayload = {
 };
 
 export type CreateChargeClient = {
-  /** Initiate a payment by integrating the payment channel of your choice. */
+  /**
+   * Initiate a payment by integrating the payment channel of your choice.
+   * @remarks This is a mutation.
+   */
   create: (
     payload: CreateChargePayload,
   ) => Promise<CreateChargeResponsePayload>;
-  /** Submit PIN to continue a charge */
+  /**
+   * Submit PIN to continue a charge
+   * @remarks This is a mutation.
+   */
   submitPin: (payload: {
     /** Reference for transaction that requested pin */
     reference: string;
     /** PIN submitted by user */
     pin: string;
   }) => Promise<SubmitPinResponsePayload>;
-  /** Submit OTP to continue a charge */
+  /**
+   * Submit OTP to continue a charge
+   * @remarks This is a mutation.
+   */
   submitOtp: (payload: {
     /** Reference for ongoing transaction */
     reference: string;
     /** OTP submitted by user */
     otp: string;
   }) => Promise<SubmitPinResponsePayload>;
-  /** Submit Phone when requested */
+  /**
+   * Submit Phone when requested
+   * @remarks This is a mutation.
+   */
   submitPhone: (payload: {
     /** Reference for ongoing transaction */
     reference: string;
     /** Phone submitted by user */
     phone: string;
   }) => Promise<SubmitPinResponsePayload>;
-  /** Submit Birthday when requested */
+  /**
+   * Submit Birthday when requested
+   * @remarks This is a mutation.
+   */
   submitBirthday: (payload: {
     /** Reference for ongoing transaction */
     reference: string;
     /** Birthday submitted by user e.g. 2016-09-21 */
     birthday: string;
   }) => Promise<SubmitPinResponsePayload>;
-  /** Submit address to continue a charge */
+  /**
+   * Submit address to continue a charge
+   * @remarks This is a mutation.
+   */
   submitAddress: (
     payload: SubmitAddressPayload,
   ) => Promise<SubmitPinResponsePayload>;
-  /** When you get pending as a charge status or if there was an exception when calling any of the /charge endpoints, wait 10 seconds or more, then make a check to see if its status has changed. Don't call too early as you may get a lot more pending than you should. */
+  /**
+   * When you get pending as a charge status or if there was an exception when calling any of the /charge endpoints, wait 10 seconds or more, then make a check to see if its status has changed. Don't call too early as you may get a lot more pending than you should.
+   * @remarks This is a query.
+   */
   checkPending: (payload: {
     /** The reference to check */
     reference: string;

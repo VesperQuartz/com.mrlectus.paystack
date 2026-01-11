@@ -1,6 +1,7 @@
 export type CreateIntegrationClient = {
   /**
    * Fetch the payment session timeout on your integration
+   * @remarks This is a query.
    */
   fetchTimeout: () => Promise<{
     status: boolean;
@@ -11,6 +12,7 @@ export type CreateIntegrationClient = {
   }>;
   /**
    * Update the payment session timeout on your integration
+   * @remarks This is a mutation.
    */
   updateTimeout: (payload: {
     /** Time before stopping session (in seconds). Set to 0 to cancel session timeouts */

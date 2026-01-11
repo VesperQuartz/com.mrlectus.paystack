@@ -121,16 +121,19 @@ export type AddSplitCodeResponsePayload = {
 export type CreateVirtualTerminalClient = {
   /**
    * Create a Virtual Terminal on your integration
+   * @remarks This is a mutation.
    */
   create: (payload: CreateVirtualTerminalPayload) => Promise<CreateVirtualTerminalResponsePayload>;
 
   /**
    * List the Virtual Terminals available on your integration
+   * @remarks This is a query.
    */
   list: (payload: ListTerminalPayload) => Promise<ListVirtualTerminalResponsePayload>;
 
   /**
    * Fetch a Virtual Terminal on your integration
+   * @remarks This is a query.
    */
   fetch: (payload: {
     /**
@@ -141,6 +144,7 @@ export type CreateVirtualTerminalClient = {
 
   /**
    * Update a Virtual Terminal on your integration
+   * @remarks This is a mutation.
    */
   update: (payload: {
     /**
@@ -158,6 +162,7 @@ export type CreateVirtualTerminalClient = {
 
   /**
    * Deactivate a Virtual Terminal on your integration
+   * @remarks This is a mutation.
    */
   deactivate: (payload: {
     /**
@@ -171,6 +176,7 @@ export type CreateVirtualTerminalClient = {
 
   /**
    * Add a destination (WhatsApp number) to a Virtual Terminal on your integration
+   * @remarks This is a mutation.
    */
   assignDestination: (
     payload: AssignDestinationPayload,
@@ -178,6 +184,7 @@ export type CreateVirtualTerminalClient = {
 
   /**
    * Unassign a destination (WhatsApp Number) summary of transactions from a Virtual Terminal on your integration
+   * @remarks This is a mutation.
    */
   unassignDestination: (payload: UnAssignDestinationPayload) => Promise<{
     status: boolean;
@@ -186,11 +193,13 @@ export type CreateVirtualTerminalClient = {
 
   /**
    * Add a split code to a Virtual Terminal on your integration
+   * @remarks This is a mutation.
    */
   addSplitCode: (payload: AddSplitCodePayload) => Promise<AddSplitCodeResponsePayload>;
 
   /**
    * Remove a split code from a Virtual Terminal on your integration
+   * @remarks This is a mutation.
    */
   removeSplitCode: (payload: AddSplitCodePayload) => Promise<{
     status: boolean;

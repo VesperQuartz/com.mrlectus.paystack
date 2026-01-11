@@ -438,6 +438,7 @@ export type PartialDebitResponsePayload = {
 export type TransactionsClient = {
   /**
    * Initialize a transaction from your backend
+   * @remarks This is a mutation.
    */
   initialize: (payload: InitializePayload) => Promise<InitializePayloadResponse>;
 
@@ -447,6 +448,7 @@ export type TransactionsClient = {
    * **IMPORTANT: Transaction ID data type**
    * If you plan to store or make use of the the transaction ID, you should represent it as a unsigned 64-bit integer. To learn more, check out our changelog.
    * @see https://paystack.com/docs/changelog/api/#june-2022
+   * @remarks This is a query.
    */
   verify: (payload: VerifyPayload) => Promise<VerifyResponsePayload>;
 
@@ -456,6 +458,7 @@ export type TransactionsClient = {
    * **IMPORTANT: Transaction ID data type**
    * If you plan to store or make use of the the transaction ID, you should represent it as a unsigned 64-bit integer. To learn more, check out our changelog.
    * @see https://paystack.com/docs/changelog/api/#june-2022
+   * @remarks This is a query.
    */
   list: (payload?: ListPayload) => Promise<ListResponsePayload>;
 
@@ -465,6 +468,7 @@ export type TransactionsClient = {
    * **IMPORTANT: Transaction ID data type**
    * If you plan to store or make use of the the transaction ID, you should represent it as a unsigned 64-bit integer. To learn more, check out our changelog.
    * @see https://paystack.com/docs/changelog/api/#june-2022
+   * @remarks This is a query.
    */
 
   fetch: (payload: {
@@ -476,11 +480,13 @@ export type TransactionsClient = {
 
   /**
    * All authorizations marked as reusable can be charged with this endpoint whenever you need to receive payments
+   * @remarks This is a mutation.
    */
   chargeAuthorization: (payload: ChargeAuthorizationPayload) => Promise<VerifyResponsePayload>;
 
   /**
    * View the timeline of a transaction
+   * @remarks This is a query.
    */
   viewTimeline: (payload: {
     /**
@@ -491,6 +497,7 @@ export type TransactionsClient = {
 
   /**
    * Total amount received on your account
+   * @remarks This is a query.
    */
   transactionTotals: (
     payload?: TransactionTotalPayload,
@@ -498,6 +505,7 @@ export type TransactionsClient = {
 
   /**
    * Export a list of transactions carried out on your integration
+   * @remarks This is a mutation.
    */
   exportTransaction: (
     payload?: ExportTransactionPayload,
@@ -505,6 +513,7 @@ export type TransactionsClient = {
 
   /**
    * Retrieve part of a payment from a customer
+   * @remarks This is a mutation.
    */
   partialDebit: (payload: PartialDebitPayload) => Promise<PartialDebitResponsePayload>;
 };

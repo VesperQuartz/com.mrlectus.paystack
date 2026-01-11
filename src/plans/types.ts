@@ -137,16 +137,19 @@ export type UpdatePlanPayload = {
 export type CreatePlanClient = {
   /**
    * Create a plan on your integration
+   * @remarks This is a mutation.
    */
   create: (payload: CreatePlanPayload) => Promise<CreatePlanResponsePayload>;
 
   /**
    * List plans available on your integration
+   * @remarks This is a query.
    */
   list: (payload: ListPlansPayload) => Promise<ListPlansResponsePayload>;
 
   /**
    * Get details of a plan on your integration
+   * @remarks This is a query.
    */
   fetch: (payload: {
     /**
@@ -157,6 +160,7 @@ export type CreatePlanClient = {
 
   /**
    * Update a plan's details on your integration
+   * @remarks This is a mutation.
    */
   update: (payload: UpdatePlanPayload) => Promise<{
     status: boolean;
