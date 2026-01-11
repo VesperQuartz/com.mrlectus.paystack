@@ -29,7 +29,7 @@ export const AddEvidencePayloadSchema = z.object({
   id: z.string(),
   customer_email: z.email(),
   customer_name: z.string(),
-  customer_phone: z.string().check(z.length(10)),
+  customer_phone: z.string().check(z.length(11)),
   service_details: z.string(),
   delivery_address: z.optional(z.string()),
   delivery_date: z.pipe(
