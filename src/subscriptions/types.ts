@@ -169,7 +169,7 @@ export type CreateSubscriptionClient = {
 
   /**
    * Generate a link for relevant steps an subscription update
-   * @remarks This is a mutation.
+   * @remarks This is a query.
    */
   generateUpdatelink: (payload: {
     /**

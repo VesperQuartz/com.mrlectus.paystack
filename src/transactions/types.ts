@@ -505,7 +505,7 @@ export type TransactionsClient = {
 
   /**
    * Export a list of transactions carried out on your integration
-   * @remarks This is a mutation.
+   * @remarks This is a query.
    */
   exportTransaction: (
     payload?: ExportTransactionPayload,
