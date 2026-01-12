@@ -23,5 +23,5 @@ export const InitiateBulkTransferPayloadSchema = z.object({
 }) satisfies z.ZodMiniType<InitiateBulkTransferPayload>;
 
 export const ListTransfersPayloadSchema = z.extend(PaginationSchema, {
-  recipient: z.number(),
+  recipient: z.optional(z.number()),
 }) satisfies z.ZodMiniType<ListTransfersPayload>;

@@ -87,7 +87,7 @@ export type ListTransfersPayload = {
    */
   page?: number;
   /** Filter by the recipient ID */
-  recipient: number;
+  recipient?: number;
   /**
    * A timestamp from which to start listing transaction e.g. `2016-09-24T00:00:05.000Z`, `2016-09-21`
    */
