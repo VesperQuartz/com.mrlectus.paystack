@@ -19,6 +19,8 @@ export type InitiateTransferPayload = {
   currency?: Currency;
   /** A unique identifier required in Kenya for MPESA Paybill and Till transfers */
   account_reference?: string;
+  /** Used for passing additional details for your transfer processes */
+  metadata?: Record<string, unknown>;
 };
 
 type Transfer = {

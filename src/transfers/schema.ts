@@ -14,6 +14,7 @@ export const InitiateTransferPayloadSchema = z.object({
   reason: z.optional(z.string()),
   currency: z.optional(CurrencySchema),
   account_reference: z.optional(z.string()),
+  metadata: z.optional(z.record(z.string(), z.unknown())),
 }) satisfies z.ZodMiniType<InitiateTransferPayload>;
 
 export const InitiateBulkTransferPayloadSchema = z.object({
