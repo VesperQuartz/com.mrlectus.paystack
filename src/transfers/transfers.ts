@@ -50,7 +50,7 @@ export const createTransfers = (instance: KyInstance): CreateTransferClient => {
       .json<InitiateBulkTransferResponsePayload>();
   };
 
-  const list = async (payload: ListTransfersPayload) => {
+  const list = async (payload: ListTransfersPayload = {}) => {
     const data = ListTransfersPayloadSchema.parse(payload);
     return await instance
       .get("transfer", {
