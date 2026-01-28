@@ -92,7 +92,7 @@ The SDK covers the entire Paystack API surface area:
 - **Terminal & Virtual Terminal**: Manage POS and virtual terminal payments.
 - **Verification**: Perform KYC/identity verification (BVN, Account Match, etc).
 - **Miscellaneous**: List banks, countries, and states.
-- **Webhooks**: Schema validation and type-safe handling of webhook events.
+- **Webhooks**: Type-safe handling of webhook events using `WebhookEventData`.
 
 ## Examples
 
@@ -185,13 +185,13 @@ try {
 
 ## Handling Webhooks
 
-The SDK provides a discriminated union type `WebhookEventData` and a Zod schema `EventDataSchema` for all supported webhook events. This ensures robust type safety when processing events.
+The SDK provides a discriminated union type `WebhookEventData` for all supported webhook events. This ensures robust type safety when processing events.
 
 ### Using `switch` Statement (Express.js Example)
 
 ```typescript
 import express from "express";
-import { EventDataSchema } from "@mrlectus/paystack";
+import { WebhookEventData } from "@mrlectus/paystack";
 
 const app = express();
 
@@ -201,25 +201,20 @@ app.post("/webhook", express.json(), (req, res) => {
   // You should verify this signature using your secret key.
   const signature = req.headers["x-paystack-signature"] as string;
   
-  // 2. Parse and validate the event body
-  try {
-    const event = EventDataSchema.parse(req.body);
+  // 2. Cast the body to WebhookEventData
+  const event = req.body as WebhookEventData;
 
-    switch (event.event) {
-      case "charge.success":
-        // TypeScript automatically narrows 'event.data' to TransactionSuccessSchema
-        console.log("Payment Reference:", event.data.reference);
-        break;
-      case "transfer.success":
-        // TypeScript knows this is a Transfer event
-        console.log("Transfer Recipient:", event.data.recipient);
-        break;
-      default:
-        console.log("Unhandled event:", event.event);
-    }
-  } catch (error) {
-    console.error("Invalid webhook body", error);
-    return res.sendStatus(400);
+  switch (event.event) {
+    case "charge.success":
+      // TypeScript automatically narrows 'event.data' to the correct payload
+      console.log("Payment Reference:", event.data.reference);
+      break;
+    case "transfer.success":
+      // TypeScript knows this is a Transfer event
+      console.log("Transfer Recipient:", event.data.recipient);
+      break;
+    default:
+      console.log("Unhandled event:", event.event);
   }
 
   res.sendStatus(200);
@@ -232,25 +227,21 @@ If you prefer a functional approach with pattern matching, you can use [ts-patte
 
 ```typescript
 import { match } from "ts-pattern";
-import { EventDataSchema } from "@mrlectus/paystack";
+import { WebhookEventData } from "@mrlectus/paystack";
 
 // ... inside your express route handler
-try {
-  const event = EventDataSchema.parse(req.body);
+const event = req.body as WebhookEventData;
 
-  match(event)
-    .with({ event: "charge.success" }, (evt) => {
-      console.log("Success:", evt.data.amount);
-    })
-    .with({ event: "refund.processed" }, (evt) => {
-      console.log("Refund:", evt.data.refund_reference);
-    })
-    .otherwise((evt) => {
-      console.log("Ignored event:", evt.event);
-    });
-} catch (e) {
-  // handle validation error
-}
+match(event)
+  .with({ event: "charge.success" }, (evt) => {
+    console.log("Success:", evt.data.amount);
+  })
+  .with({ event: "refund.processed" }, (evt) => {
+    console.log("Refund:", evt.data.refund_reference);
+  })
+  .otherwise((evt) => {
+    console.log("Ignored event:", evt.event);
+  });
 ```
 
 ## Runtime Schema Validation
