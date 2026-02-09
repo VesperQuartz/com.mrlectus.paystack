@@ -9,7 +9,9 @@ import type {
 
 export const CreateDedicatedVirtualAccountSchemaPayload = z.object({
   customer: z.string(),
-  preferred_bank: z.optional(z.union([z.string(), z.enum(["wema-bank", "titan-paystack"])])),
+  preferred_bank: z.optional(
+    z.union([z.string(), z.enum(["wema-bank", "titan-paystack"])]),
+  ),
   subaccount: z.optional(z.string()),
   split_code: z.optional(z.string()),
   first_name: z.optional(z.string()),
@@ -22,7 +24,10 @@ export const AssignDedicatedVirtualAccountSchemaPayload = z.object({
   first_name: z.string(),
   last_name: z.string(),
   phone: z.string(),
-  preferred_bank: z.union([z.string(), z.enum(["wema-bank", "titan-paystack"])]),
+  preferred_bank: z.union([
+    z.string(),
+    z.enum(["wema-bank", "titan-paystack"]),
+  ]),
   country: z.union([z.string(), z.enum(["NG", "GH"])]),
   account_number: z.optional(z.string()),
   bvn: z.optional(z.string()),
@@ -34,7 +39,9 @@ export const AssignDedicatedVirtualAccountSchemaPayload = z.object({
 export const ListDedicatedVirtualAccountsSchemaPayload = z.object({
   active: z.boolean(),
   currency: z.enum(["NGN", "GHS"]),
-  provider_slug: z.optional(z.union([z.string(), z.enum(["wema-bank", "titan-paystack"])])),
+  provider_slug: z.optional(
+    z.union([z.string(), z.enum(["wema-bank", "titan-paystack"])]),
+  ),
   bank_id: z.optional(z.string()),
   customer: z.optional(z.string()),
 }) satisfies z.ZodMiniType<ListDedicatedVirtualAccountsPayload>;
@@ -49,5 +56,7 @@ export const SplitDedicatedAccountTransactionSchemaPayload = z.object({
   customer: z.string(),
   subaccount: z.optional(z.string()),
   split_code: z.optional(z.string()),
-  preferred_bank: z.optional(z.union([z.string(), z.enum(["wema-bank", "titan-paystack"])])),
+  preferred_bank: z.optional(
+    z.union([z.string(), z.enum(["wema-bank", "titan-paystack"])]),
+  ),
 }) satisfies z.ZodMiniType<SplitDedicatedAccountTransactionPayload>;

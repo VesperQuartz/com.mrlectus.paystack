@@ -25,7 +25,9 @@ import type {
   ViewTimelineResponsePayload,
 } from "./types";
 
-export const createTransactions = (instance: KyInstance): TransactionsClient => {
+export const createTransactions = (
+  instance: KyInstance,
+): TransactionsClient => {
   const initialize = async (payload: InitializePayload) => {
     const data = InitializePayloadSchema.parse(payload);
     return await instance
@@ -51,7 +53,9 @@ export const createTransactions = (instance: KyInstance): TransactionsClient => 
   };
 
   const fetch = async (payload: { id: number }) => {
-    return instance.get(`transaction/${payload.id}`).json<VerifyResponsePayload>();
+    return instance
+      .get(`transaction/${payload.id}`)
+      .json<VerifyResponsePayload>();
   };
 
   const chargeAuthorization = async (payload: ChargeAuthorizationPayload) => {

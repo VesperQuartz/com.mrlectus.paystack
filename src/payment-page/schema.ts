@@ -2,7 +2,7 @@ import { z } from "zod/v4-mini";
 import type {
   CreatePaymentPagePayload,
   ListPaymentPagePayload,
-} from "#/payment-page";
+} from "#/payment-page/types";
 import { CurrencySchema, PaginationSchema } from "#/schemas";
 
 export const CreatePaymentPagePayloadSchema = z.object({

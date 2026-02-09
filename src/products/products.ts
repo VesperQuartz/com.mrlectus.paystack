@@ -41,7 +41,9 @@ export const createProducts = (instance: KyInstance): CreateProductClient => {
         id: z.string(),
       })
       .parse(payload);
-    return await instance.get(`product/${data.id}`).json<FetchProductResponsePayload>();
+    return await instance
+      .get(`product/${data.id}`)
+      .json<FetchProductResponsePayload>();
   };
 
   const update = async (payload: UpdateProductPayload) => {

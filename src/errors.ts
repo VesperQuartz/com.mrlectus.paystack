@@ -1,5 +1,3 @@
-import { z } from "zod/v4-mini";
-
 export class PaystackApiError extends Error {
   public status: boolean;
   public override message: string;

@@ -122,12 +122,16 @@ export type CreateTerminalClient = {
    * Check the status of an event sent to the Terminal
    * @remarks This is a query.
    */
-  fetchEventStatus: (payload: FetchEventStatusPayload) => Promise<FetchEventStatusResponsePayload>;
+  fetchEventStatus: (
+    payload: FetchEventStatusPayload,
+  ) => Promise<FetchEventStatusResponsePayload>;
   /**
    * Check the availiability of a Terminal before sending an event to it
    * @remarks This is a query.
    */
-  fetchStatus: (payload: { terminal_id: string }) => Promise<FetchStatusResponsePayload>;
+  fetchStatus: (payload: {
+    terminal_id: string;
+  }) => Promise<FetchStatusResponsePayload>;
   /**
    * List the Terminals available on your integration
    * @remarks This is a query.
@@ -137,7 +141,9 @@ export type CreateTerminalClient = {
    * Get the details of a Terminal
    * @remarks This is a query.
    */
-  fetch: (payload: { terminal_id: string }) => Promise<FetchTerminalResponsePayload>;
+  fetch: (payload: {
+    terminal_id: string;
+  }) => Promise<FetchTerminalResponsePayload>;
   /**
    * Update the details of a Terminal
    * @remarks This is a mutation.

@@ -89,7 +89,9 @@ export const createDedicatedVirtualAccounts = (
       .json<DeactivateDedicatedAccountResponsePayload>();
   };
 
-  const splitTransaction = async (payload: SplitDedicatedAccountTransactionPayload) => {
+  const splitTransaction = async (
+    payload: SplitDedicatedAccountTransactionPayload,
+  ) => {
     const data = SplitDedicatedAccountTransactionSchemaPayload.parse(payload);
     return await instance
       .post(`dedicated_account/split`, {

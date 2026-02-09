@@ -70,7 +70,9 @@ export const createTerminal = (instance: KyInstance): CreateTerminalClient => {
         terminal_id: z.string(),
       })
       .parse(payload);
-    return await instance.get(`terminal/${parse.terminal_id}`).json<FetchTerminalResponsePayload>();
+    return await instance
+      .get(`terminal/${parse.terminal_id}`)
+      .json<FetchTerminalResponsePayload>();
   };
 
   const update = async (payload: UpdateTerminalPayload) => {

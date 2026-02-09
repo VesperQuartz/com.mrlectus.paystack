@@ -1,4 +1,4 @@
-import type { CustomerMeta } from "../customers";
+import type { CustomerMeta } from "../customers/types";
 
 export type ListMandateAuthorizationsPayload = {
   /** The cursor value of the next set of authorizations to fetch. You can get this from the meta object of the response */

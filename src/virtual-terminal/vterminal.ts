@@ -1,6 +1,6 @@
 import type { KyInstance } from "ky";
 import { z } from "zod/v4-mini";
-import type { ListTerminalPayload } from "../terminal";
+import type { ListTerminalPayload } from "../terminal/types";
 import {
   AddSplitCodePayloadSchema,
   AssignDestinationPayloadSchema,
@@ -20,7 +20,9 @@ import type {
   UnAssignDestinationPayload,
 } from "./types";
 
-export const createVirtualTerminal = (instance: KyInstance): CreateVirtualTerminalClient => {
+export const createVirtualTerminal = (
+  instance: KyInstance,
+): CreateVirtualTerminalClient => {
   const create = async (payload: CreateVirtualTerminalPayload) => {
     const data = CreateVirtualTerminalSchemaPayload.parse(payload);
     return await instance
@@ -74,10 +76,12 @@ export const createVirtualTerminal = (instance: KyInstance): CreateVirtualTermin
         code: z.string(),
       })
       .parse(payload);
-    return await instance.put(`virtual_terminal/${parse.code}/deactivate`).json<{
-      status: boolean;
-      message: string;
-    }>();
+    return await instance
+      .put(`virtual_terminal/${parse.code}/deactivate`)
+      .json<{
+        status: boolean;
+        message: string;
+      }>();
   };
 
   const assignDestination = async (payload: AssignDestinationPayload) => {

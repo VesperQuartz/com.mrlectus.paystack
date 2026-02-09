@@ -1,4 +1,4 @@
-import type { PaymentChannel } from "#/transactions";
+import type { PaymentChannel } from "#/transactions/types";
 import type { Currency, Pagination } from "#/types";
 
 export type CreateRefundPayload = {

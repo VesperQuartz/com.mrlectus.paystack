@@ -1,7 +1,7 @@
 import type {
   Details,
   ListTransferRecipientsResponsePayload,
-} from "#/transfers-recipients";
+} from "#/transfers-recipients/types";
 import type { Currency } from "#/types";
 
 export type InitiateTransferPayload = {

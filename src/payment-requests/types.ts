@@ -1,4 +1,4 @@
-import type { Customer } from "#/customers";
+import type { Customer } from "#/customers/types";
 import type { Currency, MetaV1 } from "#/types";
 
 export type CreatePaymentRequestPayload = {

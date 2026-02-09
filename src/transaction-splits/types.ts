@@ -202,7 +202,9 @@ export type TransactionSplitsClient = {
    * Add a Subaccount to a Transaction Split, or update the share of an existing Subaccount in a Transaction Split
    * @remarks This is a mutation.
    */
-  updateSubaccount: (payload: UpdateSubAccountSplitPayload) => Promise<SplitResponsePayload>;
+  updateSubaccount: (
+    payload: UpdateSubAccountSplitPayload,
+  ) => Promise<SplitResponsePayload>;
 
   /**
    * Remove a subaccount from a transaction split

@@ -79,7 +79,9 @@ describe("Subscriptions", () => {
 
       const result = await subscriptions.fetch(payload);
 
-      expect(mockKy.get).toHaveBeenCalledWith(`subscription/${payload.id_or_code}`);
+      expect(mockKy.get).toHaveBeenCalledWith(
+        `subscription/${payload.id_or_code}`,
+      );
       expect(result).toEqual(mockResponse);
     });
   });
@@ -132,7 +134,9 @@ describe("Subscriptions", () => {
 
       const result = await subscriptions.generateUpdatelink(payload);
 
-      expect(mockKy.get).toHaveBeenCalledWith(`subscription/${payload.code}/manage/link`);
+      expect(mockKy.get).toHaveBeenCalledWith(
+        `subscription/${payload.code}/manage/link`,
+      );
       expect(result).toEqual(mockResponse);
     });
   });
@@ -147,7 +151,9 @@ describe("Subscriptions", () => {
 
       const result = await subscriptions.sendUpdatelink(payload);
 
-      expect(mockKy.post).toHaveBeenCalledWith(`subscription/${payload.code}/manage/email`);
+      expect(mockKy.post).toHaveBeenCalledWith(
+        `subscription/${payload.code}/manage/email`,
+      );
       expect(result).toEqual(mockResponse);
     });
   });

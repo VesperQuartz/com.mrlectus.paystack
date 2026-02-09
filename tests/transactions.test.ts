@@ -51,7 +51,9 @@ describe("Transactions", () => {
 
       const result = await transactions.verify({ reference });
 
-      expect(mockKy.get).toHaveBeenCalledWith(`transaction/verify/${reference}`);
+      expect(mockKy.get).toHaveBeenCalledWith(
+        `transaction/verify/${reference}`,
+      );
       expect(result).toEqual(mockResponse);
     });
   });
@@ -119,9 +121,12 @@ describe("Transactions", () => {
 
       const result = await transactions.chargeAuthorization(payload as any);
 
-      expect(mockKy.post).toHaveBeenCalledWith("transaction/charge_authorization", {
-        json: payload,
-      });
+      expect(mockKy.post).toHaveBeenCalledWith(
+        "transaction/charge_authorization",
+        {
+          json: payload,
+        },
+      );
       expect(result).toEqual(mockResponse);
     });
   });
@@ -136,7 +141,9 @@ describe("Transactions", () => {
 
       const result = await transactions.viewTimeline({ id_or_reference });
 
-      expect(mockKy.get).toHaveBeenCalledWith(`transaction/timeline/${id_or_reference}`);
+      expect(mockKy.get).toHaveBeenCalledWith(
+        `transaction/timeline/${id_or_reference}`,
+      );
       expect(result).toEqual(mockResponse);
     });
   });

@@ -1,4 +1,4 @@
-import type { Authorization } from "../transactions";
+import type { Authorization } from "../transactions/types";
 
 export type CreateCustomerPayload = {
   /**
@@ -163,7 +163,7 @@ export type SetRiskActionResponsePayload = {
   last_name: string;
   email: string;
   phone: string | null;
-  metadata: {};
+  metadata: Record<string, unknown> | null;
   domain: string;
   identified: boolean;
   identifications: string | null;
@@ -284,7 +284,9 @@ export type CreateCustomerClient = {
    * > parameters become compulsory.
    * @remarks This is a mutation.
    */
-  create: (payload: CreateCustomerPayload) => Promise<CreateCustomerResponsePayload>;
+  create: (
+    payload: CreateCustomerPayload,
+  ) => Promise<CreateCustomerResponsePayload>;
 
   /**
    * List customers available on your integration
@@ -307,7 +309,9 @@ export type CreateCustomerClient = {
    * Update a customer's details on your integration
    * @remarks This is a mutation.
    */
-  update: (payload: UpdateCustomerPayload) => Promise<UpdateCustomerResponsePayload>;
+  update: (
+    payload: UpdateCustomerPayload,
+  ) => Promise<UpdateCustomerResponsePayload>;
 
   /**
    * Validate a customer's identity
@@ -322,7 +326,9 @@ export type CreateCustomerClient = {
    * Whitelist or blacklist a customer on your integration
    * @remarks This is a mutation.
    */
-  setRiskAction: (payload: SetRiskActionPayload) => Promise<SetRiskActionResponsePayload>;
+  setRiskAction: (
+    payload: SetRiskActionPayload,
+  ) => Promise<SetRiskActionResponsePayload>;
 
   /**
    * Initiate a request to create a reusable authorization code for recurring transactions.

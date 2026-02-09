@@ -1,4 +1,4 @@
-import type { Product } from "#/products";
+import type { Product } from "#/products/types";
 import type { Currency } from "#/types";
 
 export type CreatePaymentPagePayload = {
@@ -117,12 +117,16 @@ export type CreatePaymentPageClient = {
    * Create a payment page on your integration
    * @remarks This is a mutation.
    */
-  create: (payload: CreatePaymentPagePayload) => Promise<CreatePaymentPageResponsePayload>;
+  create: (
+    payload: CreatePaymentPagePayload,
+  ) => Promise<CreatePaymentPageResponsePayload>;
   /**
    * List payment pages available on your integration
    * @remarks This is a query.
    */
-  list: (payload?: ListPaymentPagePayload) => Promise<ListPaymentPageResponsePayload>;
+  list: (
+    payload?: ListPaymentPagePayload,
+  ) => Promise<ListPaymentPageResponsePayload>;
   /**
    * Get details of a payment page on your integration
    * @remarks This is a query.
@@ -135,7 +139,9 @@ export type CreatePaymentPageClient = {
    * Update a payment page's details on your integration
    * @remarks This is a mutation.
    */
-  update: (payload: UpdatePaymentPagePayload) => Promise<CreatePaymentPageResponsePayload>;
+  update: (
+    payload: UpdatePaymentPagePayload,
+  ) => Promise<CreatePaymentPageResponsePayload>;
   /**
    * Check the availability of a slug for a payment page
    * @remarks This is a query.

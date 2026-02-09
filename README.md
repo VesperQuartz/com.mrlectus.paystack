@@ -75,8 +75,10 @@ try {
 The SDK covers the entire Paystack API surface area:
 
 - **Transactions**: Initialize, verify, list, and manage payments.
+- **Transaction Splits**: Split settlement for a transaction across multiple accounts.
 - **Customers**: Create, validate, and manage customers.
 - **Transfers**: Automate sending money to customers.
+- **Transfers Control**: Manage settings of your transfers.
 - **Transfer Recipients**: Manage beneficiaries for transfers.
 - **Plans & Subscriptions**: Handle recurring billing and subscription plans.
 - **Payment Pages**: Create and manage payment pages.
@@ -256,6 +258,10 @@ The package is built with TypeScript and provides comprehensive type definitions
 - **Improved DX**: Get inline documentation and hints directly in your IDE.
 
 Together with runtime validation, this ensures a robust integration with the Paystack ecosystem.
+
+## Performance & Tree Shaking
+
+The SDK is designed to be lightweight and performant. It avoids barrel files internally to ensure fast load times and optimal tree-shaking when used in modern build pipelines.
 
 ## License
 

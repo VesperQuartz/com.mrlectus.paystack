@@ -43,7 +43,9 @@ export type CreateApplePayClient = {
    * Lists all registered domains on your integration. Returns an empty array if no domains have been added.
    * @remarks This is a query.
    */
-  listDomains: (payload: ListDomainsPayload) => Promise<ListDomainsResponsePayload>;
+  listDomains: (
+    payload: ListDomainsPayload,
+  ) => Promise<ListDomainsResponsePayload>;
 
   /**
    * Unregister a top-level domain or subdomain previously used for your Apple Pay integration.

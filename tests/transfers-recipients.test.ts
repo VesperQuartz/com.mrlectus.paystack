@@ -102,7 +102,9 @@ describe("Transfer Recipients", () => {
 
       const result = await recipients.fetch(payload);
 
-      expect(mockKy.get).toHaveBeenCalledWith(`transferrecipient/${payload.id_or_code}`);
+      expect(mockKy.get).toHaveBeenCalledWith(
+        `transferrecipient/${payload.id_or_code}`,
+      );
       expect(result).toEqual(mockResponse);
     });
   });
@@ -122,9 +124,12 @@ describe("Transfer Recipients", () => {
       const { id_or_code, ...rest } = payload;
       const result = await recipients.update(payload);
 
-      expect(mockKy.put).toHaveBeenCalledWith(`transferrecipient/${id_or_code}`, {
-        json: rest,
-      });
+      expect(mockKy.put).toHaveBeenCalledWith(
+        `transferrecipient/${id_or_code}`,
+        {
+          json: rest,
+        },
+      );
       expect(result).toEqual(mockResponse);
     });
   });
@@ -139,7 +144,9 @@ describe("Transfer Recipients", () => {
 
       const result = await recipients.delete(payload);
 
-      expect(mockKy.delete).toHaveBeenCalledWith(`transferrecipient/${payload.id_or_code}`);
+      expect(mockKy.delete).toHaveBeenCalledWith(
+        `transferrecipient/${payload.id_or_code}`,
+      );
       expect(result).toEqual(mockResponse);
     });
   });

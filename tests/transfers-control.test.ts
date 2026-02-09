@@ -94,9 +94,12 @@ describe("Transfers Control", () => {
 
       const result = await transfersControl.finalizeDisableOTP(payload);
 
-      expect(mockKy.post).toHaveBeenCalledWith("transfer/disable_otp_finalize", {
-        json: payload,
-      });
+      expect(mockKy.post).toHaveBeenCalledWith(
+        "transfer/disable_otp_finalize",
+        {
+          json: payload,
+        },
+      );
       expect(result).toEqual(mockResponse);
     });
   });

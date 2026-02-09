@@ -1,6 +1,6 @@
 import { z } from "zod/v4-mini";
-import type { CreateProductPayload, ListProductPayload } from "#/products";
 import { CurrencySchema, PaginationSchema } from "#/schemas";
+import type { CreateProductPayload, ListProductPayload } from "./types";
 
 export const CreateProductPayloadSchema = z.object({
   metadata: z.optional(z.record(z.string(), z.unknown())),

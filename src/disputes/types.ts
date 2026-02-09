@@ -1,5 +1,5 @@
-import type { Transaction } from "#/bulk-charges";
-import type { Customer } from "#/transactions";
+import type { Transaction } from "#/bulk-charges/types";
+import type { Customer } from "#/transactions/types";
 import type { Currency, MetaV1, Pagination } from "#/types";
 
 export type ListDisputesPayload = Pagination & {

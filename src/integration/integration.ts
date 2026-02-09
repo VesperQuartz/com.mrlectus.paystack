@@ -1,6 +1,6 @@
 import type { KyInstance } from "ky";
 import { z } from "zod/v4-mini";
-import type { CreateIntegrationClient } from "#/integration";
+import type { CreateIntegrationClient } from "./types";
 
 export const createIntegration = (
   instance: KyInstance,

@@ -59,7 +59,9 @@ export type CreateSettlementsClient = {
    * List settlements made to your settlement accounts
    * @remarks This is a query.
    */
-  list: (payload?: ListSettlementsPayload) => Promise<ListSettlementsResponsePayload>;
+  list: (
+    payload?: ListSettlementsPayload,
+  ) => Promise<ListSettlementsResponsePayload>;
   /**
    * Get the transactions that make up a particular settlement
    * @remarks This is a query.

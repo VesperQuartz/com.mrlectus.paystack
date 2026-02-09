@@ -131,7 +131,9 @@ describe("Transfers", () => {
 
       const result = await transfers.verify(payload);
 
-      expect(mockKy.get).toHaveBeenCalledWith(`transfer/verify/${payload.reference}`);
+      expect(mockKy.get).toHaveBeenCalledWith(
+        `transfer/verify/${payload.reference}`,
+      );
       expect(result).toEqual(mockResponse);
     });
   });

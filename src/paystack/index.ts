@@ -1,30 +1,30 @@
 import ky from "ky";
-import { createApplePay } from "#/apple-pay";
-import { createBulkCharges } from "#/bulk-charges";
-import { createCharges } from "#/charges";
-import { createCustomer } from "#/customers";
-import { createDedicatedVirtualAccounts } from "#/dedicated-virtual-accounts";
-import { createDirectDebit } from "#/direct-debit";
-import { createDisputes } from "#/disputes";
+import { createApplePay } from "#/apple-pay/pay";
+import { createBulkCharges } from "#/bulk-charges/bulk";
+import { createCharges } from "#/charges/charges";
+import { createCustomer } from "#/customers/customers";
+import { createDedicatedVirtualAccounts } from "#/dedicated-virtual-accounts/dva";
+import { createDirectDebit } from "#/direct-debit/debit";
+import { createDisputes } from "#/disputes/disputes";
 import { PaystackApiError } from "#/errors";
-import { createIntegration } from "#/integration";
-import { createMiscellaneous } from "#/miscellaneous";
-import { createPaymentPage } from "#/payment-page";
-import { createPaymentRequests } from "#/payment-requests";
-import { createPlans } from "#/plans";
-import { createProducts } from "#/products";
-import { createRefunds } from "#/refunds";
-import { createSettlements } from "#/settlements";
-import { createSubaccounts } from "#/subaccounts";
-import { createSubscriptions } from "#/subscriptions";
-import { createTerminal } from "#/terminal";
-import { createTransactionSplits } from "#/transaction-splits";
+import { createIntegration } from "#/integration/integration";
+import { createMiscellaneous } from "#/miscellaneous/miscellaneous";
+import { createPaymentPage } from "#/payment-page/payment-page";
+import { createPaymentRequests } from "#/payment-requests/requests";
+import { createPlans } from "#/plans/plans";
+import { createProducts } from "#/products/products";
+import { createRefunds } from "#/refunds/refunds";
+import { createSettlements } from "#/settlements/settlements";
+import { createSubaccounts } from "#/subaccounts/subaccounts";
+import { createSubscriptions } from "#/subscriptions/subscriptions";
+import { createTerminal } from "#/terminal/terminal";
+import { createTransactionSplits } from "#/transaction-splits/splits";
 import { createTransactions } from "#/transactions/transactions";
-import { createTransfers } from "#/transfers";
-import { createTransfersControl } from "#/transfers-control";
-import { createTransferRecipients } from "#/transfers-recipients";
-import { createVerification } from "#/verification";
-import { createVirtualTerminal } from "#/virtual-terminal";
+import { createTransfers } from "#/transfers/transfers";
+import { createTransfersControl } from "#/transfers-control/control";
+import { createTransferRecipients } from "#/transfers-recipients/recipients";
+import { createVerification } from "#/verification/verification";
+import { createVirtualTerminal } from "#/virtual-terminal/vterminal";
 
 type ApiConfig = {
   timeout?: number;
@@ -101,7 +101,7 @@ export const PaystackClient = (
     /** The Terminal API allows you to build delightful in-person payment experiences. */
     terminal: createTerminal(kyclient),
     /** The Virtual Terminal API allows you to accept in-person payments without a POS device. */
-    virtaulTerminal: createVirtualTerminal(kyclient),
+    virtualTerminal: createVirtualTerminal(kyclient),
     /** The Customers API allows you create and manage customers on your integration. */
     customers: createCustomer(kyclient),
     /** The Direct Debit API allows you manage the authorization on your customer's bank accounts. */

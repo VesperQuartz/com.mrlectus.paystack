@@ -1,18 +1,22 @@
 import type { KyInstance } from "ky";
 import { z } from "zod/v4-mini";
 import {
-  type CreatePaymentPageClient,
-  type CreatePaymentPagePayload,
-  type CreatePaymentPageResponsePayload,
-  type FetchPaymentPageResponsePayload,
-  type ListPaymentPagePayload,
   ListPaymentPagePayloadSchema,
-  type ListPaymentPageResponsePayload,
-  type UpdatePaymentPagePayload,
   UpdatePaymentPagePayloadSchema,
-} from "#/payment-page";
+} from "./schema";
+import type {
+  CreatePaymentPageClient,
+  CreatePaymentPagePayload,
+  CreatePaymentPageResponsePayload,
+  FetchPaymentPageResponsePayload,
+  ListPaymentPagePayload,
+  ListPaymentPageResponsePayload,
+  UpdatePaymentPagePayload,
+} from "./types";
 
-export const createPaymentPage = (instance: KyInstance): CreatePaymentPageClient => {
+export const createPaymentPage = (
+  instance: KyInstance,
+): CreatePaymentPageClient => {
   const create = (payload: CreatePaymentPagePayload) => {
     return instance
       .post("page", {
@@ -32,7 +36,9 @@ export const createPaymentPage = (instance: KyInstance): CreatePaymentPageClient
 
   const fetch = (payload: { id_or_slug: string }) => {
     const data = z.object({ id_or_slug: z.string() }).parse(payload);
-    return instance.get(`page/${data.id_or_slug}`).json<FetchPaymentPageResponsePayload>();
+    return instance
+      .get(`page/${data.id_or_slug}`)
+      .json<FetchPaymentPageResponsePayload>();
   };
 
   const update = (payload: UpdatePaymentPagePayload) => {

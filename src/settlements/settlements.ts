@@ -10,7 +10,9 @@ import type {
   ListSettlementTransactionsPayload,
 } from "#/settlements/types";
 
-export const createSettlements = (instance: KyInstance): CreateSettlementsClient => {
+export const createSettlements = (
+  instance: KyInstance,
+): CreateSettlementsClient => {
   const list = (payload: ListSettlementsPayload) => {
     const data = ListSettlementsPayloadSchema.parse(payload);
     return instance

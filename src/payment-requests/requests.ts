@@ -17,7 +17,9 @@ import type {
   VerifyPaymentRequestResponsePayload,
 } from "#/payment-requests/types";
 
-export const createPaymentRequests = (instance: KyInstance): CreatePaymentRequestClient => {
+export const createPaymentRequests = (
+  instance: KyInstance,
+): CreatePaymentRequestClient => {
   const create = async (payload: CreatePaymentRequestPayload) => {
     const data = CreatePaymentRequestPayloadSchema.parse(payload);
     return await instance
@@ -71,10 +73,15 @@ export const createPaymentRequests = (instance: KyInstance): CreatePaymentReques
   };
 
   const totals = async () => {
-    return await instance.get("paymentrequest/totals").json<PaymentReuestTotalResponsePayload>();
+    return await instance
+      .get("paymentrequest/totals")
+      .json<PaymentReuestTotalResponsePayload>();
   };
 
-  const finalize = async (payload: { code: string; send_notification?: boolean }) => {
+  const finalize = async (payload: {
+    code: string;
+    send_notification?: boolean;
+  }) => {
     const data = z
       .object({
         code: z.string(),

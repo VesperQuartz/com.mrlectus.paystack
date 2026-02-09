@@ -16,7 +16,9 @@ import type {
   UpdateSubAccountSplitPayload,
 } from "./types";
 
-export const createTransactionSplits = (instance: KyInstance): TransactionSplitsClient => {
+export const createTransactionSplits = (
+  instance: KyInstance,
+): TransactionSplitsClient => {
   const create = async (payload: CreateSplitPayload) => {
     const data = createSplitPayloadSchema.parse(payload);
     return await instance

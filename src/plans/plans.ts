@@ -40,7 +40,9 @@ export const createPlans = (instance: KyInstance): CreatePlanClient => {
         id_or_code: z.string(),
       })
       .parse(payload);
-    return await instance.get(`plan/${data.id_or_code}`).json<FetchPlansResponsePayload>();
+    return await instance
+      .get(`plan/${data.id_or_code}`)
+      .json<FetchPlansResponsePayload>();
   };
 
   const update = async (payload: UpdatePlanPayload) => {

@@ -146,9 +146,12 @@ describe("Transaction Splits", () => {
 
       const result = await splits.removeSubaccount(payload);
 
-      expect(mockKy.post).toHaveBeenCalledWith(`split/${id}/subaccount/remove`, {
-        json: expectedData,
-      });
+      expect(mockKy.post).toHaveBeenCalledWith(
+        `split/${id}/subaccount/remove`,
+        {
+          json: expectedData,
+        },
+      );
       expect(result).toEqual(mockResponse);
     });
   });

@@ -1,4 +1,8 @@
-import type { Authorization, Customer, PaymentChannel } from "#/transactions";
+import type {
+  Authorization,
+  Customer,
+  PaymentChannel,
+} from "#/transactions/types";
 import type { Currency, MetaV1 } from "#/types";
 
 export type InitiateBulkChargePayload = {

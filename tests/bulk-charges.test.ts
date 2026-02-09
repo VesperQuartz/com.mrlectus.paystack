@@ -69,7 +69,9 @@ describe("Bulk Charges", () => {
 
       const result = await bulkCharges.fetch(payload);
 
-      expect(mockKy.get).toHaveBeenCalledWith(`bulkcharge/${payload.id_or_code}`);
+      expect(mockKy.get).toHaveBeenCalledWith(
+        `bulkcharge/${payload.id_or_code}`,
+      );
       expect(result).toEqual(mockResponse);
     });
   });
@@ -90,9 +92,12 @@ describe("Bulk Charges", () => {
       const { id_or_code, ...rest } = payload;
       const result = await bulkCharges.fetchBatch(payload);
 
-      expect(mockKy.get).toHaveBeenCalledWith(`bulkcharge/${id_or_code}/charges`, {
-        searchParams: rest,
-      });
+      expect(mockKy.get).toHaveBeenCalledWith(
+        `bulkcharge/${id_or_code}/charges`,
+        {
+          searchParams: rest,
+        },
+      );
       expect(result).toEqual(mockResponse);
     });
   });
@@ -107,7 +112,9 @@ describe("Bulk Charges", () => {
 
       const result = await bulkCharges.pauseBatch(payload);
 
-      expect(mockKy.get).toHaveBeenCalledWith(`bulkcharge/pause/${payload.batch_code}`);
+      expect(mockKy.get).toHaveBeenCalledWith(
+        `bulkcharge/pause/${payload.batch_code}`,
+      );
       expect(result).toEqual(mockResponse);
     });
   });
@@ -122,7 +129,9 @@ describe("Bulk Charges", () => {
 
       const result = await bulkCharges.resumeBatch(payload);
 
-      expect(mockKy.get).toHaveBeenCalledWith(`bulkcharge/resume/${payload.batch_code}`);
+      expect(mockKy.get).toHaveBeenCalledWith(
+        `bulkcharge/resume/${payload.batch_code}`,
+      );
       expect(result).toEqual(mockResponse);
     });
   });

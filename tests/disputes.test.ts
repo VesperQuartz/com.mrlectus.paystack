@@ -56,14 +56,19 @@ describe("Disputes", () => {
   describe("listTranaction", () => {
     it("should call listTranaction with correct id", async () => {
       const payload = { id: "12345" };
-      const mockResponse = { status: true, message: "Dispute transaction retrieved" };
+      const mockResponse = {
+        status: true,
+        message: "Dispute transaction retrieved",
+      };
       (mockKy.get as any).mockReturnValue({
         json: vi.fn().mockResolvedValue(mockResponse),
       });
 
       const result = await disputes.listTranaction(payload);
 
-      expect(mockKy.get).toHaveBeenCalledWith(`dispute/transaction/${payload.id}`);
+      expect(mockKy.get).toHaveBeenCalledWith(
+        `dispute/transaction/${payload.id}`,
+      );
       expect(result).toEqual(mockResponse);
     });
   });

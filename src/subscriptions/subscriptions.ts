@@ -1,6 +1,9 @@
 import type { KyInstance } from "ky";
 import { z } from "zod/v4-mini";
-import { CreateSubscriptionPayloadSchame, ListSubscriptionPayloadSchema } from "./schema";
+import {
+  CreateSubscriptionPayloadSchame,
+  ListSubscriptionPayloadSchema,
+} from "./schema";
 import type {
   CreateSubscriptionClient,
   CreateSubscriptionPayload,
@@ -10,7 +13,9 @@ import type {
   ListSubscriptionResponsePayload,
 } from "./types";
 
-export const createSubscriptions = (instance: KyInstance): CreateSubscriptionClient => {
+export const createSubscriptions = (
+  instance: KyInstance,
+): CreateSubscriptionClient => {
   const create = async (payload: CreateSubscriptionPayload) => {
     const data = CreateSubscriptionPayloadSchame.parse(payload);
     return await instance

@@ -1,7 +1,7 @@
 import type { Pagination } from "#/types";
-import type { Customer } from "../customers";
-import type { Plans } from "../plans";
-import type { Authorization } from "../transactions";
+import type { Customer } from "../customers/types";
+import type { Plans } from "../plans/types";
+import type { Authorization } from "../transactions/types";
 
 export type CreateSubscriptionPayload = {
   /** Customer's email address or customer code */

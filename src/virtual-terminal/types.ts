@@ -1,5 +1,5 @@
-import type { ListTerminalPayload } from "../terminal";
-import type { CreateSplit } from "../transaction-splits";
+import type { ListTerminalPayload } from "../terminal/types";
+import type { CreateSplit } from "../transaction-splits/types";
 import type { Currency } from "../types";
 
 export type CreateVirtualTerminalPayload = {
@@ -123,13 +123,17 @@ export type CreateVirtualTerminalClient = {
    * Create a Virtual Terminal on your integration
    * @remarks This is a mutation.
    */
-  create: (payload: CreateVirtualTerminalPayload) => Promise<CreateVirtualTerminalResponsePayload>;
+  create: (
+    payload: CreateVirtualTerminalPayload,
+  ) => Promise<CreateVirtualTerminalResponsePayload>;
 
   /**
    * List the Virtual Terminals available on your integration
    * @remarks This is a query.
    */
-  list: (payload: ListTerminalPayload) => Promise<ListVirtualTerminalResponsePayload>;
+  list: (
+    payload: ListTerminalPayload,
+  ) => Promise<ListVirtualTerminalResponsePayload>;
 
   /**
    * Fetch a Virtual Terminal on your integration
@@ -195,7 +199,9 @@ export type CreateVirtualTerminalClient = {
    * Add a split code to a Virtual Terminal on your integration
    * @remarks This is a mutation.
    */
-  addSplitCode: (payload: AddSplitCodePayload) => Promise<AddSplitCodeResponsePayload>;
+  addSplitCode: (
+    payload: AddSplitCodePayload,
+  ) => Promise<AddSplitCodeResponsePayload>;
 
   /**
    * Remove a split code from a Virtual Terminal on your integration

@@ -1,7 +1,11 @@
 import type { KyInstance } from "ky";
 import { z } from "zod/v4-mini";
 import { ListDomainsPayloadSchema } from "./schema";
-import type { CreateApplePayClient, ListDomainsPayload, ListDomainsResponsePayload } from "./types";
+import type {
+  CreateApplePayClient,
+  ListDomainsPayload,
+  ListDomainsResponsePayload,
+} from "./types";
 
 export const createApplePay = (instance: KyInstance): CreateApplePayClient => {
   const registerDomain = async (payload: { domainName: string }) => {

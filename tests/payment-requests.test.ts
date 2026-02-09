@@ -47,7 +47,10 @@ describe("Payment Requests", () => {
         currency: "NGN" as const,
         include_archive: "false",
       };
-      const mockResponse = { status: true, message: "Payment requests retrieved" };
+      const mockResponse = {
+        status: true,
+        message: "Payment requests retrieved",
+      };
       (mockKy.get as any).mockReturnValue({
         json: vi.fn().mockResolvedValue(mockResponse),
       });
@@ -64,14 +67,19 @@ describe("Payment Requests", () => {
   describe("fetch", () => {
     it("should call fetch with correct id_or_code", async () => {
       const payload = { id_or_code: "PRQ_12345" };
-      const mockResponse = { status: true, message: "Payment request retrieved" };
+      const mockResponse = {
+        status: true,
+        message: "Payment request retrieved",
+      };
       (mockKy.get as any).mockReturnValue({
         json: vi.fn().mockResolvedValue(mockResponse),
       });
 
       const result = await paymentRequests.fetch(payload);
 
-      expect(mockKy.get).toHaveBeenCalledWith(`paymentrequest/${payload.id_or_code}`);
+      expect(mockKy.get).toHaveBeenCalledWith(
+        `paymentrequest/${payload.id_or_code}`,
+      );
       expect(result).toEqual(mockResponse);
     });
   });
@@ -79,14 +87,19 @@ describe("Payment Requests", () => {
   describe("verify", () => {
     it("should call verify with correct code", async () => {
       const payload = { code: "PRQ_12345" };
-      const mockResponse = { status: true, message: "Payment request verified" };
+      const mockResponse = {
+        status: true,
+        message: "Payment request verified",
+      };
       (mockKy.get as any).mockReturnValue({
         json: vi.fn().mockResolvedValue(mockResponse),
       });
 
       const result = await paymentRequests.verify(payload);
 
-      expect(mockKy.get).toHaveBeenCalledWith(`paymentrequest/verify/${payload.code}`);
+      expect(mockKy.get).toHaveBeenCalledWith(
+        `paymentrequest/verify/${payload.code}`,
+      );
       expect(result).toEqual(mockResponse);
     });
   });
@@ -101,7 +114,9 @@ describe("Payment Requests", () => {
 
       const result = await paymentRequests.sendNotification(payload);
 
-      expect(mockKy.post).toHaveBeenCalledWith(`paymentrequest/notify/${payload.code}`);
+      expect(mockKy.post).toHaveBeenCalledWith(
+        `paymentrequest/notify/${payload.code}`,
+      );
       expect(result).toEqual(mockResponse);
     });
   });
@@ -123,7 +138,10 @@ describe("Payment Requests", () => {
   describe("finalize", () => {
     it("should call finalize with correct payload", async () => {
       const payload = { code: "PRQ_12345", send_notification: true };
-      const mockResponse = { status: true, message: "Payment request finalized" };
+      const mockResponse = {
+        status: true,
+        message: "Payment request finalized",
+      };
       (mockKy.post as any).mockReturnValue({
         json: vi.fn().mockResolvedValue(mockResponse),
       });
@@ -131,9 +149,12 @@ describe("Payment Requests", () => {
       const { code, ...rest } = payload;
       const result = await paymentRequests.finalize(payload);
 
-      expect(mockKy.post).toHaveBeenCalledWith(`paymentrequest/finalize/${code}`, {
-        json: rest,
-      });
+      expect(mockKy.post).toHaveBeenCalledWith(
+        `paymentrequest/finalize/${code}`,
+        {
+          json: rest,
+        },
+      );
       expect(result).toEqual(mockResponse);
     });
   });
@@ -163,14 +184,19 @@ describe("Payment Requests", () => {
   describe("archive", () => {
     it("should call archive with correct code", async () => {
       const payload = { code: "PRQ_12345" };
-      const mockResponse = { status: true, message: "Payment request archived" };
+      const mockResponse = {
+        status: true,
+        message: "Payment request archived",
+      };
       (mockKy.post as any).mockReturnValue({
         json: vi.fn().mockResolvedValue(mockResponse),
       });
 
       const result = await paymentRequests.archive(payload);
 
-      expect(mockKy.post).toHaveBeenCalledWith(`paymentrequest/archive/${payload.code}`);
+      expect(mockKy.post).toHaveBeenCalledWith(
+        `paymentrequest/archive/${payload.code}`,
+      );
       expect(result).toEqual(mockResponse);
     });
   });

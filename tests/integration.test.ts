@@ -29,7 +29,9 @@ describe("Integration", () => {
 
       const result = await integration.fetchTimeout();
 
-      expect(mockKy.get).toHaveBeenCalledWith("integration/payment_session_timeout");
+      expect(mockKy.get).toHaveBeenCalledWith(
+        "integration/payment_session_timeout",
+      );
       expect(result).toEqual(mockResponse);
     });
   });
@@ -48,9 +50,12 @@ describe("Integration", () => {
 
       const result = await integration.updateTimeout(payload);
 
-      expect(mockKy.put).toHaveBeenCalledWith("integration/payment_session_timeout", {
-        json: payload,
-      });
+      expect(mockKy.put).toHaveBeenCalledWith(
+        "integration/payment_session_timeout",
+        {
+          json: payload,
+        },
+      );
       expect(result).toEqual(mockResponse);
     });
   });

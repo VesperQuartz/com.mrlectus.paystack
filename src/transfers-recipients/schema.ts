@@ -4,7 +4,7 @@ import type {
   BulkCreateTransferRecipientPayload,
   CreateTransferRecipientPayload,
   ListTransferRecipientsPayload,
-} from "#/transfers-recipients";
+} from "#/transfers-recipients/types";
 
 export const CreateTransferRecipientPayloadSchema = z.object({
   type: z.enum(["nuban", "ghipss", "mobile_money", "basa"]),

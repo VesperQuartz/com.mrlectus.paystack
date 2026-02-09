@@ -15,7 +15,9 @@ import type {
   UpdateSubAccountPayload,
 } from "./types";
 
-export const createSubaccounts = (instance: KyInstance): CreateSubaccountClient => {
+export const createSubaccounts = (
+  instance: KyInstance,
+): CreateSubaccountClient => {
   const create = async (payload: CreateSubaccountPayload) => {
     const data = CreateSubaccountPayloadSchema.parse(payload);
     return await instance

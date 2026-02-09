@@ -7,8 +7,12 @@ import type {
   ListMandateAuthorizationsResponsePayload,
 } from "./types";
 
-export const createDirectDebit = (instance: KyInstance): CreateDirectDebitClient => {
-  const triggerActivationCharge = async (payload: { customer_ids: number[] }) => {
+export const createDirectDebit = (
+  instance: KyInstance,
+): CreateDirectDebitClient => {
+  const triggerActivationCharge = async (payload: {
+    customer_ids: number[];
+  }) => {
     const data = z
       .object({
         customer_ids: z.array(z.number()),
@@ -24,7 +28,9 @@ export const createDirectDebit = (instance: KyInstance): CreateDirectDebitClient
       }>();
   };
 
-  const listMandateAuthorizations = async (payload: ListMandateAuthorizationsPayload) => {
+  const listMandateAuthorizations = async (
+    payload: ListMandateAuthorizationsPayload,
+  ) => {
     const data = ListMandateAuthorizationsSchema.parse(payload);
     return await instance
       .get("directdebit/mandate-authorizations", {

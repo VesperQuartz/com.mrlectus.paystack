@@ -1,4 +1,8 @@
-import type { Authorization, Customer, PaymentChannel } from "#/transactions";
+import type {
+  Authorization,
+  Customer,
+  PaymentChannel,
+} from "#/transactions/types";
 import type { Currency } from "#/types";
 
 export type CreateChargePayload = {

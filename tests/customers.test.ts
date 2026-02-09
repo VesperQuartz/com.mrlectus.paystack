@@ -83,9 +83,12 @@ describe("Customers", () => {
 
       const result = await customer.fetch(payload);
 
-      expect(mockKy.get).toHaveBeenCalledWith(`customer/${payload.email_or_code}`, {
-        searchParams: payload,
-      });
+      expect(mockKy.get).toHaveBeenCalledWith(
+        `customer/${payload.email_or_code}`,
+        {
+          searchParams: payload,
+        },
+      );
       expect(result).toEqual(mockResponse);
     });
   });
@@ -133,9 +136,12 @@ describe("Customers", () => {
       const { code, ...rest } = payload;
       const result = await customer.validate(payload as any);
 
-      expect(mockKy.post).toHaveBeenCalledWith(`customer/${code}/identification`, {
-        json: rest,
-      });
+      expect(mockKy.post).toHaveBeenCalledWith(
+        `customer/${code}/identification`,
+        {
+          json: rest,
+        },
+      );
       expect(result).toEqual(mockResponse);
     });
   });
@@ -176,9 +182,12 @@ describe("Customers", () => {
 
       const result = await customer.initializeAuthorization(payload as any);
 
-      expect(mockKy.post).toHaveBeenCalledWith("customer/authorization/initialize", {
-        json: payload,
-      });
+      expect(mockKy.post).toHaveBeenCalledWith(
+        "customer/authorization/initialize",
+        {
+          json: payload,
+        },
+      );
       expect(result).toEqual(mockResponse);
     });
   });
@@ -193,7 +202,9 @@ describe("Customers", () => {
 
       const result = await customer.verifyAuthorization({ reference });
 
-      expect(mockKy.get).toHaveBeenCalledWith(`customer/authorization/verify/${reference}`);
+      expect(mockKy.get).toHaveBeenCalledWith(
+        `customer/authorization/verify/${reference}`,
+      );
       expect(result).toEqual(mockResponse);
     });
   });
@@ -216,9 +227,12 @@ describe("Customers", () => {
       const { id, ...rest } = payload;
       const result = await customer.initializeDirectDebit(payload as any);
 
-      expect(mockKy.post).toHaveBeenCalledWith(`customer/${id}/initialize-direct-debit`, {
-        json: rest,
-      });
+      expect(mockKy.post).toHaveBeenCalledWith(
+        `customer/${id}/initialize-direct-debit`,
+        {
+          json: rest,
+        },
+      );
       expect(result).toEqual(mockResponse);
     });
   });
@@ -263,7 +277,9 @@ describe("Customers", () => {
 
       const result = await customer.fetchMandateAuthorizations({ id });
 
-      expect(mockKy.get).toHaveBeenCalledWith(`customer/${id}/directdebit-mandate-authorizations`);
+      expect(mockKy.get).toHaveBeenCalledWith(
+        `customer/${id}/directdebit-mandate-authorizations`,
+      );
       expect(result).toEqual(mockResponse);
     });
   });
@@ -281,9 +297,12 @@ describe("Customers", () => {
 
       const result = await customer.deactivateAuthorization(payload);
 
-      expect(mockKy.post).toHaveBeenCalledWith(`customer/authorization/deactivate`, {
-        json: payload,
-      });
+      expect(mockKy.post).toHaveBeenCalledWith(
+        `customer/authorization/deactivate`,
+        {
+          json: payload,
+        },
+      );
       expect(result).toEqual(mockResponse);
     });
   });

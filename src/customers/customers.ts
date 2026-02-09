@@ -92,7 +92,9 @@ export const createCustomer = (instance: KyInstance): CreateCustomerClient => {
       .json<SetRiskActionResponsePayload>();
   };
 
-  const initializeAuthorization = async (payload: InitializeAuthorizationPayload) => {
+  const initializeAuthorization = async (
+    payload: InitializeAuthorizationPayload,
+  ) => {
     const data = InitializeAuthorizationPayloadSchema.parse(payload);
     return await instance
       .post(`customer/authorization/initialize`, {
@@ -112,7 +114,9 @@ export const createCustomer = (instance: KyInstance): CreateCustomerClient => {
       .json<VerifyAuthorizationResponsePayload>();
   };
 
-  const initializeDirectDebit = async (payload: InitializeDirectDebitPayload) => {
+  const initializeDirectDebit = async (
+    payload: InitializeDirectDebitPayload,
+  ) => {
     const parse = InitializeDirectDebitPayloadSchema.parse(payload);
     const { id, ...rest } = parse;
     return await instance
@@ -122,7 +126,10 @@ export const createCustomer = (instance: KyInstance): CreateCustomerClient => {
       .json<InitializeAuthorizationResponsePayload>();
   };
 
-  const directDebitActivationCharge = async (payload: { id: number; authorization_id: number }) => {
+  const directDebitActivationCharge = async (payload: {
+    id: number;
+    authorization_id: number;
+  }) => {
     const parse = z
       .object({
         id: z.number(),
@@ -151,7 +158,9 @@ export const createCustomer = (instance: KyInstance): CreateCustomerClient => {
       .json<FetchMandateAuthorizationsResponsePayload>();
   };
 
-  const deactivateAuthorization = async (payload: { authorization_code: string }) => {
+  const deactivateAuthorization = async (payload: {
+    authorization_code: string;
+  }) => {
     const data = z
       .object({
         authorization_code: z.templateLiteral([`AUTH_`, z.string()]),

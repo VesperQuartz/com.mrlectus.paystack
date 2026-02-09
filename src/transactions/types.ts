@@ -440,7 +440,9 @@ export type TransactionsClient = {
    * Initialize a transaction from your backend
    * @remarks This is a mutation.
    */
-  initialize: (payload: InitializePayload) => Promise<InitializePayloadResponse>;
+  initialize: (
+    payload: InitializePayload,
+  ) => Promise<InitializePayloadResponse>;
 
   /**
    * Confirm the status of a transaction
@@ -482,7 +484,9 @@ export type TransactionsClient = {
    * All authorizations marked as reusable can be charged with this endpoint whenever you need to receive payments
    * @remarks This is a mutation.
    */
-  chargeAuthorization: (payload: ChargeAuthorizationPayload) => Promise<VerifyResponsePayload>;
+  chargeAuthorization: (
+    payload: ChargeAuthorizationPayload,
+  ) => Promise<VerifyResponsePayload>;
 
   /**
    * View the timeline of a transaction
@@ -515,5 +519,7 @@ export type TransactionsClient = {
    * Retrieve part of a payment from a customer
    * @remarks This is a mutation.
    */
-  partialDebit: (payload: PartialDebitPayload) => Promise<PartialDebitResponsePayload>;
+  partialDebit: (
+    payload: PartialDebitPayload,
+  ) => Promise<PartialDebitResponsePayload>;
 };
