@@ -1,3 +1,5 @@
 strictDepBuilds: true
 packages:
   - "."
+allowBuilds:
+  esbuild: true
