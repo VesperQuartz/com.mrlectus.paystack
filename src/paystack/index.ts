@@ -1,4 +1,4 @@
-import ky from "ky";
+import ky, { isHTTPError } from "ky";
 import { createApplePay } from "#/apple-pay/pay";
 import { createBulkCharges } from "#/bulk-charges/bulk";
 import { createCharges } from "#/charges/charges";
@@ -53,7 +53,7 @@ export const PaystackClient = (
   }
 
   const kyclient = ky.create({
-    prefixUrl: "https://api.paystack.co",
+    prefix: "https://api.paystack.co",
     timeout: configWithDefaults.timeout ?? 10000,
     signal: configWithDefaults.signal ?? undefined,
     headers: {
@@ -62,25 +62,25 @@ export const PaystackClient = (
     },
     hooks: {
       afterResponse: [
-        async (req) => {
-          configWithDefaults.debug && console.log("FULL REQUEST URL:", req.url);
+        async ({ request }) => {
+          configWithDefaults.debug &&
+            console.log("FULL REQUEST URL:", request.url);
         },
       ],
       beforeError: [
-        async (error) => {
+        async ({ error }) => {
           console.error("CHECK", error);
-          const { response } = error;
-          if (response) {
-            const errorBody = await response.json<{
+          if (isHTTPError(error)) {
+            const errorBody = await error.response.json<{
               status: boolean;
               statusCode: number;
               message: string;
               data?: unknown;
             }>();
             throw new PaystackApiError(
-              { ...errorBody, statusCode: response.status },
+              { ...errorBody, statusCode: error.response.status },
               {
-                cause: error,
+                cause: error.response.statusText,
               },
             );
           }
