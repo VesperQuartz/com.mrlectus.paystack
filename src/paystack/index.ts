@@ -1,4 +1,4 @@
-import ky, { isHTTPError } from "ky";
+import ky from "ky";
 import { createApplePay } from "#/apple-pay/pay";
 import { createBulkCharges } from "#/bulk-charges/bulk";
 import { createCharges } from "#/charges/charges";
@@ -6,7 +6,6 @@ import { createCustomer } from "#/customers/customers";
 import { createDedicatedVirtualAccounts } from "#/dedicated-virtual-accounts/dva";
 import { createDirectDebit } from "#/direct-debit/debit";
 import { createDisputes } from "#/disputes/disputes";
-import { PaystackApiError } from "#/errors";
 import { createIntegration } from "#/integration/integration";
 import { createMiscellaneous } from "#/miscellaneous/miscellaneous";
 import { createPaymentPage } from "#/payment-page/payment-page";
@@ -69,20 +68,6 @@ export const PaystackClient = (
       ],
       beforeError: [
         async ({ error }) => {
-          if (isHTTPError(error)) {
-            const errorBody = (await error.response.clone().json()) as object;
-            throw new PaystackApiError(
-              {
-                ...errorBody,
-                statusCode: error.response.status,
-                message: error.response.statusText,
-                status: error.response.status === 200,
-              },
-              {
-                cause: error.response.statusText,
-              },
-            );
-          }
           return error;
         },
       ],
