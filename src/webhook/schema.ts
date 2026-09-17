@@ -1,7 +1,7 @@
 import { z } from "zod/v4-mini";
 
 const RefundSchema = z.object({
-  status: z.enum(["success", "failed", "pending"]),
+  status: z.enum(["success", "failed", "pending", "processing", "processed"]),
   transaction_reference: z.string(),
   refund_reference: z.string(),
   amount: z.number(),
