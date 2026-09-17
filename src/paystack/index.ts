@@ -70,14 +70,14 @@ export const PaystackClient = (
       beforeError: [
         async ({ error }) => {
           if (isHTTPError(error)) {
-            const errorBody = await error.response.json<{
-              status: boolean;
-              statusCode: number;
-              message: string;
-              data?: unknown;
-            }>();
+            const errorBody = (await error.response.clone().json()) as object;
             throw new PaystackApiError(
-              { ...errorBody, statusCode: error.response.status },
+              {
+                ...errorBody,
+                statusCode: error.response.status,
+                message: error.response.statusText,
+                status: error.response.status === 200,
+              },
               {
                 cause: error.response.statusText,
               },
