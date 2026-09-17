@@ -7,7 +7,7 @@ import {
 } from "#/refunds/schema";
 import type {
   CreateRefundPayload,
-  CreateRefundResponsePauload,
+  CreateRefundResponsePayload,
   CreateRefundsClient,
   ListRefundsPayload,
   ListRefundsResponsePayload,
@@ -22,7 +22,7 @@ export const createRefunds = (instance: KyInstance): CreateRefundsClient => {
       .post("refund", {
         json: data,
       })
-      .json<CreateRefundResponsePauload>();
+      .json<CreateRefundResponsePayload>();
   };
 
   const retry = async (payload: RetryRefundPayload) => {

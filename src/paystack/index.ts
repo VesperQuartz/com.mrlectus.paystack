@@ -66,11 +66,6 @@ export const PaystackClient = (
             console.log("FULL REQUEST URL:", request.url);
         },
       ],
-      beforeError: [
-        async ({ error }) => {
-          return error;
-        },
-      ],
     },
   });
   return {

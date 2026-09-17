@@ -61,7 +61,7 @@ type Refund = {
   updatedAt: string;
 };
 
-export type CreateRefundResponsePauload = {
+export type CreateRefundResponsePayload = {
   status: boolean;
   message: string;
   data: Refund;
@@ -131,7 +131,7 @@ export type CreateRefundsClient = {
    */
   create: (
     payload: CreateRefundPayload,
-  ) => Promise<CreateRefundResponsePauload>;
+  ) => Promise<CreateRefundResponsePayload>;
   /**
    * List refunds available on your integration
    * @remarks This is a query.
