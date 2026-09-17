@@ -13,7 +13,7 @@ import type {
 export const createSettlements = (
   instance: KyInstance,
 ): CreateSettlementsClient => {
-  const list = (payload: ListSettlementsPayload) => {
+  const list = (payload: ListSettlementsPayload = {}) => {
     const data = ListSettlementsPayloadSchema.parse(payload);
     return instance
       .get("settlement", {
