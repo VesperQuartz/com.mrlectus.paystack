@@ -69,7 +69,6 @@ export const PaystackClient = (
       ],
       beforeError: [
         async ({ error }) => {
-          console.error("CHECK", error);
           if (isHTTPError(error)) {
             const errorBody = await error.response.json<{
               status: boolean;
