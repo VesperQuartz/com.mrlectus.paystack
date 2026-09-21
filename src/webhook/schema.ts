@@ -3,10 +3,13 @@ import { z } from "zod/v4-mini";
 const RefundSchema = z.object({
   status: z.enum(["success", "failed", "pending", "processing", "processed"]),
   transaction_reference: z.string(),
-  refund_reference: z.string(),
+  // Neither of these appears on a Paystack refund object — the API returns
+  // `id`, `transaction_reference` and `reason`, and the webhook sends the
+  // same shape. Declared required, they rejected every real refund.
+  refund_reference: z.nullish(z.string()),
   amount: z.number(),
   currency: z.string(),
-  processor: z.string(),
+  processor: z.nullish(z.string()),
   customer: z.object({
     first_name: z.nullish(z.string()),
     last_name: z.nullish(z.string()),

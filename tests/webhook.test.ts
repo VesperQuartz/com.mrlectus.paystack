@@ -461,6 +461,57 @@ describe("EventDataSchema", () => {
         reference: "fixam-63f30b26-cdda-45f5-beea-737340bb072c",
       });
     });
+
+    /**
+     * Captured from `GET /refund` for a live test-mode refund. Paystack's
+     * refund object carries no `refund_reference` and no `processor` — both
+     * were declared required, so every real refund was rejected.
+     */
+    it("parses a live refund.processed payload with no refund_reference", () => {
+      const parsed = EventDataSchema.safeParse({
+        event: "refund.processed",
+        data: {
+          integration: 1581457,
+          transaction: 6568094692,
+          dispute: null,
+          settlement: null,
+          id: 18315169,
+          domain: "test",
+          currency: "NGN",
+          amount: 1500000,
+          status: "processed",
+          refunded_at: "2026-09-17T15:30:03.000Z",
+          refunded_by: "gmail",
+          deducted_amount: 1500000,
+          fully_deducted: 1,
+          createdAt: "2026-09-17T15:02:16.000Z",
+          bank_reference: null,
+          transaction_reference: "dmyo8iphqkb6xox",
+          reason: "PROCESSED",
+          customer: {
+            id: 400689365,
+            first_name: null,
+            last_name: null,
+            email: "client@example.com",
+            customer_code: "CUS_ryaovpb4qs9btyb",
+            phone: null,
+            metadata: null,
+            risk_action: "default",
+            international_format_phone: null,
+          },
+          initiated_by: "gmail",
+          refund_type: "Full",
+          transaction_amount: 1500000,
+          refund_channel: "Original Payment",
+          session_id: null,
+          retriable: false,
+        },
+      });
+
+      expect(parsed.success).toBe(true);
+      if (!parsed.success || parsed.data.event !== "refund.processed") return;
+      expect(parsed.data.data.transaction_reference).toBe("dmyo8iphqkb6xox");
+    });
   });
 
   describe("discrimination", () => {
