@@ -33,7 +33,7 @@ describe("Verification", () => {
 
       const result = await verification.resolveAccount(payload);
 
-      expect(mockKy.get).toHaveBeenCalledWith("resolve", {
+      expect(mockKy.get).toHaveBeenCalledWith("bank/resolve", {
         searchParams: payload,
       });
       expect(result).toEqual(mockResponse);

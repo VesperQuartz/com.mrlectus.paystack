@@ -21,7 +21,11 @@ export const createVerification = (
       })
       .parse(payload);
     return await instance
-      .get("resolve", {
+      // `bank/resolve`, not `resolve`: the client's prefix is the bare
+      // `https://api.paystack.co`, and Paystack serves account resolution
+      // under `/bank`. A bare `resolve` 404s, which the mocked test could
+      // not catch because it asserted the same wrong string.
+      .get("bank/resolve", {
         searchParams: data,
       })
       .json<{
