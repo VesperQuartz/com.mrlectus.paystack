@@ -238,7 +238,9 @@ const TransactionSuccessSchema = z.object({
       z.nullish(z.record(z.string(), z.unknown())),
       z.number(),
     ]),
-    log: LogSchema,
+    // Paystack nulls this outright for a charge with no recorded attempt
+    // log, rather than sending an object with empty fields.
+    log: z.nullish(LogSchema),
     fees: z.any(),
     customer: z.omit(CustomerSchema, {
       international_format_phone: true,

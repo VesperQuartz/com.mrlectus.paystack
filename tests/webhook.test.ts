@@ -185,6 +185,18 @@ describe("EventDataSchema", () => {
       expect(EventDataSchema.safeParse(charge(undefined)).success).toBe(true);
     });
 
+    it("accepts a charge with a null attempt log", () => {
+      // Paystack nulls `log` entirely for a charge that never recorded an
+      // attempt log. Declared required, this rejected a live payment.
+      const payload = charge({});
+      const parsed = EventDataSchema.safeParse({
+        ...payload,
+        data: { ...payload.data, log: null },
+      });
+
+      expect(parsed.success).toBe(true);
+    });
+
     it("rejects a charge with no amount", () => {
       const payload = charge({});
       // @ts-expect-error deliberately violating the payload shape
