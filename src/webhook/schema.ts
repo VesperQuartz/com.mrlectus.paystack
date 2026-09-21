@@ -33,12 +33,7 @@ const RecipientSchema = z.object({
   email: z.nullish(z.email()),
   id: z.number(),
   integration: z.number(),
-  metadata: z.nullish(
-    z.object({
-      userId: z.string(),
-      walletId: z.string(),
-    }),
-  ),
+  metadata: z.nullish(z.record(z.string(), z.unknown())),
   name: z.string(),
   recipient_code: z.string(),
   type: z.string(),
@@ -65,7 +60,7 @@ const TransferSchema = z.object({
   reason: z.nullish(z.string()),
   reference: z.string(),
   source: z.string(),
-  source_details: z.nullish(z.object({})),
+  source_details: z.nullish(z.record(z.string(), z.unknown())),
   status: z.enum(["success", "pending", "failed", "reversed"]),
   titan_code: z.nullish(z.string()),
   transfer_code: z.nullish(z.string()),
@@ -102,11 +97,11 @@ const CustomerSchema = z.object({
   phone: z.string(),
   metadata: z.union([
     z.nullish(
-      z.object({
-        data: z.union([z.record(z.string(), z.any()), z.object({})]),
+      z.looseObject({
+        data: z.record(z.string(), z.unknown()),
       }),
     ),
-    z.object({}),
+    z.record(z.string(), z.unknown()),
   ]),
   risk_action: z.string(),
   international_format_phone: z.string(),
@@ -152,11 +147,7 @@ const DedicatedAccountSchema = z.object({
   account_number: z.string(),
   assigned: z.boolean(),
   currency: z.string(),
-  metadata: z.nullish(
-    z.object({
-      data: z.any(),
-    }),
-  ),
+  metadata: z.nullish(z.record(z.string(), z.unknown())),
   active: z.boolean(),
   id: z.number(),
   created_at: z.string(),
@@ -186,7 +177,7 @@ const PaymentRequest = z.object({
   status: z.enum(["pending", "success", "failed"]),
   paid: z.boolean(),
   paid_at: z.nullish(z.string()),
-  metadata: z.nullish(z.object({})),
+  metadata: z.nullish(z.record(z.string(), z.unknown())),
   notifications: z.array(
     z.nullish(
       z.object({
@@ -239,14 +230,17 @@ const TransactionSuccessSchema = z.object({
     channel: z.string(),
     currency: z.string(),
     ip_address: z.nullish(z.string()),
-    metadata: z.union([z.nullish(z.object({})), z.number()]),
+    metadata: z.union([
+      z.nullish(z.record(z.string(), z.unknown())),
+      z.number(),
+    ]),
     log: LogSchema,
     fees: z.any(),
     customer: z.omit(CustomerSchema, {
       international_format_phone: true,
     }),
     authorization: AuthorizationSchema,
-    plan: z.nullish(z.object({})),
+    plan: z.nullish(z.record(z.string(), z.unknown())),
   }),
 });
 
