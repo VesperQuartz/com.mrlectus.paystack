@@ -140,7 +140,9 @@ const refund = (status: string) => ({
 });
 
 describe("EventDataSchema", () => {
-  describe("charge.success", () => { The schema used to declare
+  describe("charge.success", () => {
+    /**
+     * The regression this suite exists for. The schema used to declare
      * `metadata` as `z.object({})`, which *strips* rather than rejects: the
      * parse succeeded and handed back `{}`, so metadata passed in by the
      * caller was unreachable on the way out.
@@ -356,6 +358,95 @@ describe("EventDataSchema", () => {
       expect(parsed.data.data.customer.metadata).toEqual({
         data: { a: 1 },
         sibling: "kept",
+      });
+    });
+  });
+
+  describe("real payloads", () => {
+    /**
+     * Captured from `GET /transaction/verify/:reference` for a live test-mode
+     * charge. Paystack nulled the customer's name and phone, omitted
+     * `log.authentication` entirely, and nulled `authorization.account_name`.
+     * The schema declared all five as required strings, so this payload - a
+     * genuinely successful charge - was rejected outright.
+     */
+    it("parses a live charge.success payload with nulls and an absent key", () => {
+      const parsed = EventDataSchema.safeParse({
+        event: "charge.success",
+        data: {
+          id: 401638395,
+          domain: "test",
+          status: "success",
+          reference: "fixam-63f30b26-cdda-45f5-beea-737340bb072c",
+          amount: 10000000,
+          message: null,
+          gateway_response: "Successful",
+          paid_at: "2026-09-21T10:04:58.000Z",
+          created_at: "2026-09-21T10:04:58.000Z",
+          channel: "card",
+          currency: "NGN",
+          ip_address: null,
+          metadata: {
+            userId: "A8t0yDvIX7oTFITeD5gAJrA4evvhIQQG",
+            credits: 1000,
+            reference: "fixam-63f30b26-cdda-45f5-beea-737340bb072c",
+          },
+          log: {
+            time_spent: 4,
+            attempts: 1,
+            errors: 0,
+            success: true,
+            mobile: false,
+            input: [],
+            history: [
+              {
+                type: "action",
+                message: "Attempted to pay with card",
+                time: 3,
+              },
+              {
+                type: "success",
+                message: "Successfully paid with card",
+                time: 4,
+              },
+            ],
+          },
+          fees: 160000,
+          customer: {
+            id: 401638395,
+            first_name: null,
+            last_name: null,
+            email: "tradesman@example.com",
+            customer_code: "CUS_nwsrqn2ppg6ajbx",
+            phone: null,
+            metadata: null,
+            risk_action: "default",
+          },
+          authorization: {
+            authorization_code: "AUTH_u565egyqob",
+            bin: "408408",
+            last4: "4081",
+            exp_month: "12",
+            exp_year: "2030",
+            card_type: "visa",
+            bank: "TEST BANK",
+            country_code: "NG",
+            brand: "visa",
+            account_name: null,
+          },
+          plan: null,
+        },
+      });
+
+      expect(parsed.success).toBe(true);
+      if (!parsed.success || parsed.data.event !== "charge.success") return;
+      expect(parsed.data.data.reference).toBe(
+        "fixam-63f30b26-cdda-45f5-beea-737340bb072c",
+      );
+      expect(parsed.data.data.metadata).toEqual({
+        userId: "A8t0yDvIX7oTFITeD5gAJrA4evvhIQQG",
+        credits: 1000,
+        reference: "fixam-63f30b26-cdda-45f5-beea-737340bb072c",
       });
     });
   });
