@@ -140,9 +140,7 @@ const refund = (status: string) => ({
 });
 
 describe("EventDataSchema", () => {
-  describe("charge.success", () => {
-    /**
-     * The regression this suite exists for. The schema used to declare
+  describe("charge.success", () => { The schema used to declare
      * `metadata` as `z.object({})`, which *strips* rather than rejects: the
      * parse succeeded and handed back `{}`, so metadata passed in by the
      * caller was unreachable on the way out.

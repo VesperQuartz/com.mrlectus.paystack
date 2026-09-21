@@ -8,8 +8,8 @@ const RefundSchema = z.object({
   currency: z.string(),
   processor: z.string(),
   customer: z.object({
-    first_name: z.string(),
-    last_name: z.string(),
+    first_name: z.nullish(z.string()),
+    last_name: z.nullish(z.string()),
     email: z.string(),
   }),
   integration: z.number(),
@@ -85,16 +85,19 @@ const AuthorizationSchema = z.object({
   bank: z.string(),
   country_code: z.string(),
   brand: z.string(),
-  account_name: z.string(),
+  // Real charges to a card without a stored account name carry `null` here.
+  account_name: z.nullish(z.string()),
 });
 
 const CustomerSchema = z.object({
   id: z.number(),
-  first_name: z.string(),
-  last_name: z.string(),
+  // Paystack omits or nulls the name and phone for customers created by a
+  // bare charge — only the email is guaranteed.
+  first_name: z.nullish(z.string()),
+  last_name: z.nullish(z.string()),
   email: z.email(),
   customer_code: z.string(),
-  phone: z.string(),
+  phone: z.nullish(z.string()),
   metadata: z.union([
     z.nullish(
       z.looseObject({
@@ -104,13 +107,14 @@ const CustomerSchema = z.object({
     z.record(z.string(), z.unknown()),
   ]),
   risk_action: z.string(),
-  international_format_phone: z.string(),
+  international_format_phone: z.nullish(z.string()),
 });
 
 const LogSchema = z.object({
   time_spent: z.number(),
   attempts: z.number(),
-  authentication: z.string(),
+  // A card charge that never hit a 3DS step omits this key entirely.
+  authentication: z.nullish(z.string()),
   errors: z.number(),
   success: z.boolean(),
   mobile: z.boolean(),
