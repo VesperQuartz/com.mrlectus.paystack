@@ -6,6 +6,7 @@ export type PaymentChannel =
   | "apple_pay"
   | "ussd"
   | "qr"
+  | "opay"
   | "mobile_money"
   | "bank_transfer"
   | "eft"

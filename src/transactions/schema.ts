@@ -10,6 +10,7 @@ import type {
 } from "./types";
 
 const paymentChannelSchema = z.enum([
+  "opay",
   "card",
   "bank",
   "apple_pay",
